@@ -1,0 +1,20 @@
+{
+    "nav": {
+        "about": "Acerca",
+        "services": "Servicios",
+        "portfolio": "Portafolio",
+        "contact": "Contacto"
+    },
+    "hero": {
+        "title": "Alejandro Rodríguez",
+        "tagline": "Donde la Ingeniería se Encuentra con la Innovación",
+        "subtitles": [
+            "Ingeniero OPEX & Especialista en Automatización",
+            "Desarrollador Full-Stack",
+            "Experto en Integración de IA",
+            "Tus Ideas, Automatizadas"
+        ],
+        "cta1": "Contrátame",
+        "cta2": "Explora Herramientas"
+    }
+}

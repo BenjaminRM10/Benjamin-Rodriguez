@@ -1,0 +1,20 @@
+{
+    "nav": {
+        "about": "About",
+        "services": "Services",
+        "portfolio": "Portfolio",
+        "contact": "Contact"
+    },
+    "hero": {
+        "title": "Alejandro Rodríguez",
+        "tagline": "Where Engineering Meets Innovation",
+        "subtitles": [
+            "OPEX Engineer & Automation Specialist",
+            "Full-Stack Developer",
+            "AI Integration Expert",
+            "Your Ideas, Automated"
+        ],
+        "cta1": "Hire Me",
+        "cta2": "Explore Tools"
+    }
+}
