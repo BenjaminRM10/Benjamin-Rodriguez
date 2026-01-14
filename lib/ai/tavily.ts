@@ -6,7 +6,7 @@ if (!apiKey) {
     console.error("TAVILY_API_KEY is missing in environment variables.");
 }
 
-const client = tavily({ apiKey: apiKey || "" });
+// client init moved inside function
 
 export interface CaseStudy {
     title: string;
@@ -19,6 +19,7 @@ export async function findSimilarCases(
     taskDescription: string
 ): Promise<CaseStudy[]> {
     const query = `automation case study success story for: ${taskDescription}`;
+    const client = tavily({ apiKey: apiKey || "" });
 
     try {
         const response = await client.search(query, {

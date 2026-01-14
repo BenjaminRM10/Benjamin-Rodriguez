@@ -4,10 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { analyzeTask } from "@/lib/ai/gemini";
 import { findSimilarCases } from "@/lib/ai/tavily";
 
-// Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Initialize Supabase client inside handler
 
 const requestSchema = z.object({
     taskDescription: z.string().min(10).max(500),
@@ -17,6 +14,11 @@ const requestSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
+    // Initialize Supabase client
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
     try {
         const body = await req.json();
         const validation = requestSchema.safeParse(body);

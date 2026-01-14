@@ -6,14 +6,7 @@ if (!apiKey) {
     console.error("GEMINI_API_KEY is missing in environment variables.");
 }
 
-const genAI = new GoogleGenerativeAI(apiKey || "");
-
-const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
-    generationConfig: {
-        responseMimeType: "application/json",
-    },
-});
+// function scope init
 
 interface TaskContext {
     hoursPerWeek: number;
@@ -70,6 +63,14 @@ export async function analyzeTask(
       "considerations": ["string"]
     }
   `;
+
+    const genAI = new GoogleGenerativeAI(apiKey || "");
+    const model = genAI.getGenerativeModel({
+        model: "gemini-2.5-flash",
+        generationConfig: {
+            responseMimeType: "application/json",
+        },
+    });
 
     try {
         if (!apiKey) {

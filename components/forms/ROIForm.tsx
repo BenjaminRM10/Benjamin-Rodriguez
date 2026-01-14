@@ -51,7 +51,7 @@ export function ROIForm() {
     } | null>(null);
 
     const form = useForm<FormValues>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(formSchema) as any,
         defaultValues: {
             taskDescription: "",
             hoursPerWeek: 5,
