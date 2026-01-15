@@ -1,12 +1,5 @@
 import { tavily } from "@tavily/core";
-
-const apiKey = process.env.TAVILY_API_KEY;
-
-if (!apiKey) {
-    console.error("TAVILY_API_KEY is missing in environment variables.");
-}
-
-// client init moved inside function
+import { getCachedEnvVar } from "@/lib/config/env";
 
 export interface CaseStudy {
     title: string;
@@ -18,8 +11,15 @@ export interface CaseStudy {
 export async function findSimilarCases(
     taskDescription: string
 ): Promise<CaseStudy[]> {
+    const apiKey = await getCachedEnvVar("TAVILY_API_KEY");
+
+    if (!apiKey) {
+        console.error("TAVILY_API_KEY is missing in Supabase app_config.");
+        return []; // Fail gracefully for Tavily as it's secondary
+    }
+
     const query = `automation case study success story for: ${taskDescription}`;
-    const client = tavily({ apiKey: apiKey || "" });
+    const client = tavily({ apiKey });
 
     try {
         const response = await client.search(query, {

@@ -1,12 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const apiKey = process.env.GEMINI_API_KEY;
-
-if (!apiKey) {
-    console.error("GEMINI_API_KEY is missing in environment variables.");
-}
-
-// function scope init
+import { getCachedEnvVar } from "@/lib/config/env";
 
 interface TaskContext {
     hoursPerWeek: number;
@@ -29,6 +22,22 @@ export async function analyzeTask(
     taskDescription: string,
     context: TaskContext
 ): Promise<AIAnalysisResult> {
+
+    const apiKey = await getCachedEnvVar("GEMINI_API_KEY");
+
+    if (!apiKey) {
+        console.error("GEMINI_API_KEY is missing in Supabase app_config.");
+        throw new Error("Missing AI configuration (GEMINI_API_KEY)");
+    }
+
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({
+        model: "gemini-2.5-flash",
+        generationConfig: {
+            responseMimeType: "application/json",
+        },
+    });
+
     const prompt = `
     Analyze this manual task and determine its automation feasibility.
     
@@ -64,19 +73,8 @@ export async function analyzeTask(
     }
   `;
 
-    const genAI = new GoogleGenerativeAI(apiKey || "");
-    const model = genAI.getGenerativeModel({
-        model: "gemini-2.5-flash",
-        generationConfig: {
-            responseMimeType: "application/json",
-        },
-    });
-
     try {
-        if (!apiKey) {
-            throw new Error("Missing GEMINI_API_KEY");
-        }
-        console.log("Calling Gemini 3 Flash with task:", taskDescription.substring(0, 50) + "...");
+        console.log("Calling Gemini 2.5 Flash with task:", taskDescription.substring(0, 50) + "...");
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
