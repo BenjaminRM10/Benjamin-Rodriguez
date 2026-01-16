@@ -74,20 +74,15 @@ export async function analyzeTask(
   `;
 
     try {
-        console.log("Calling Gemini 2.5 Flash with task:", taskDescription.substring(0, 50) + "...");
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
-        console.log("Gemini Response Raw:", text.substring(0, 100) + "...");
 
         // Parse JSON safely
         const data = JSON.parse(text) as AIAnalysisResult;
         return data;
     } catch (error: any) {
-        console.error("Gemini API Detailed Error:", error);
-        if (error.response) {
-            console.error("Gemini Response Error:", error.response);
-        }
+        console.error("Gemini Analysis Failed:", error.message);
         throw new Error(`Failed to analyze task with AI: ${error.message}`);
     }
 }

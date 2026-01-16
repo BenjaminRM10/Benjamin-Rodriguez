@@ -35,8 +35,14 @@ export async function findSimilarCases(
             content: result.content,
             score: result.score,
         }));
-    } catch (error) {
-        console.error("Tavily API Error:", error);
+        return response.results.map((result) => ({
+            title: result.title,
+            url: result.url,
+            content: result.content,
+            score: result.score,
+        }));
+    } catch (error: any) {
+        console.error("Tavily Search Failed:", error.message || error);
         // Return empty array instead of failing completely to allow the rest of the app to work
         return [];
     }

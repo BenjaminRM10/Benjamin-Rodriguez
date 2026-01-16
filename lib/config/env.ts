@@ -16,7 +16,7 @@ export async function getEnvVar(key: string): Promise<string | null> {
         });
 
     if (error) {
-        console.error(`Error fetching ${key}:`, error);
+        console.error(`Error fetching config for ${key}:`, error.message);
         return null;
     }
 
