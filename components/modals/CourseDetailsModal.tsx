@@ -35,7 +35,7 @@ export function CourseDetailsModal({ isOpen, onClose, course }: CourseDetailsMod
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="max-w-3xl bg-slate-950/95 border-white/10 backdrop-blur-xl text-white">
+            <DialogContent className="max-w-3xl bg-slate-950/95 border-white/10 backdrop-blur-xl text-white max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
                     <div className="flex items-center gap-3 mb-2">
                         <Badge variant="outline" className="border-yellow-500/30 text-yellow-400 bg-yellow-500/10">

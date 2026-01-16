@@ -1,16 +1,17 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
-import { Services } from "@/components/sections/Services";
-import { ROICalculator } from "@/components/sections/ROICalculator";
-import { Portfolio } from "@/components/sections/Portfolio";
-import { Skills } from "@/components/sections/Skills";
-import { Certifications } from "@/components/sections/Certifications";
-import { BeyondCode } from "@/components/sections/BeyondCode";
 import ParticleBackground from "@/components/shared/ParticleBackground";
-import { Locale } from "@/lib/i18n/config";
+import { Brand } from "@/components/sections/Brand";
 import { Contact } from "@/components/sections/Contact";
 
-import { Brand } from "@/components/sections/Brand";
+// Lazy load heavy components below the fold
+const Services = dynamic(() => import("@/components/sections/Services").then(mod => mod.Services));
+const ROICalculator = dynamic(() => import("@/components/sections/ROICalculator").then(mod => mod.ROICalculator));
+const Portfolio = dynamic(() => import("@/components/sections/Portfolio").then(mod => mod.Portfolio));
+const Skills = dynamic(() => import("@/components/sections/Skills").then(mod => mod.Skills));
+const Certifications = dynamic(() => import("@/components/sections/Certifications").then(mod => mod.Certifications));
+const BeyondCode = dynamic(() => import("@/components/sections/BeyondCode").then(mod => mod.BeyondCode));
 
 export default async function Home({
   params,

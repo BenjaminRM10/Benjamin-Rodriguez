@@ -102,7 +102,7 @@ export default function Hero({ lang = "en" }: { lang?: string }) {
                                 src="/profile.jpg"
                                 alt="Benjamin Rodríguez"
                                 fill
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                sizes="(max-width: 768px) 288px, (max-width: 1024px) 384px, 384px"
                                 className="object-cover hover:scale-105 transition-transform duration-500"
                                 priority
                             />
