@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Calendar as CalendarIcon, Clock, Video, Loader2, CheckCircle2 } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, Video, Loader2, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -89,20 +89,20 @@ export function CalendarBooking() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button
-                    variant="outline"
-                    className="w-full h-14 bg-white/5 border-white/10 hover:bg-white/10 hover:border-blue-500/30 hover:text-blue-400 group transition-all duration-300"
-                >
-                    <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 text-blue-400 transition-colors">
-                            <CalendarIcon className="w-5 h-5" />
+                <div className="group cursor-pointer p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-blue-500/30 transition-all block w-full">
+                    <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
+                            <CalendarIcon className="w-5 h-5 text-blue-400" />
                         </div>
-                        <div className="flex flex-col items-start gap-0.5">
-                            <span className="font-semibold text-white">Schedule a Call</span>
-                            <span className="text-xs text-slate-400">Book a free 30-min consultation</span>
+                        <div className="flex-1 min-w-0 text-left">
+                            <span className="block text-sm text-slate-400">Schedule a Call</span>
+                            <span className="block font-medium text-white truncate group-hover:text-blue-300 transition-colors">
+                                Book a free 30-min consultation
+                            </span>
                         </div>
+                        <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
                     </div>
-                </Button>
+                </div>
             </DialogTrigger>
             <DialogContent className="w-[95vw] md:w-full sm:max-w-[950px] h-[90vh] md:h-auto md:max-h-[85vh] p-0 overflow-hidden bg-slate-950 border-white/10 flex flex-col">
 

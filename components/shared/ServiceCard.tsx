@@ -12,7 +12,7 @@ export interface ServiceCardProps {
     icon: LucideIcon;
     gradient: string;
     techStack?: { icon: LucideIcon; name: string; color?: string }[];
-    ctaText: string;
+    ctaText?: string; // Optional
     onCtaClick?: () => void;
     ctaAction?: "modal" | "scroll" | "link" | "download";
     ctaValue?: string;
@@ -144,23 +144,25 @@ export function ServiceCard({
 
                     <div className="grid grid-cols-1 gap-3">
                         {/* Primary Button */}
-                        <Button
-                            onClick={handleCtaClick}
-                            className={cn(
-                                "w-full justify-between group/btn border",
-                                isCourse
-                                    ? "bg-yellow-500/10 border-yellow-500/30 hover:bg-yellow-500/20 text-yellow-200"
-                                    : "bg-white/5 hover:bg-white/10 border-white/10 text-white"
-                            )}
-                            variant="ghost"
-                        >
-                            <span>{ctaText}</span>
-                            {ctaAction === "download" ? (
-                                <Download className="w-4 h-4 ml-2 group-hover/btn:scale-110 transition-transform" />
-                            ) : (
-                                <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                            )}
-                        </Button>
+                        {ctaText && (
+                            <Button
+                                onClick={handleCtaClick}
+                                className={cn(
+                                    "w-full justify-between group/btn border",
+                                    isCourse
+                                        ? "bg-yellow-500/10 border-yellow-500/30 hover:bg-yellow-500/20 text-yellow-200"
+                                        : "bg-white/5 hover:bg-white/10 border-white/10 text-white"
+                                )}
+                                variant="ghost"
+                            >
+                                <span>{ctaText}</span>
+                                {ctaAction === "download" ? (
+                                    <Download className="w-4 h-4 ml-2 group-hover/btn:scale-110 transition-transform" />
+                                ) : (
+                                    <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                                )}
+                            </Button>
+                        )}
 
                         {/* Secondary Button (WhatsApp) */}
                         {secondaryCtaText && secondaryCtaLink && (

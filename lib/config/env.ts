@@ -9,7 +9,7 @@ export async function getEnvVar(key: string): Promise<string | null> {
         return null;
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
         .rpc('get_decrypted_config', {
             p_key: key,
             p_enc_key: encryptionKey

@@ -17,6 +17,7 @@ export default function Footer({ lang = "en" }: { lang?: string }) {
                                 alt="AppCreatorBR"
                                 fill
                                 className="object-contain drop-shadow-[0_0_20px_rgba(59,130,246,0.2)]"
+                                sizes="(max-width: 768px) 128px, 160px"
                             />
                         </div>
                     </div>
@@ -33,15 +34,10 @@ export default function Footer({ lang = "en" }: { lang?: string }) {
                     <div className="space-y-4">
                         <h4 className="font-semibold text-slate-100">Quick Links</h4>
                         <nav className="flex flex-col space-y-2">
-                            {["About", "Services", "Portfolio", "Contact"].map((item) => (
-                                <Link
-                                    key={item}
-                                    href={`/${lang}#${item.toLowerCase()}`}
-                                    className="text-slate-400 hover:text-blue-400 transition-colors w-fit"
-                                >
-                                    {item}
-                                </Link>
-                            ))}
+                            <Link href={`/${lang}/profile`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">Profile</Link>
+                            <Link href={`/${lang}/solutions`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">Solutions</Link>
+                            <Link href={`/${lang}/academy`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">Academy</Link>
+                            <Link href={`/${lang}/contact`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">Contact</Link>
                         </nav>
                     </div>
 

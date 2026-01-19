@@ -11,10 +11,10 @@ export default function MobileMenu({ lang }: { lang: string }) {
     const [open, setOpen] = useState(false);
 
     const navLinks = [
-        { href: `#about`, label: "About" },
-        { href: `#services`, label: "Services" },
-        { href: `#portfolio`, label: "Portfolio" },
-        { href: `#contact`, label: "Contact" },
+        { href: `/profile`, label: "Profile" },
+        { href: `/solutions`, label: "Solutions" },
+        { href: `/academy`, label: "Academy" },
+        { href: `/contact`, label: "Contact" },
     ];
 
     return (

@@ -33,10 +33,11 @@ const formSchema = z.object({
         .max(168, { message: "Cannot exceed 168 hours per week." }),
     hourlyCost: z.coerce
         .number()
-        .min(1, { message: "Hourly cost must be at least $1." }),
+        .min(1, { message: "Hourly cost must be at least 1." }),
     peopleCount: z.coerce
         .number()
         .min(1, { message: "At least one person must perform the task." }),
+    currency: z.enum(["USD", "MXN"]),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -44,10 +45,12 @@ type FormValues = z.infer<typeof formSchema>;
 export function ROIForm() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [currency, setCurrency] = useState<"USD" | "MXN">("MXN");
     const [results, setResults] = useState<{
         metrics: any;
         analysis: AIAnalysisResult;
         similarCases: CaseStudy[];
+        currency: string;
     } | null>(null);
 
     const form = useForm<FormValues>({
@@ -55,10 +58,22 @@ export function ROIForm() {
         defaultValues: {
             taskDescription: "",
             hoursPerWeek: 5,
-            hourlyCost: 20,
+            hourlyCost: 200, // Default for MXN
             peopleCount: 1,
+            currency: "MXN",
         },
     });
+
+    // Update hourly cost default when currency changes
+    const handleCurrencyChange = (newCurrency: "USD" | "MXN") => {
+        setCurrency(newCurrency);
+        form.setValue("currency", newCurrency);
+        if (newCurrency === "USD") {
+            form.setValue("hourlyCost", 20);
+        } else {
+            form.setValue("hourlyCost", 200);
+        }
+    };
 
     async function onSubmit(values: FormValues) {
         setIsLoading(true);
@@ -90,20 +105,43 @@ export function ROIForm() {
     }
 
     return (
-        <div className="w-full max-w-lg mx-auto bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 p-6 md:p-8 shadow-2xl relative overflow-hidden group">
+        <div className="w-full max-w-lg mx-auto bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-1 md:p-1 relative overflow-hidden group shadow-[0_0_50px_-12px_rgba(59,130,246,0.5)]">
 
-            {/* Decorative gradient blob */}
-            <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl group-hover:bg-blue-500/30 transition-colors duration-500" />
-            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl group-hover:bg-purple-500/30 transition-colors duration-500" />
+            <div className="bg-[#0f1629] rounded-xl p-6 md:p-8 relative z-20 h-full">
 
-            <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-6">
-                    <div className="p-3 bg-blue-500/10 rounded-xl border border-blue-500/20">
-                        <Calculator className="w-6 h-6 text-blue-400" />
+                <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center gap-3">
+                        <div className="p-3 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl border border-blue-500/20 shadow-inner">
+                            <Calculator className="w-6 h-6 text-blue-400" />
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-bold text-white">ROI Calculator</h3>
+                            <p className="text-xs text-slate-400 font-medium tracking-wide uppercase">AI-Powered Analysis</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 className="text-xl font-bold text-white">Calculate Savings</h3>
-                        <p className="text-sm text-slate-400">See how much you can save with AI</p>
+
+                    {/* Currency Toggle */}
+                    <div className="bg-slate-900 border border-white/10 rounded-lg p-1 flex gap-1">
+                        <button
+                            type="button"
+                            onClick={() => handleCurrencyChange("MXN")}
+                            className={`px-3 py-1 rounded-md text-sm font-medium transition-all ${currency === "MXN"
+                                    ? "bg-white text-slate-900 shadow-sm"
+                                    : "text-slate-400 hover:text-white"
+                                }`}
+                        >
+                            MXN
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => handleCurrencyChange("USD")}
+                            className={`px-3 py-1 rounded-md text-sm font-medium transition-all ${currency === "USD"
+                                    ? "bg-white text-slate-900 shadow-sm"
+                                    : "text-slate-400 hover:text-white"
+                                }`}
+                        >
+                            USD
+                        </button>
                     </div>
                 </div>
 
@@ -114,11 +152,11 @@ export function ROIForm() {
                             name="taskDescription"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-slate-300">What task do you want to automate?</FormLabel>
+                                    <FormLabel className="text-slate-300">What specific task do you want to automate?</FormLabel>
                                     <FormControl>
                                         <Textarea
-                                            placeholder="e.g. Copying data from PDF invoices to Excel..."
-                                            className="bg-slate-900/50 border-white/10 text-white placeholder:text-slate-600 focus:border-blue-500/50 focus:ring-blue-500/20 min-h-[100px] resize-none"
+                                            placeholder="Example: Copying leads from LinkedIn to Excel and sending connection requests..."
+                                            className="bg-slate-900/50 border-white/10 text-white placeholder:text-slate-600 focus:border-blue-500/50 focus:ring-blue-500/20 min-h-[120px] resize-none"
                                             disabled={isLoading}
                                             {...field}
                                         />
@@ -134,15 +172,17 @@ export function ROIForm() {
                                 name="hoursPerWeek"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-slate-300 text-xs">Hours/Week</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type="number"
-                                                className="bg-slate-900/50 border-white/10 text-white placeholder:text-slate-600 focus:border-blue-500/50 focus:ring-blue-500/20"
-                                                disabled={isLoading}
-                                                {...field}
-                                            />
-                                        </FormControl>
+                                        <div className="space-y-1">
+                                            <FormLabel className="text-slate-300 text-xs">Hours/Week</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    type="number"
+                                                    className="bg-slate-900/50 border-white/10 text-white placeholder:text-slate-600 focus:border-blue-500/50 focus:ring-blue-500/20"
+                                                    disabled={isLoading}
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                        </div>
                                         <FormMessage className="text-red-400 text-xs" />
                                     </FormItem>
                                 )}
@@ -153,15 +193,17 @@ export function ROIForm() {
                                 name="peopleCount"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-slate-300 text-xs">People</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type="number"
-                                                className="bg-slate-900/50 border-white/10 text-white placeholder:text-slate-600 focus:border-purple-500/50 focus:ring-purple-500/20"
-                                                disabled={isLoading}
-                                                {...field}
-                                            />
-                                        </FormControl>
+                                        <div className="space-y-1">
+                                            <FormLabel className="text-slate-300 text-xs">People</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    type="number"
+                                                    className="bg-slate-900/50 border-white/10 text-white placeholder:text-slate-600 focus:border-purple-500/50 focus:ring-purple-500/20"
+                                                    disabled={isLoading}
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                        </div>
                                         <FormMessage className="text-red-400 text-xs" />
                                     </FormItem>
                                 )}
@@ -172,15 +214,17 @@ export function ROIForm() {
                                 name="hourlyCost"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-slate-300 text-xs">Hourly Cost ($)</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type="number"
-                                                className="bg-slate-900/50 border-white/10 text-white placeholder:text-slate-600 focus:border-cyan-500/50 focus:ring-cyan-500/20"
-                                                disabled={isLoading}
-                                                {...field}
-                                            />
-                                        </FormControl>
+                                        <div className="space-y-1">
+                                            <FormLabel className="text-slate-300 text-xs">Hourly Copst ({currency})</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    type="number"
+                                                    className="bg-slate-900/50 border-white/10 text-white placeholder:text-slate-600 focus:border-cyan-500/50 focus:ring-cyan-500/20"
+                                                    disabled={isLoading}
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                        </div>
                                         <FormMessage className="text-red-400 text-xs" />
                                     </FormItem>
                                 )}
@@ -197,16 +241,17 @@ export function ROIForm() {
                         <Button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/20 transition-all duration-300 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98] border border-white/10"
+                            className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 transition-all duration-300 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98] border border-white/10 relative overflow-hidden"
                         >
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] animate-[shimmer_2s_infinite]" />
                             {isLoading ? (
                                 <div className="flex items-center gap-2">
                                     <LoadingSpinner size="sm" className="border-white" />
-                                    <span>Analyzing with AI...</span>
+                                    <span>Processing Analysis...</span>
                                 </div>
                             ) : (
-                                <div className="flex items-center gap-2">
-                                    <span>Calculate Potential Savings</span>
+                                <div className="flex items-center gap-2 relative z-10">
+                                    <span>Calculate My Savings</span>
                                     <ArrowRight className="w-4 h-4" />
                                 </div>
                             )}
@@ -214,6 +259,9 @@ export function ROIForm() {
                     </form>
                 </Form>
             </div>
+
+            {/* Animated Glow Border */}
+            <div className="absolute -inset-[1px] bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 rounded-2xl z-10 opacity-50 blur-sm group-hover:opacity-100 transition-opacity duration-500 animate-gradient-xy" />
         </div>
     );
 }

@@ -46,8 +46,8 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="max-w-4xl bg-slate-950 border-slate-800 text-white p-0 overflow-hidden">
-                <DialogHeader className="p-6 border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-50">
+            <DialogContent className="max-w-4xl max-h-[90vh] flex flex-col bg-slate-950 border-slate-800 text-white p-0 overflow-hidden">
+                <DialogHeader className="p-6 border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm shrink-0">
                     <div className="flex items-center justify-between pr-8">
                         <div>
                             <DialogTitle className="text-2xl font-bold flex items-center gap-3">
@@ -63,7 +63,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     </div>
                 </DialogHeader>
 
-                <div className="p-6 overflow-y-auto max-h-[80vh]">
+                <div className="p-6 overflow-y-auto flex-1">
                     {/* Gallery Carousel */}
                     {project.gallery && project.gallery.length > 0 && (
                         <div className="relative mb-8 group">
@@ -143,20 +143,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                                 </div>
                             </div>
 
-                            {project.downloadUrl && (
-                                <div className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
-                                    <h5 className="font-semibold text-blue-100 mb-2">Get the Template</h5>
-                                    <p className="text-xs text-blue-200/70 mb-4">
-                                        Includes all dashboards, macros, and documentation.
-                                    </p>
-                                    <Button className="w-full bg-blue-600 hover:bg-blue-500 text-white gap-2 shadow-lg shadow-blue-500/20" asChild>
-                                        <a href={project.downloadUrl} download>
-                                            <Download className="w-4 h-4" />
-                                            Download Now
-                                        </a>
-                                    </Button>
-                                </div>
-                            )}
+                            {/* Download Section Removed per user request */}
                         </div>
                     </div>
                 </div>

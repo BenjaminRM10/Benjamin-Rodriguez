@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import Typewriter from "typewriter-effect";
+
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getImageUrl } from "@/lib/storage/supabase-images";
+import { RoleTyper } from "@/components/shared/RoleTyper";
 
 export default function Hero({ lang = "en" }: { lang?: string }) {
     const titles = [
@@ -39,47 +41,19 @@ export default function Hero({ lang = "en" }: { lang?: string }) {
                         </span>
                     </div>
 
+
+
                     <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white whitespace-nowrap">
                         Benjamin <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Rodríguez</span>
                     </h1>
 
-                    <div className="text-2xl lg:text-3xl font-light text-slate-300 h-20">
-                        <Typewriter
-                            options={{
-                                strings: titles,
-                                autoStart: true,
-                                loop: true,
-                                delay: 50,
-                                deleteSpeed: 30,
-                            }}
-                        />
-                    </div>
+                    <RoleTyper />
 
                     <p className="text-lg text-slate-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
                         Where Engineering Meets Innovation. bridging the gap between manufacturing processes and cutting-edge technology to eliminate waste and unlock efficiency.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                        <Link href={`/${lang}#contact`}>
-                            <Button
-                                size="lg"
-                                className="bg-blue-600 hover:bg-blue-500 text-white rounded-full px-8 py-6 text-lg shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)] transition-all duration-300 group"
-                            >
-                                Hire Me
-                                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                            </Button>
-                        </Link>
-                        <Link href={`/${lang}#services`}>
-                            <Button
-                                variant="outline"
-                                size="lg"
-                                className="border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 rounded-full px-8 py-6 text-lg transition-all duration-300"
-                            >
-                                Explore Tools
-                                <Sparkles className="ml-2 h-5 w-5 text-purple-400" />
-                            </Button>
-                        </Link>
-                    </div>
+                    {/* Buttons removed as per request */}
 
 
                 </motion.div>
@@ -99,12 +73,14 @@ export default function Hero({ lang = "en" }: { lang?: string }) {
                         {/* Image Container */}
                         <div className="absolute inset-2 rounded-full overflow-hidden z-20 border-4 border-slate-800/50 shadow-2xl">
                             <Image
-                                src="/profile.jpg"
+                                src={getImageUrl("profile.webp")}
                                 alt="Benjamin Rodríguez"
+                                unoptimized
                                 fill
                                 sizes="(max-width: 768px) 288px, (max-width: 1024px) 384px, 384px"
                                 className="object-cover hover:scale-105 transition-transform duration-500"
-                                priority
+                                priority={true}
+                                quality={90}
                             />
                         </div>
 

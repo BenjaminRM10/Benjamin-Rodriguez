@@ -5,6 +5,7 @@ interface TaskContext {
     hoursPerWeek: number;
     hourlyCost: number;
     peopleCount: number;
+    currency: string;
 }
 
 export interface AIAnalysisResult {
@@ -46,10 +47,9 @@ export async function analyzeTask(
     
     CONTEXT:
     - Hours spent per week: ${context.hoursPerWeek}
-    - Hourly cost: $${context.hourlyCost} USD
+    - Hourly cost: $${context.hourlyCost} ${context.currency}
     - Number of people performing the task: ${context.peopleCount}
-    - Annual cost (current): $${context.hoursPerWeek * context.hourlyCost * context.peopleCount * 52
-        } USD
+    - Annual cost (current): $${context.hoursPerWeek * context.hourlyCost * context.peopleCount * 52} ${context.currency}
     
     REQUIRED ANALYSIS:
     1. Feasibility (high/medium/low) based on technical complexity and potential ROI.
@@ -57,7 +57,7 @@ export async function analyzeTask(
     3. Specific technical solution proposal.
     4. List of recommended tools/technologies.
     5. Estimated implementation time in weeks.
-    6. Estimated implementation cost in USD (rough estimate).
+    6. Estimated implementation cost in ${context.currency} (rough estimate).
     7. Key risks or considerations.
     
     Respond strictly in JSON format matching this schema:

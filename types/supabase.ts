@@ -1,4 +1,3 @@
-// @ts-nocheck
 export type Json =
     | string
     | number
@@ -39,6 +38,45 @@ export type Database = {
                     key?: string
                     updated_at?: string | null
                     value?: string | null
+                }
+                Relationships: []
+            }
+            certifications: {
+                Row: {
+                    category: string
+                    created_at: string | null
+                    credential_url: string | null
+                    id: string
+                    image_path: string | null
+                    issue_date: string | null
+                    issuer: string
+                    logo: string | null
+                    name: string
+                    sort_order: number | null
+                }
+                Insert: {
+                    category: string
+                    created_at?: string | null
+                    credential_url?: string | null
+                    id?: string
+                    image_path?: string | null
+                    issue_date?: string | null
+                    issuer: string
+                    logo?: string | null
+                    name: string
+                    sort_order?: number | null
+                }
+                Update: {
+                    category?: string
+                    created_at?: string | null
+                    credential_url?: string | null
+                    id?: string
+                    image_path?: string | null
+                    issue_date?: string | null
+                    issuer: string
+                    logo?: string | null
+                    name: string
+                    sort_order?: number | null
                 }
                 Relationships: []
             }
@@ -84,7 +122,7 @@ export type Database = {
                 }
                 Relationships: [
                     {
-                        foreignKeyName: "contact_messages_roi_calculation_id_fkey"
+                        foreignKeyName: "fk_roi_calculation"
                         columns: ["roi_calculation_id"]
                         isOneToOne: false
                         referencedRelation: "roi_calculations"
@@ -92,66 +130,192 @@ export type Database = {
                     },
                 ]
             }
+            course_registrations: {
+                Row: {
+                    attendee_type: Database["public"]["Enums"]["course_attendee_type"]
+                    course_id: string
+                    created_at: string | null
+                    email: string
+                    email_verification_token: string | null
+                    email_verified_at: string | null
+                    event_id: string | null
+                    event_date: string | null
+                    full_name: string
+                    id: string
+                    payment_id: string | null
+                    phone: string | null
+                    status: Database["public"]["Enums"]["course_registration_status"] | null
+                }
+                Insert: {
+                    attendee_type: Database["public"]["Enums"]["course_attendee_type"]
+                    course_id: string
+                    created_at?: string | null
+                    email: string
+                    email_verification_token?: string | null
+                    email_verified_at?: string | null
+                    event_id?: string | null
+                    event_date?: string | null
+                    full_name: string
+                    id?: string
+                    payment_id?: string | null
+                    phone?: string | null
+                    status?: Database["public"]["Enums"]["course_registration_status"] | null
+                }
+                Update: {
+                    attendee_type?: Database["public"]["Enums"]["course_attendee_type"]
+                    course_id?: string
+                    created_at?: string | null
+                    email?: string
+                    email_verification_token?: string | null
+                    email_verified_at?: string | null
+                    event_id?: string | null
+                    event_date?: string | null
+                    full_name?: string
+                    id?: string
+                    payment_id?: string | null
+                    phone?: string | null
+                    status?: Database["public"]["Enums"]["course_registration_status"] | null
+                }
+                Relationships: []
+            }
+            email_verifications: {
+                Row: {
+                    created_at: string | null
+                    email: string
+                    expires_at: string | null
+                    id: string
+                    token: string
+                    verified: boolean | null
+                }
+                Insert: {
+                    created_at?: string | null
+                    email: string
+                    expires_at?: string | null
+                    id?: string
+                    token: string
+                    verified?: boolean | null
+                }
+                Update: {
+                    created_at?: string | null
+                    email?: string
+                    expires_at?: string | null
+                    id?: string
+                    token?: string
+                    verified?: boolean | null
+                }
+                Relationships: []
+            }
+            events: {
+                Row: {
+                    id: string
+                    slug: string
+                    title: string
+                    description: string | null
+                    type: Database["public"]["Enums"]["event_type"]
+                    start_date: string
+                    end_date: string
+                    location: string | null
+                    capacity: number | null
+                    price_config: Json | null
+                    created_at: string | null
+                    updated_at: string | null
+                }
+                Insert: {
+                    id?: string
+                    slug: string
+                    title: string
+                    description?: string | null
+                    type: Database["public"]["Enums"]["event_type"]
+                    start_date: string
+                    end_date: string
+                    location?: string | null
+                    capacity?: number | null
+                    price_config?: Json | null
+                    created_at?: string | null
+                    updated_at?: string | null
+                }
+                Update: {
+                    id?: string
+                    slug?: string
+                    title?: string
+                    description?: string | null
+                    type?: Database["public"]["Enums"]["event_type"]
+                    start_date?: string
+                    end_date?: string
+                    location?: string | null
+                    capacity?: number | null
+                    price_config?: Json | null
+                    created_at?: string | null
+                    updated_at?: string | null
+                }
+                Relationships: []
+            }
             roi_calculations: {
                 Row: {
-                    ai_response: Json | null
-                    annual_roi: number | null
                     created_at: string | null
-                    feasibility: string | null
                     hourly_cost: number
                     hours_per_week: number
                     id: string
-                    implementation_weeks: number | null
-                    ip_address: unknown | null
                     monthly_cost_saved: number | null
-                    payback_period_months: number | null
                     people_count: number
-                    recommended_solution: string | null
-                    search_results: Json | null
                     task_description: string
-                    tools_suggested: string[] | null
-                    user_agent: string | null
                     weekly_hours_saved: number | null
+                    yearly_roi: number | null
                 }
                 Insert: {
-                    ai_response?: Json | null
-                    annual_roi?: number | null
                     created_at?: string | null
-                    feasibility?: string | null
                     hourly_cost: number
                     hours_per_week: number
                     id?: string
-                    implementation_weeks?: number | null
-                    ip_address?: unknown | null
                     monthly_cost_saved?: number | null
-                    payback_period_months?: number | null
                     people_count: number
-                    recommended_solution?: string | null
-                    search_results?: Json | null
                     task_description: string
-                    tools_suggested?: string[] | null
-                    user_agent?: string | null
                     weekly_hours_saved?: number | null
+                    yearly_roi?: number | null
                 }
                 Update: {
-                    ai_response?: Json | null
-                    annual_roi?: number | null
                     created_at?: string | null
-                    feasibility?: string | null
                     hourly_cost?: number
                     hours_per_week?: number
                     id?: string
-                    implementation_weeks?: number | null
-                    ip_address?: unknown | null
                     monthly_cost_saved?: number | null
-                    payback_period_months?: number | null
                     people_count?: number
-                    recommended_solution?: string | null
-                    search_results?: Json | null
                     task_description?: string
-                    tools_suggested?: string[] | null
-                    user_agent?: string | null
                     weekly_hours_saved?: number | null
+                    yearly_roi?: number | null
+                }
+                Relationships: []
+            }
+            skills: {
+                Row: {
+                    category: string
+                    certified: boolean | null
+                    created_at: string | null
+                    icon: string | null
+                    id: string
+                    name: string
+                    proficiency: number | null
+                    sort_order: number | null
+                }
+                Insert: {
+                    category: string
+                    certified?: boolean | null
+                    created_at?: string | null
+                    icon?: string | null
+                    id?: string
+                    name: string
+                    proficiency?: number | null
+                    sort_order?: number | null
+                }
+                Update: {
+                    category?: string
+                    certified?: boolean | null
+                    created_at?: string | null
+                    icon?: string | null
+                    id?: string
+                    name?: string
+                    proficiency?: number | null
+                    sort_order?: number | null
                 }
                 Relationships: []
             }
@@ -160,25 +324,16 @@ export type Database = {
             [_ in never]: never
         }
         Functions: {
-            get_decrypted_config: {
-                Args: {
-                    p_key: string
-                    p_enc_key: string
-                }
-                Returns: string
-            }
-            set_config_config: {
-                Args: {
-                    p_key: string
-                    p_value: string
-                    p_enc_key: string
-                    p_description?: string
-                }
-                Returns: undefined
-            }
+            [_ in never]: never
         }
         Enums: {
-            [_ in never]: never
+            course_attendee_type: "student" | "professional" | "company"
+            course_registration_status:
+            | "pending_email_verification"
+            | "pending_payment"
+            | "confirmed"
+            | "rejected"
+            event_type: "workshop" | "online" | "corporate" | "tec_saltillo"
         }
         CompositeTypes: {
             [_ in never]: never
@@ -191,7 +346,7 @@ type PublicSchema = Database[Extract<keyof Database, "public">]
 export type Tables<
     PublicTableNameOrOptions extends
     | keyof (PublicSchema["Tables"] & PublicSchema["Views"])
-    | { schema: keyof Database },
+    | { schema: Exclude<keyof Database, "__InternalSupabase"> },
     TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
         Database[PublicTableNameOrOptions["schema"]]["Views"])
@@ -216,7 +371,7 @@ export type Tables<
 export type TablesInsert<
     PublicTableNameOrOptions extends
     | keyof PublicSchema["Tables"]
-    | { schema: keyof Database },
+    | { schema: Exclude<keyof Database, "__InternalSupabase"> },
     TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
     : never = never,
@@ -237,7 +392,7 @@ export type TablesInsert<
 export type TablesUpdate<
     PublicTableNameOrOptions extends
     | keyof PublicSchema["Tables"]
-    | { schema: keyof Database },
+    | { schema: Exclude<keyof Database, "__InternalSupabase"> },
     TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
     : never = never,
@@ -258,7 +413,7 @@ export type TablesUpdate<
 export type Enums<
     PublicEnumNameOrOptions extends
     | keyof PublicSchema["Enums"]
-    | { schema: keyof Database },
+    | { schema: Exclude<keyof Database, "__InternalSupabase"> },
     EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
     : never = never,
@@ -273,7 +428,7 @@ export type CompositeTypes<
     | keyof PublicSchema["CompositeTypes"]
     | { schema: keyof Database },
     CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-        schema: keyof Database
+        schema: Exclude<keyof Database, "__InternalSupabase">
     }
     ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
     : never = never,

@@ -26,10 +26,10 @@ export default function Navbar() {
     });
 
     const navLinks = [
-        { href: `#about`, label: "About" },
-        { href: `#services`, label: "Services" },
-        { href: `#portfolio`, label: "Portfolio" },
-        { href: `#contact`, label: "Contact" },
+        { href: `/profile`, label: "Profile" },
+        { href: `/solutions`, label: "Solutions" },
+        { href: `/academy`, label: "Academy" },
+        { href: `/contact`, label: "Contact" },
     ];
 
     return (
@@ -54,14 +54,24 @@ export default function Navbar() {
                 {/* Desktop Nav */}
                 <div className="hidden md:flex items-center space-x-8">
                     {navLinks.map((link) => (
-                        <Link
-                            key={link.href}
-                            href={`/${lang}${link.href}`}
-                            className="text-sm font-medium text-slate-300 hover:text-white transition-colors relative group"
-                        >
-                            {link.label}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
-                        </Link>
+                        link.label === "Contact" ? (
+                            <Link
+                                key={link.href}
+                                href={`/${lang}${link.href}`}
+                                className="px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium hover:from-blue-500 hover:to-cyan-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all transform hover:scale-105"
+                            >
+                                {link.label}
+                            </Link>
+                        ) : (
+                            <Link
+                                key={link.href}
+                                href={`/${lang}${link.href}`}
+                                className="text-sm font-medium text-slate-300 hover:text-white transition-colors relative group"
+                            >
+                                {link.label}
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                            </Link>
+                        )
                     ))}
                     <div className="h-6 w-px bg-slate-800 mx-4" />
                     <LanguageToggle />

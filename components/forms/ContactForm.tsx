@@ -25,6 +25,7 @@ import {
     FormLabel,
     FormMessage,
 } from '@/components/ui/form';
+import { useSearchParams } from 'next/navigation';
 
 const formSchema = z.object({
     name: z.string().min(2, 'Name is required'),
@@ -37,17 +38,15 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const services = [
-    'AI Training & Consulting',
-    'Web Development',
-    'WhatsApp Automation',
-    'Excel Automation',
-    'Data Analysis',
-    'Python Course',
+    'Recruiter / Hiring Opportunity',
+    'Business Solution / Automation',
+    'Academy / Training',
     'Other',
 ];
 
 export function ContactForm() {
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+    const searchParams = useSearchParams();
 
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
@@ -55,7 +54,8 @@ export function ContactForm() {
             name: '',
             email: '',
             company: '',
-            message: '',
+            service: searchParams.get('service') || '',
+            message: searchParams.get('message') || '',
         },
     });
 

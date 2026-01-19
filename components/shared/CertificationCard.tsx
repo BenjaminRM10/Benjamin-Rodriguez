@@ -37,6 +37,7 @@ export function CertificationCard({ certification }: CertificationCardProps) {
                                 alt={certification.issuer}
                                 fill
                                 className="object-contain p-1"
+                                sizes="(max-width: 768px) 48px, 48px"
                             />
                         ) : (
                             <Award className="w-6 h-6 text-blue-400" />
@@ -68,7 +69,7 @@ export function CertificationCard({ certification }: CertificationCardProps) {
                         className="w-full border-white/10 hover:bg-white/5 hover:text-white text-slate-300 group-hover:border-blue-500/30 group-hover:text-blue-200 transition-all"
                         asChild
                     >
-                        <a href={certification.credentialUrl || "#"} target="_blank" rel="noopener noreferrer">
+                        <a href={certification.credentialUrl && certification.credentialUrl !== 'undefined' ? certification.credentialUrl : "#"} target={certification.credentialUrl ? "_blank" : undefined} rel={certification.credentialUrl ? "noopener noreferrer" : undefined}>
                             View Credential
                             <ExternalLink className="w-4 h-4 ml-2" />
                         </a>

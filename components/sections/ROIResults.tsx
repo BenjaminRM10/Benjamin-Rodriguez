@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter } from 'next/navigation';
 import { motion } from "framer-motion";
 import {
     CheckCircle2,
@@ -52,7 +52,19 @@ interface ROIResultsProps {
     similarCases: CaseStudy[];
 }
 
-export function ROIResults({ metrics, analysis, similarCases }: ROIResultsProps) {
+export function ROIResults({ metrics, analysis, similarCases, currency = "USD" }: // Default to USD if missing
+    ROIResultsProps & { currency: string }) {
+
+    const router = useRouter();
+
+    const formatMoney = (amount: number) => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        }).format(amount);
+    };
 
     const feasibilityColor = {
         high: "bg-green-500/20 text-green-400 border-green-500/50",
@@ -68,7 +80,7 @@ export function ROIResults({ metrics, analysis, similarCases }: ROIResultsProps)
         labels: ['Current Annual Cost', 'Projected Annual Cost'],
         datasets: [
             {
-                label: 'Cost (USD)',
+                label: `Cost (${currency})`,
                 data: [currentAnnualCost, projectedAnnualCost],
                 backgroundColor: [
                     'rgba(239, 68, 68, 0.5)', // Red for current
@@ -140,12 +152,12 @@ export function ROIResults({ metrics, analysis, similarCases }: ROIResultsProps)
                 />
                 <MetricCard
                     label="Monthly Savings"
-                    value={`$${metrics.monthlyCostSaved.toLocaleString()}`}
-                    icon={<ArrowRight className="w-4 h-4 text-green-400" />} // Using ArrowRight as a placeholder money icon or could use standard $
+                    value={formatMoney(metrics.monthlyCostSaved)}
+                    icon={<ArrowRight className="w-4 h-4 text-green-400" />}
                 />
                 <MetricCard
                     label="Annual ROI"
-                    value={`$${metrics.annualROI.toLocaleString()}`}
+                    value={formatMoney(metrics.annualROI)}
                     highlight
                     icon={<TrendingUp className="w-4 h-4 text-purple-400" />}
                 />
@@ -229,20 +241,35 @@ export function ROIResults({ metrics, analysis, similarCases }: ROIResultsProps)
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-gradient-to-br from-blue-900/50 to-purple-900/50 border-white/10">
-                        <CardContent className="p-6 text-center space-y-4">
-                            <h3 className="text-xl font-bold text-white">Ready to automate this?</h3>
-                            <p className="text-slate-300 text-sm">
-                                I can help you build this solution in approximately <span className="text-white font-bold">{analysis.implementation_weeks} weeks</span>.
-                            </p>
-                            <Button
-                                className="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold"
-                                onClick={() => {
-                                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                                }}
-                            >
-                                Let's Make It Happen
-                            </Button>
+                    <Card className="bg-gradient-to-br from-blue-900/50 to-purple-900/50 border-white/10 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+
+                        <CardContent className="p-6 text-center space-y-6 relative z-10">
+                            <div>
+                                <p className="text-slate-400 text-sm uppercase tracking-wider mb-1">Estimated Investment</p>
+                                <div className="text-3xl font-bold text-white">
+                                    {formatMoney(analysis.implementation_cost)}
+                                </div>
+                                <p className="text-xs text-slate-400 mt-1">Approx. {analysis.implementation_weeks} weeks delivery</p>
+                            </div>
+
+                            <div className="h-px bg-white/10 w-full" />
+
+                            <div className="space-y-3">
+                                <h3 className="text-lg font-bold text-white">Ready to automate this?</h3>
+                                <Button
+                                    className="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold h-11"
+                                    onClick={() => {
+                                        const query = new URLSearchParams({
+                                            service: 'Business Solution / Automation',
+                                            message: `I'm interested in the ${analysis.solution} solution. ROI analysis estimates ${formatMoney(metrics.annualROI)} annual savings.`
+                                        }).toString();
+                                        router.push(`/contact?${query}`);
+                                    }}
+                                >
+                                    Let's Make It Happen
+                                </Button>
+                            </div>
                         </CardContent>
                     </Card>
                 </div>

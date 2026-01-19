@@ -3,7 +3,7 @@
 import { ContactForm } from '@/components/forms/ContactForm';
 import { CalendarBooking } from '@/components/modals/CalendarBooking';
 import { motion } from 'framer-motion';
-import { Mail, MessageCircle, Github, Linkedin, MapPin } from 'lucide-react';
+import { Mail, MessageCircle, Github, Linkedin, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
@@ -32,9 +32,9 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
     ];
 
     return (
-        <section className="py-24 relative overflow-hidden" id="contact">
+        <section className="pb-24 pt-0 relative overflow-hidden" id="contact">
             {/* Background Decor */}
-            <div className="absolute inset-0 bg-slate-950">
+            <div className="absolute inset-0 bg-[#0a0e27]">
                 <div className="absolute top-0 left-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
             </div>
 
@@ -44,7 +44,7 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 mb-4"
+                        className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 mb-4 pb-2"
                     >
                         Let's Build Something Amazing
                     </motion.h2>
@@ -73,30 +73,34 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
                         <div className="space-y-6">
                             <h3 className="text-xl font-semibold text-white">Direct Contact</h3>
 
-                            {/* WhatsApp - Primary CTA */}
+                            {/* WhatsApp - Standardized */}
                             <a
                                 href="https://wa.me/528661479075?text=Hola%20Alejandro,%20me%20gustaría%20conocer%20más%20sobre%20tus%20servicios"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group block"
+                                className="group cursor-pointer p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-green-500/30 transition-all block"
                             >
-                                <div className="relative p-1 rounded-2xl bg-gradient-to-r from-green-500/50 to-emerald-500/50 hover:from-green-500 hover:to-emerald-500 transition-all duration-300">
-                                    <div className="bg-slate-950 rounded-xl p-4 flex items-center gap-4 group-hover:bg-slate-900 transition-colors">
-                                        <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
-                                            <MessageCircle className="w-6 h-6 text-green-500" />
-                                        </div>
-                                        <div>
-                                            <span className="block font-bold text-white text-lg">WhatsApp Me</span>
-                                            <span className="text-sm text-slate-400 group-hover:text-green-400 transition-colors">Instant Response</span>
-                                        </div>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
+                                        <MessageCircle className="w-5 h-5 text-green-500" />
                                     </div>
+                                    <div className="flex-1 min-w-0">
+                                        <span className="block text-sm text-slate-400">WhatsApp Me</span>
+                                        <span className="block font-medium text-white truncate group-hover:text-green-400 transition-colors">
+                                            Instant Response
+                                        </span>
+                                    </div>
+                                    <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-green-400 group-hover:translate-x-1 transition-all" />
                                 </div>
                             </a>
 
-                            {/* Email */}
-                            <div
-                                onClick={handleCopyEmail}
-                                className="group cursor-pointer p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-purple-500/30 transition-all"
+                            {/* Email - Standardized */}
+                            <a
+                                href="mailto:contacto@appcreatorbr.com"
+                                className="group cursor-pointer p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-purple-500/30 transition-all block"
+                                onClick={(e) => {
+                                    handleCopyEmail();
+                                }}
                             >
                                 <div className="flex items-center gap-4">
                                     <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center shrink-0">
@@ -108,8 +112,9 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
                                             contacto@appcreatorbr.com
                                         </span>
                                     </div>
+                                    <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" />
                                 </div>
-                            </div>
+                            </a>
 
                             {/* Calendar Booking */}
                             <CalendarBooking />

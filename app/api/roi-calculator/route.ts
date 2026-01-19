@@ -11,6 +11,7 @@ const requestSchema = z.object({
     hoursPerWeek: z.number().min(1).max(168),
     hourlyCost: z.number().min(1),
     peopleCount: z.number().min(1),
+    currency: z.enum(["USD", "MXN"]).default("MXN"),
 });
 
 export async function POST(req: NextRequest) {
@@ -30,7 +31,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const { taskDescription, hoursPerWeek, hourlyCost, peopleCount } = validation.data;
+        const { taskDescription, hoursPerWeek, hourlyCost, peopleCount, currency } = validation.data;
         const ip = req.headers.get("x-forwarded-for") || "unknown";
 
         // 1. Rate Limiting (Simple Supabase check)
@@ -54,7 +55,7 @@ export async function POST(req: NextRequest) {
 
         // 2. Parallel AI Execution
         const [aiAnalysis, similarCases] = await Promise.all([
-            analyzeTask(taskDescription, { hoursPerWeek, hourlyCost, peopleCount }),
+            analyzeTask(taskDescription, { hoursPerWeek, hourlyCost, peopleCount, currency }),
             findSimilarCases(taskDescription),
         ]);
 
@@ -63,7 +64,21 @@ export async function POST(req: NextRequest) {
         const weeklyHoursSaved = (hoursPerWeek * peopleCount * automationPercentage) / 100;
         const monthlyCostSaved = weeklyHoursSaved * 4.33 * hourlyCost;
         const annualROI = monthlyCostSaved * 12;
-        // Simple payback calc: if implementation cost is 0 (unlikely but possible output), avoid division by zero
+
+        // --- COST ADJUSTMENT LOGIC ---
+        // 1. Reduce the AI-estimated global market cost to be 1/3 (User request: "1/3 parte de lo que calcula actualmente")
+        let adjustedCost = Math.round(aiAnalysis.implementation_cost / 3);
+
+        // 2. USD Premium Logic ("los que tienen dolares tienen mas dinero... sin pasarse de lanza")
+        if (currency === "USD") {
+            adjustedCost = Math.round(adjustedCost * 1.25); // 25% premium for USD clients
+        }
+
+        // Overwrite the analysis cost with our competitive pricing
+        aiAnalysis.implementation_cost = adjustedCost;
+        // -----------------------------
+
+        // Simple payback calc
         const paybackPeriodMonths = monthlyCostSaved > 0
             ? (aiAnalysis.implementation_cost / monthlyCostSaved)
             : 0;
@@ -102,9 +117,11 @@ export async function POST(req: NextRequest) {
                 monthlyCostSaved,
                 annualROI,
                 paybackPeriodMonths,
+                currency // Pass back currency for formatter
             },
             analysis: aiAnalysis,
             similarCases,
+            currency
         });
 
     } catch (error: any) {
