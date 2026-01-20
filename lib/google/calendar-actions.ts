@@ -24,7 +24,8 @@ async function getSecret(key: string, supabaseClient?: SupabaseClient): Promise<
     // but the signature allows for future expansion.
     // If getCachedEnvVar itself needs a supabaseClient, it would need to be refactored.
     // For now, we'll just call getCachedEnvVar.
-    return getCachedEnvVar(key);
+    const secret = await getCachedEnvVar(key);
+    return secret || undefined;
 }
 
 export async function getCalendarClient() {
