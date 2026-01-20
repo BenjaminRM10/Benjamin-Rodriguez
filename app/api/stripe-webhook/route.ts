@@ -102,7 +102,7 @@ Payment ID: ${session.id}
                         endTime: new Date(new Date(finalEventDate).getTime() + 8 * 60 * 60 * 1000).toISOString(),
                         attendees: [registration.email, 'contacto@appcreatorbr.com'],
                         location: 'Vía Google Meet / Presencial',
-                    }, supabaseAdmin); // Pass admin client
+                    });
 
                     console.log('Calendar event created for:', registration.email);
                 } catch (calendarError) {
