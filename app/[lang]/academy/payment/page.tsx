@@ -45,12 +45,12 @@ export default function PaymentPage() {
                 // Determine types for Stripe
                 let registrationType = 'public-workshop';
                 // If it's online individual
-                if (registration.attendee_type === 'online_individual') {
+                if ((registration.attendee_type as string) === 'online_individual') {
                     registrationType = 'online';
                 }
 
                 let ticketType = 'professional';
-                if (registration.attendee_type === 'student' || registration.attendee_type === 'student_tec') {
+                if ((registration.attendee_type as string) === 'student' || (registration.attendee_type as string) === 'student_tec') {
                     ticketType = 'student';
                 }
 
