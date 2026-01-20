@@ -107,7 +107,8 @@ export async function POST(req: Request) {
             };
 
             const siteUrl = getBaseUrl();
-            const callbackUrl = `${siteUrl}/api/auth/callback?next=${encodeURIComponent(`/academy/verify-callback?registrationId=${record.id}`)}`;
+            // Fix: Add '/es' locale prefix because page is under [lang]
+            const callbackUrl = `${siteUrl}/api/auth/callback?next=${encodeURIComponent(`/es/academy/verify-callback?registrationId=${record.id}`)}`;
 
             let authError;
 
