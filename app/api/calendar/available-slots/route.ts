@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getCalendarClient } from '@/lib/google/calendar';
 import { addDays, setHours, setMinutes, isBefore, startOfDay, endOfDay, format } from 'date-fns';
-import { toZonedTime } from 'date-fns-tz';
+import { toZonedTime, fromZonedTime } from 'date-fns-tz';
 
 const TIMEZONE = 'America/Mexico_City';
 const WORK_START_HOUR = 9;
@@ -43,14 +43,19 @@ export async function GET(request: Request) {
 
         // Generate all possible slots
         const availableSlots: string[] = [];
-        let currentSlot = setHours(setMinutes(start, 0), WORK_START_HOUR);
-        const endOfDayTime = setHours(setMinutes(start, 0), WORK_END_HOUR);
+        const dateStr = dateParam.split('T')[0]; // Extract YYYY-MM-DD safely from ISO
 
-        console.log(`[Calendar Debug] Start generation from: ${currentSlot.toISOString()}`);
+        // We want to generate slots from WORK_START_HOUR to WORK_END_HOUR in Mexico City time
+        // Construct the start time: "2024-01-24 09:00:00" (Mexico City)
+        let currentSlot = fromZonedTime(`${dateStr} ${String(WORK_START_HOUR).padStart(2, '0')}:00:00`, TIMEZONE);
 
-        // Get current time in correct timezone to avoid booking in past
-        // Note: This is a simplification. For rigorous implementation we need 
-        // to handle timezone conversion carefully.
+        // Construct the end time: "2024-01-24 18:00:00" (Mexico City)
+        const endOfDayTime = fromZonedTime(`${dateStr} ${String(WORK_END_HOUR).padStart(2, '0')}:00:00`, TIMEZONE);
+
+        console.log(`[Calendar Debug] Start generation (UTC): ${currentSlot.toISOString()}`);
+        console.log(`[Calendar Debug] End generation (UTC): ${endOfDayTime.toISOString()}`);
+
+        // Get current time to avoid booking in past
         const now = new Date();
 
         while (isBefore(currentSlot, endOfDayTime)) {
@@ -69,11 +74,19 @@ export async function GET(request: Request) {
                 );
             });
 
-            // Also check if slot is in the past (only for today)
+            // Check if slot is in the past
             const isPast = isBefore(currentSlot, now);
 
             if (!isBusy && !isPast) {
-                availableSlots.push(format(currentSlot, 'hh:mm a'));
+                // Determine format based on currentSlot timezone? 
+                // We want to return a label like "09:00 AM".
+                // Since currentSlot is a correct Date object (UTC), we can format it in the target timezone
+                // Or simply rely on the fact that we constructed it iteratively from the start hour.
+                // Re-calculating the label from the loop variables might be safer/simpler than formatting the Date object if we don't have a format-in-tz helper handy,
+                // but formatting the Date object using toZonedTime + format is robust.
+
+                const mexicoTime = toZonedTime(currentSlot, TIMEZONE);
+                availableSlots.push(format(mexicoTime, 'hh:mm a'));
             }
 
             currentSlot = slotEnd;
