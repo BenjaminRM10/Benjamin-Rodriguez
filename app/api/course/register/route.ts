@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
+import { createClient as createServerSupabaseClient } from '@/lib/supabase/server';
 import { createCheckoutSession } from '@/lib/stripe';
 
 // Initialize Admin Client
@@ -101,8 +102,10 @@ export async function POST(req: Request) {
                 ? 'benjaminrm14032018@gmail.com'
                 : data.email;
 
-            // Robust Base URL detection - FORCED PRODUCTION URL
+            // Robust Base URL detection (Allows Localhost for Testing)
             const getBaseUrl = () => {
+                if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+                if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
                 return 'https://appcreatorbr.com';
             };
 
@@ -114,7 +117,9 @@ export async function POST(req: Request) {
 
             // If it's the admin/test account, use signInWithOtp because they likely already exist
             if (emailToSendTo === 'benjaminrm14032018@gmail.com') {
-                const { error } = await supabaseAdmin.auth.signInWithOtp({
+                // Use Server Client (with cookies) for PKCE compatibility
+                const supabase = await createServerSupabaseClient();
+                const { error } = await supabase.auth.signInWithOtp({
                     email: emailToSendTo,
                     options: {
                         emailRedirectTo: callbackUrl
@@ -122,7 +127,8 @@ export async function POST(req: Request) {
                 });
                 authError = error;
             } else {
-                // For new students, invite them
+                // For new students, invite them (Admin action)
+                // Note: invites might send token_hash, not code. Callback should handle both.
                 const { error } = await supabaseAdmin.auth.admin.inviteUserByEmail(emailToSendTo, {
                     data: { full_name: data.fullName, type: 'student_registration', registration_id: record.id },
                     redirectTo: callbackUrl
