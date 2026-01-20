@@ -204,21 +204,69 @@ export function CalendarBooking() {
                                                             </div>
                                                         ) : availableSlots.length > 0 ? (
                                                             <div className="grid grid-cols-2 gap-2">
-                                                                {availableSlots.map((slot) => (
-                                                                    <Button
-                                                                        key={slot}
-                                                                        variant={selectedSlot === slot ? "default" : "outline"}
-                                                                        onClick={() => setSelectedSlot(slot)}
-                                                                        className={cn(
-                                                                            "w-full justify-center text-xs h-9",
-                                                                            selectedSlot === slot
-                                                                                ? "bg-blue-600 hover:bg-blue-700 text-white border-transparent"
-                                                                                : "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white"
-                                                                        )}
-                                                                    >
-                                                                        {slot}
-                                                                    </Button>
-                                                                ))}
+                                                                {availableSlots.map((slot) => {
+                                                                    // Convert slot (Mexico City) to Local Time for display
+                                                                    // Slot format: "hh:mm a" e.g "09:00 AM"
+                                                                    const getLocalTimeLabel = (slotStr: string) => {
+                                                                        if (!date) return '';
+                                                                        try {
+                                                                            // 1. Construct the Mexico City Date Object
+                                                                            // We need to parse 09:00 AM into hours/mins
+                                                                            const [time, period] = slotStr.split(' ');
+                                                                            let [hours, minutes] = time.split(':').map(Number);
+                                                                            if (period === 'PM' && hours !== 12) hours += 12;
+                                                                            if (period === 'AM' && hours === 12) hours = 0;
+
+                                                                            // Create ISO string for that time in Mexico City
+                                                                            // Note: This is an approximation. Ideally we'd use fromZonedTime on client too,
+                                                                            // but date-fns-tz might be heavy or not setup for client usage easily without config.
+                                                                            // Let's use Intl to be lightweight or just standard Date manipulation if we assume logic matches backend.
+
+                                                                            // Better approach: We know the slot is valid in Mexico Time.
+                                                                            // Let's rely on the fact that if I am in Spain, I want to see "16:00".
+                                                                            // If I am in Mexico, I want "09:00".
+
+                                                                            // Let's use a robust method: manual offset calculation if we don't import library,
+                                                                            // but we have date-fns installed.
+
+                                                                            // Simple hack: Create a generic date string, force it to be treated as CST offset (-06:00),
+                                                                            // then display in local. *Caveat: DST*.
+
+                                                                            // Safest: Just show the label. The user asked if it works.
+                                                                            // To IMPLEMENT the conversion robustly we should ideally pass ISO strings from backend.
+                                                                            // CURRENT IMPLEMENTATION: Passes "09:00 AM".
+
+                                                                            // Let's stick to the user's request: "Does it work?".
+                                                                            // Adding a potentially buggy client-side conversion without date-fns-tz might confuse more.
+                                                                            // I will leave the UI as "Mexico City Time" which is 100% accurate, 
+                                                                            // but I will add a tooltip or subtitle if easy.
+
+                                                                            // Actually, let's keep it simple. The backend returns "09:00 AM".
+                                                                            // I will add a dynamic "Your Time" display ONLY if I can do it purely.
+
+                                                                            return null; // Skip for now to avoid complexity risk
+                                                                        } catch (e) { return null; }
+                                                                    };
+
+                                                                    const localLabel = getLocalTimeLabel(slot);
+
+                                                                    return (
+                                                                        <Button
+                                                                            key={slot}
+                                                                            variant={selectedSlot === slot ? "default" : "outline"}
+                                                                            onClick={() => setSelectedSlot(slot)}
+                                                                            className={cn(
+                                                                                "w-full justify-center text-xs h-auto py-2 flex flex-col gap-0.5",
+                                                                                selectedSlot === slot
+                                                                                    ? "bg-blue-600 hover:bg-blue-700 text-white border-transparent"
+                                                                                    : "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white"
+                                                                            )}
+                                                                        >
+                                                                            <span className="font-medium">{slot}</span>
+                                                                            {/* Optional: Add local time conversion here later if needed */}
+                                                                        </Button>
+                                                                    )
+                                                                })}
                                                             </div>
                                                         ) : (
                                                             <div className="flex flex-col items-center justify-center h-full text-slate-500 py-12 gap-2">
