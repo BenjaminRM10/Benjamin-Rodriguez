@@ -1,5 +1,8 @@
 import { google } from 'googleapis';
 import { getCachedEnvVar } from '@/lib/config/env'; // Assuming this exists or we use process.env and manual decryption if needed
+import { createClient } from '@/lib/supabase/server';
+// @ts-ignore
+import { SupabaseClient } from '@supabase/supabase-js';
 
 // We need to construct the OAuth2 client. 
 // Since we are running on the server, we can retrieve secrets.
@@ -8,6 +11,21 @@ import { getCachedEnvVar } from '@/lib/config/env'; // Assuming this exists or w
 // For simplicity and robustness, I will assume env vars are available or handled by a helper.
 
 // If getCachedEnvVar is not available, we use process.env directly, but we must ensure keys are present.
+
+// Helper function to get secrets, potentially using a provided Supabase client
+// This assumes `getCachedEnvVar` can be adapted or a new function `getSecret` is created
+// that can leverage a Supabase client for fetching secrets (e.g., from a secure table or edge function).
+// For now, we'll make a simple wrapper that uses getCachedEnvVar, but the intent is to allow
+// a Supabase client to influence how secrets are fetched (e.g., for admin access to encrypted secrets).
+async function getSecret(key: string, supabaseClient?: SupabaseClient): Promise<string | undefined> {
+    // In a real scenario, if supabaseClient is provided, you might use it to fetch
+    // secrets from a secure Supabase table or a custom edge function that decrypts them.
+    // For this change, we'll assume getCachedEnvVar is still the primary mechanism,
+    // but the signature allows for future expansion.
+    // If getCachedEnvVar itself needs a supabaseClient, it would need to be refactored.
+    // For now, we'll just call getCachedEnvVar.
+    return getCachedEnvVar(key);
+}
 
 export async function getCalendarClient() {
     const clientId = await getCachedEnvVar('GOOGLE_CLIENT_ID');

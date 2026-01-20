@@ -44,3 +44,6 @@ next-env.d.ts
 # tools
 .turbo
 
+# CV files (personal documents)
+/cv/
+

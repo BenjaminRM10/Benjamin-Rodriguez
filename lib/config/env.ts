@@ -1,7 +1,7 @@
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 export async function getEnvVar(key: string): Promise<string | null> {
-    const supabase = await createClient();
+    const supabase = createAdminClient();
     const encryptionKey = process.env.SUPABASE_ENCRYPTION_KEY;
 
     if (!encryptionKey) {

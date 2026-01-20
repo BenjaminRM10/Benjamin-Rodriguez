@@ -288,97 +288,56 @@ export function CourseRegistrationForm({ eventType, eventDate, onSuccess, onCanc
 
         try {
             // 1. Determine Registration Type & Flow
-            let registrationType = 'public-workshop';
-            if (eventType === 'corporate') registrationType = 'corporate';
-            else if (eventType.includes('online')) registrationType = 'online';
-            else if (eventType === 'tec-saltillo') registrationType = 'tec-saltillo';
+            // eventType is passed from parent (AICourseDetails). 
+            // values.attendeeType comes from form.
+            // We need to pass both to API to map correctly to Stripe.
 
-            const ticketType = values.attendeeType;
-            const needsVerification = (ticketType === 'student' || eventType === 'tec-saltillo');
+            const payload = {
+                fullName: values.fullName,
+                email: values.email,
+                phone: values.phone || '',
+                eventDate: values.preferredDate ? format(values.preferredDate, 'yyyy-MM-dd') : eventDate?.toISOString().split('T')[0],
+                attendeeType: values.attendeeType,
+                eventType: eventType, // e.g. 'student' (which assumes workshop), 'online-group', etc.
+                attendees: values.numberOfAttendees || 1,
+            };
 
-            // 2. Handle Logic
-            if (needsVerification) {
-                // --- VERIFICATION FLOW ---
-                // For now, we simulate the verification email sent step
-                // In a full implementation, this would call supabase.auth.signInWithOtp
-                // and we'd creation the registration on the callback or here with 'pending' status.
+            // 2. Call Unified API
+            const response = await fetch('/api/course/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
 
-                // We will create a 'pending_email_verification' record securely via API to avoid RLS issues on client insert
-                // then trigger the email step UI.
+            const result = await response.json();
 
-                const response = await fetch('/api/academy/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        eventSlug: eventType === 'tec-saltillo' ? 'tec-saltillo-jan-2026' : 'peers-workshop-feb-2026', // Simplified mapping
-                        fullName: values.fullName,
-                        email: values.email,
-                        phone: values.phone || '',
-                        attendeeType: values.attendeeType,
-                        // Add status override if API supports it? API defaults to pending_email_verification if student.
-                    }),
-                });
-
-
-                if (!response.ok) throw new Error("Failed to initiate verification");
-
-                // Redirect to success page for verification flow
-                router.push('/academy/success');
-                setIsLoading(false);
-                return;
-
-            } else {
-                // --- PAYMENT FLOW (Corporate & Professionals) ---
-                // "No Verification" -> Insert & Redirect to Stripe
-
-                const supabase = createClient();
-                const dateStr = values.preferredDate ? values.preferredDate.toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
-
-                // 1. Create Registration (Client-Side Insert as requested, assuming RLS allows public insert or we use API fallback)
-                // Note: If RLS blocks this, we should fallback to API. 
-                // However, user specifically asked for this code. We'll try it. 
-                // If it fails due to RLS, I'll catch and fallback to API.
-
-                let registrationId = '';
-
-                // 1. Create Registration (Client-Side Insert)
-                const { data: registration, error: insertError } = await supabase
-                    .from('course_registrations')
-                    .insert({
-                        course_id: eventType === 'corporate' ? 'corporate-training-generic' : 'ai-engineering-2026',
-                        event_date: dateStr,
-                        full_name: values.fullName,
-                        email: values.email,
-                        phone: values.phone || null,
-                        attendee_type: values.attendeeType,
-                        status: 'pending_payment',
-                    })
-                    .select()
-                    .single();
-
-                if (insertError) throw new Error(insertError.message);
-                registrationId = registration.id;
-
-                // 2. Stripe Session
-                const response = await fetch('/api/stripe/create-checkout', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        registrationId: registrationId,
-                        registrationType: registrationType,
-                        ticketType: ticketType,
-                        attendees: values.numberOfAttendees,
-                        customerEmail: values.email,
-                        eventDate: dateStr,
-                    }),
-                });
-
-                const result = await response.json();
-                if (!response.ok) throw new Error(result.error || 'Error creating checkout');
-
-                // 3. Redirect
-                window.location.href = result.url;
+            if (!response.ok) {
+                throw new Error(result.error || "Registration failed");
             }
+
+            // 3. Handle Response Actions
+            if (result.status === 'pending_email_verification') {
+                // Success -> Email Sent
+                setStep('email-verification');
+                // Effectively we are done here, UI shows check email message
+            }
+            else if (result.paymentUrl) {
+                // Payment Required -> Redirect
+                window.location.href = result.paymentUrl;
+            }
+            else if (result.status === 'pending_contact') {
+                // Corporate contact
+                onSuccess(); // Close modal or show success message
+                alert("Thank you! We've received your request and will contact you shortly.");
+            }
+            else {
+                // Generic Success (e.g. Free Tec Event confirmed immediately if logic permits?)
+                // Currently API returns pending_email_verification for Tec students too.
+                // If we implemented auto-confirm for them in API, we'd handle it here.
+                onSuccess();
+            }
+
+            setIsLoading(false);
 
         } catch (error: any) {
             console.error("Registration Error:", error);

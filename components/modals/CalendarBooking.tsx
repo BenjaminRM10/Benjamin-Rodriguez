@@ -30,7 +30,8 @@ export function CalendarBooking() {
     // State for booking process
     const [step, setStep] = useState<'datetime' | 'details' | 'success'>('datetime');
     const [isBooking, setIsBooking] = useState(false);
-    const [userDetails, setUserDetails] = useState({ name: '', email: '' });
+    const [userDetails, setUserDetails] = useState({ name: '', email: '', phone: '' });
+    const [meetingType, setMeetingType] = useState<'google_meet' | 'phone_call'>('google_meet');
 
     // Fetch slots when date changes
     useEffect(() => {
@@ -66,6 +67,8 @@ export function CalendarBooking() {
                 body: JSON.stringify({
                     name: userDetails.name,
                     email: userDetails.email,
+                    phone: userDetails.phone,
+                    meetingType: meetingType,
                     date: date.toISOString(),
                     time: selectedSlot
                 })
@@ -113,7 +116,9 @@ export function CalendarBooking() {
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-2">Meeting Confirmed!</h3>
                         <p className="text-slate-400 mb-6">
-                            Check your email for the Google Meet link. I look forward to speaking with you.
+                            {meetingType === 'google_meet'
+                                ? "Check your email for the Google Meet link. I look forward to speaking with you."
+                                : "Check your email for confirmation. I will call you at the scheduled time."}
                         </p>
                         <div className="p-4 rounded-xl bg-white/5 border border-white/10 w-full max-w-sm mb-6">
                             <div className="flex items-center gap-3 text-sm text-slate-300 mb-2">
@@ -252,6 +257,42 @@ export function CalendarBooking() {
                                     </DialogHeader>
 
                                     <div className="space-y-4">
+                                        {/* Meeting Type Selector */}
+                                        <div className="space-y-2">
+                                            <Label className="text-slate-300">How do you prefer to meet?</Label>
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <div
+                                                    onClick={() => setMeetingType('google_meet')}
+                                                    className={cn(
+                                                        "cursor-pointer p-3 rounded-xl border transition-all flex items-center gap-3",
+                                                        meetingType === 'google_meet'
+                                                            ? "bg-blue-600/20 border-blue-500 text-white"
+                                                            : "bg-white/5 border-white/10 text-slate-400 hover:bg-white/10"
+                                                    )}
+                                                >
+                                                    <div className={cn("w-8 h-8 rounded-full flex items-center justify-center", meetingType === 'google_meet' ? "bg-blue-500" : "bg-white/10")}>
+                                                        <Video className="w-4 h-4 text-white" />
+                                                    </div>
+                                                    <span className="text-sm font-medium">Google Meet</span>
+                                                </div>
+
+                                                <div
+                                                    onClick={() => setMeetingType('phone_call')}
+                                                    className={cn(
+                                                        "cursor-pointer p-3 rounded-xl border transition-all flex items-center gap-3",
+                                                        meetingType === 'phone_call'
+                                                            ? "bg-green-600/20 border-green-500 text-white"
+                                                            : "bg-white/5 border-white/10 text-slate-400 hover:bg-white/10"
+                                                    )}
+                                                >
+                                                    <div className={cn("w-8 h-8 rounded-full flex items-center justify-center", meetingType === 'phone_call' ? "bg-green-500" : "bg-white/10")}>
+                                                        <div className="w-4 h-4 text-white">📞</div> {/* Using emoji for simplicity or import PhoneIcon */}
+                                                    </div>
+                                                    <span className="text-sm font-medium">Phone Call</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div className="space-y-2">
                                             <Label className="text-slate-300">Full Name</Label>
                                             <Input
@@ -271,6 +312,19 @@ export function CalendarBooking() {
                                                 onChange={(e) => setUserDetails(prev => ({ ...prev, email: e.target.value }))}
                                             />
                                         </div>
+
+                                        {meetingType === 'phone_call' && (
+                                            <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
+                                                <Label className="text-slate-300">Phone Number</Label>
+                                                <Input
+                                                    placeholder="+1 (555) 000-0000"
+                                                    type="tel"
+                                                    className="bg-white/5 border-white/10 text-white"
+                                                    value={userDetails.phone}
+                                                    onChange={(e) => setUserDetails(prev => ({ ...prev, phone: e.target.value }))}
+                                                />
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="flex gap-3 pt-4">
@@ -283,7 +337,7 @@ export function CalendarBooking() {
                                         </Button>
                                         <Button
                                             className="flex-[2] bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/20"
-                                            disabled={!userDetails.name || !userDetails.email || isBooking}
+                                            disabled={!userDetails.name || !userDetails.email || isBooking || (meetingType === 'phone_call' && !userDetails.phone)}
                                             onClick={handleBooking}
                                         >
                                             {isBooking ? (

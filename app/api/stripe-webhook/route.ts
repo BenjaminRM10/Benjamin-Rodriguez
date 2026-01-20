@@ -1,6 +1,6 @@
 import { headers } from 'next/headers';
 import { getStripeServerClient } from '@/lib/stripe';
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { createCalendarEvent } from '@/lib/google/calendar-actions';
 import { getCachedEnvVar } from '@/lib/config/env';
 import Stripe from 'stripe';
@@ -16,8 +16,10 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Missing signature' }, { status: 400 });
     }
 
-    // Obtener el webhook secret de Supabase de manera segura
-    const supabase = await createClient();
+    // Initialize Admin Client
+    const supabaseAdmin = createAdminClient();
+
+    // Retrieve webhook secret securely
     const webhookSecret = await getCachedEnvVar('STRIPE_WEBHOOK_SECRET');
 
     if (!webhookSecret) {
@@ -35,7 +37,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
     }
 
-    // Manejar el evento checkout.session.completed
+    // Handle checkout.session.completed
     if (event.type === 'checkout.session.completed') {
         const session = event.data.object as Stripe.Checkout.Session;
 
@@ -53,24 +55,8 @@ export async function POST(request: Request) {
         }
 
         try {
-            // 1. Obtener el registro actual
-            // Assuming we are using admin or service role permissions implicitly via createClient usually handling cookies or if valid session exists
-            // BUT webhooks have no user session. We need a SERVICE ROLE client to update specific user data if RLS protects it.
-            // However, typical `createClient` in '@/lib/supabase/server' uses cookie store.
-            // For webhooks, we usually need an admin client.
-            // The prompt used `createClient`. If RLS is enabled and allows 'update' only for owner, this will fail.
-            // I should use `createClient` from `@/lib/supabase/server` but often we need `createAdminClient` for webhooks.
-            // Let's stick to what's requested but if it fails I'll know why.
-            // Actually, I can use the same pattern as `actions.ts` which used `supabaseAdmin` with SERVICE_ROLE key.
-            // I will switch to creating a direct Admin client here for safety since webhooks are unauthenticated user-wise.
-
-            const supabaseAdmin = await createClient(); // Wait, the standard createClient might be cookie-based.
-            // Let's look at how actions.ts did it.
-            // actions.ts: `createClient<Database>(supabaseUrl, supabaseServiceKey)`
-            // I'll stick to user prompt's `createClient` for now to avoid deviating too much, 
-            // but I'll add the checks for null dates.
-
-            const { data: registration, error: fetchError } = await supabase
+            // 1. Get current registration
+            const { data: registration, error: fetchError } = await supabaseAdmin
                 .from('course_registrations')
                 .select('*')
                 .eq('id', registrationId)
@@ -81,8 +67,8 @@ export async function POST(request: Request) {
                 return NextResponse.json({ error: 'Registration not found' }, { status: 404 });
             }
 
-            // 2. Actualizar registro a 'confirmed'
-            const { error: updateError } = await supabase
+            // 2. Update registration to 'confirmed'
+            const { error: updateError } = await supabaseAdmin
                 .from('course_registrations')
                 .update({
                     status: 'confirmed',
@@ -96,11 +82,12 @@ export async function POST(request: Request) {
                 throw updateError;
             }
 
-            // 3. Crear evento en Google Calendar
+            // 3. Create Google Calendar event
             const finalEventDate = registration.event_date || eventDate;
 
             if (finalEventDate) {
                 try {
+                    // Pass the admin client to allow secret decryption inside the function if updated
                     await createCalendarEvent({
                         summary: `AI Engineering Course - ${registrationType} - ${registration.full_name}`,
                         description: `
@@ -115,7 +102,8 @@ Payment ID: ${session.id}
                         endTime: new Date(new Date(finalEventDate).getTime() + 8 * 60 * 60 * 1000).toISOString(),
                         attendees: [registration.email, 'contacto@appcreatorbr.com'],
                         location: 'Vía Google Meet / Presencial',
-                    });
+                    }, supabaseAdmin); // Pass admin client
+
                     console.log('Calendar event created for:', registration.email);
                 } catch (calendarError) {
                     console.error('Error creating calendar event (non-fatal):', calendarError);
@@ -135,6 +123,6 @@ Payment ID: ${session.id}
     return NextResponse.json({ received: true }, { status: 200 });
 }
 
-// Configuración para Next.js App Router
+// Config for Next.js App Router
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';

@@ -6,7 +6,16 @@
       "Bash(grep:*)",
       "Bash(npm run dev:*)",
       "Bash(npm install)",
-      "Bash(xargs du:*)"
+      "Bash(xargs du:*)",
+      "WebFetch(domain:www.appcreatorbr.com)",
+      "Bash(npx --yes puppeteer --version)",
+      "Bash(node -e:*)",
+      "Bash(npx --yes puppeteer-cli print:*)",
+      "Bash(npm install:*)",
+      "Bash(pdfinfo:*)",
+      "Bash(pdftk:*)",
+      "Bash(python3:*)",
+      "Bash(qpdf --show-npages:*)"
     ]
   }
 }
