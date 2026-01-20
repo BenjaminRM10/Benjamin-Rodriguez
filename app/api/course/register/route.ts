@@ -101,15 +101,24 @@ export async function POST(req: Request) {
                 ? 'benjaminrm14032018@gmail.com'
                 : data.email;
 
+            // Robust Base URL detection
+            const getBaseUrl = () => {
+                if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+                if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+                return 'https://appcreatorbr.com'; // Fallback to production domain
+            };
+
+            const siteUrl = getBaseUrl();
+            const callbackUrl = `${siteUrl}/api/auth/callback?next=${encodeURIComponent(`/academy/verify-callback?registrationId=${record.id}`)}`;
+
             let authError;
 
             // If it's the admin/test account, use signInWithOtp because they likely already exist
-            // inviteUserByEmail fails (often silently or with 500) for existing users
             if (emailToSendTo === 'benjaminrm14032018@gmail.com') {
                 const { error } = await supabaseAdmin.auth.signInWithOtp({
                     email: emailToSendTo,
                     options: {
-                        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback?next=${encodeURIComponent(`/academy/verify-callback?registrationId=${record.id}`)}`
+                        emailRedirectTo: callbackUrl
                     }
                 });
                 authError = error;
@@ -117,7 +126,7 @@ export async function POST(req: Request) {
                 // For new students, invite them
                 const { error } = await supabaseAdmin.auth.admin.inviteUserByEmail(emailToSendTo, {
                     data: { full_name: data.fullName, type: 'student_registration', registration_id: record.id },
-                    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback?next=${encodeURIComponent(`/academy/verify-callback?registrationId=${record.id}`)}`
+                    redirectTo: callbackUrl
                 });
                 authError = error;
             }
