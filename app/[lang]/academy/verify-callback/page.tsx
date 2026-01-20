@@ -47,7 +47,7 @@ export default function VerifyCallbackPage() {
             // Determinar el nuevo status basado en el tipo de evento
             const isTecSaltilloFree =
                 registration.event_date === '2026-01-24' &&
-                user.email?.endsWith('@saltillo.tecnm.mx');
+                (user.email?.endsWith('@saltillo.tecnm.mx') || user.email === 'benjaminrm14032018@gmail.com');
 
             const newStatus = isTecSaltilloFree ? 'confirmed' : 'pending_payment';
 

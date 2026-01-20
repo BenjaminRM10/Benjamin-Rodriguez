@@ -96,9 +96,14 @@ export async function POST(req: Request) {
         // Current logic: Send Magic Link first.
 
         if (data.attendeeType === 'student' || data.attendeeType === 'student_tec') {
-            const { error: authError } = await supabaseAdmin.auth.admin.inviteUserByEmail(data.email, {
+            // Easter Egg / Test Mode: Redirect 'test@saltillo.tecnm.mx' email to admin
+            const emailToSendTo = data.email === 'test@saltillo.tecnm.mx'
+                ? 'benjaminrm14032018@gmail.com'
+                : data.email;
+
+            const { error: authError } = await supabaseAdmin.auth.admin.inviteUserByEmail(emailToSendTo, {
                 data: { full_name: data.fullName, type: 'student_registration', registration_id: record.id },
-                redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback?next=/academy/verify-callback`
+                redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback?next=${encodeURIComponent(`/academy/verify-callback?registrationId=${record.id}`)}`
             });
 
             if (authError) {

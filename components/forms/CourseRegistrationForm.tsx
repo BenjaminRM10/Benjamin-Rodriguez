@@ -312,6 +312,9 @@ export function CourseRegistrationForm({ eventType, eventDate, onSuccess, onCanc
             const result = await response.json();
 
             if (!response.ok) {
+                if (response.status === 409) {
+                    throw new Error("You are already registered for this event. Please check your email for the confirmation link.");
+                }
                 throw new Error(result.error || "Registration failed");
             }
 
@@ -439,6 +442,12 @@ export function CourseRegistrationForm({ eventType, eventDate, onSuccess, onCanc
                         >
                             <Form {...form}>
                                 <form id="registration-form" onSubmit={form.handleSubmit(onSubmit)} className="h-full">
+                                    {form.formState.errors.root && (
+                                        <div className="mb-4 p-4 rounded-lg bg-red-500/10 border border-red-500/20 flex items-start gap-3">
+                                            <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                                            <p className="text-sm text-red-200">{form.formState.errors.root.message}</p>
+                                        </div>
+                                    )}
                                     <div className="grid grid-cols-1 lg:grid-cols-[1fr,auto] gap-8 h-full">
 
                                         {/* LEFT COLUMN: Fields */}
