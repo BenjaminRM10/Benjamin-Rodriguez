@@ -101,10 +101,26 @@ export async function POST(req: Request) {
                 ? 'benjaminrm14032018@gmail.com'
                 : data.email;
 
-            const { error: authError } = await supabaseAdmin.auth.admin.inviteUserByEmail(emailToSendTo, {
-                data: { full_name: data.fullName, type: 'student_registration', registration_id: record.id },
-                redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback?next=${encodeURIComponent(`/academy/verify-callback?registrationId=${record.id}`)}`
-            });
+            let authError;
+
+            // If it's the admin/test account, use signInWithOtp because they likely already exist
+            // inviteUserByEmail fails (often silently or with 500) for existing users
+            if (emailToSendTo === 'benjaminrm14032018@gmail.com') {
+                const { error } = await supabaseAdmin.auth.signInWithOtp({
+                    email: emailToSendTo,
+                    options: {
+                        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback?next=${encodeURIComponent(`/academy/verify-callback?registrationId=${record.id}`)}`
+                    }
+                });
+                authError = error;
+            } else {
+                // For new students, invite them
+                const { error } = await supabaseAdmin.auth.admin.inviteUserByEmail(emailToSendTo, {
+                    data: { full_name: data.fullName, type: 'student_registration', registration_id: record.id },
+                    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback?next=${encodeURIComponent(`/academy/verify-callback?registrationId=${record.id}`)}`
+                });
+                authError = error;
+            }
 
             if (authError) {
                 console.error('Auth Error:', authError);
