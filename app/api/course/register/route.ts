@@ -101,11 +101,9 @@ export async function POST(req: Request) {
                 ? 'benjaminrm14032018@gmail.com'
                 : data.email;
 
-            // Robust Base URL detection
+            // Robust Base URL detection - FORCED PRODUCTION URL
             const getBaseUrl = () => {
-                if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-                if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-                return 'https://appcreatorbr.com'; // Fallback to production domain
+                return 'https://appcreatorbr.com';
             };
 
             const siteUrl = getBaseUrl();
