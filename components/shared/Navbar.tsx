@@ -1,19 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { cn } from "@/lib/utils";
 import LanguageToggle from "./LanguageToggle";
 import MobileMenu from "./MobileMenu";
+import type { Locale } from "@/lib/i18n/config";
+import type { CommonTranslations } from "@/lib/i18n/types";
 
-export default function Navbar() {
+interface NavbarProps {
+    lang: Locale;
+    translations: CommonTranslations;
+}
+
+export default function Navbar({ lang, translations }: NavbarProps) {
     const [hidden, setHidden] = useState(false);
     const { scrollY } = useScroll();
     const [lastScrollY, setLastScrollY] = useState(0);
-    const pathname = usePathname();
-    const lang = pathname.split("/")[1] || "en";
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = lastScrollY;
@@ -26,10 +29,10 @@ export default function Navbar() {
     });
 
     const navLinks = [
-        { href: `/profile`, label: "Profile" },
-        { href: `/solutions`, label: "Solutions" },
-        { href: `/academy`, label: "Academy" },
-        { href: `/contact`, label: "Contact" },
+        { href: `/profile`, label: translations.nav.profile, isContact: false },
+        { href: `/solutions`, label: translations.nav.solutions, isContact: false },
+        { href: `/academy`, label: translations.nav.academy, isContact: false },
+        { href: `/contact`, label: translations.nav.contact, isContact: true },
     ];
 
     return (
@@ -54,7 +57,7 @@ export default function Navbar() {
                 {/* Desktop Nav */}
                 <div className="hidden md:flex items-center space-x-8">
                     {navLinks.map((link) => (
-                        link.label === "Contact" ? (
+                        link.isContact ? (
                             <Link
                                 key={link.href}
                                 href={`/${lang}${link.href}`}
@@ -78,7 +81,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Mobile Nav */}
-                <MobileMenu lang={lang} />
+                <MobileMenu lang={lang} translations={translations} />
             </div>
         </motion.nav>
     );

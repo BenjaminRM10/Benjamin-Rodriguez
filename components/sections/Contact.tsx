@@ -6,12 +6,74 @@ import { motion } from 'framer-motion';
 import { Mail, MessageCircle, Github, Linkedin, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import type { ContactTranslations } from '@/lib/i18n/types';
 
-export function Contact({ lang = 'en' }: { lang?: string }) {
+interface ContactProps {
+    lang?: string;
+    translations?: ContactTranslations;
+}
+
+const defaultTranslations: ContactTranslations = {
+    hero: {
+        badge: "Get in Touch",
+        title: "Let's Build Something",
+        titleHighlight: "Amazing",
+        subtitle: "Ready to automate your workflow, launch a new project, or just say hi? Get in touch and let's make it happen."
+    },
+    direct: {
+        title: "Direct Contact",
+        whatsapp: { label: "WhatsApp Me", action: "Instant Response" },
+        email: { label: "Email Me" }
+    },
+    social: {
+        title: "Connect",
+        location: "Saltillo, Coahuila, Mexico",
+        availability: "Open to opportunities worldwide (Remote)"
+    },
+    form: {
+        title: "Send a Message",
+        name: "Your Name",
+        namePlaceholder: "John Doe",
+        email: "Email Address",
+        emailPlaceholder: "john@example.com",
+        phone: "Phone Number",
+        phonePlaceholder: "+1 (555) 123-4567",
+        company: "Company (Optional)",
+        companyPlaceholder: "Your Company",
+        subject: "Subject",
+        subjectPlaceholder: "How can I help you?",
+        message: "Message",
+        messagePlaceholder: "Tell me about your project...",
+        submit: "Send Message",
+        sending: "Sending...",
+        success: "Message sent successfully! I'll get back to you soon.",
+        error: "Failed to send message. Please try again.",
+        validation: {
+            nameRequired: "Name is required",
+            emailRequired: "Email is required",
+            emailInvalid: "Please enter a valid email",
+            phoneRequired: "Phone number is required",
+            phoneInvalid: "Please enter a valid phone number",
+            messageRequired: "Message is required",
+            messageMinLength: "Message must be at least 10 characters"
+        }
+    },
+    calendar: {
+        title: "Schedule a Call",
+        subtitle: "Book a free 30-minute consultation to discuss your project",
+        cta: "Book Now"
+    },
+    toast: {
+        emailCopied: "Email copied to clipboard!"
+    }
+};
+
+export function Contact({ lang = 'en', translations }: ContactProps) {
+    const t = translations ?? defaultTranslations;
 
     const handleCopyEmail = () => {
         navigator.clipboard.writeText('contacto@appcreatorbr.com');
-        toast.success('Email copied to clipboard!');
+        toast.success(t.toast.emailCopied);
     };
 
     const socialLinks = [
@@ -46,7 +108,7 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
                         viewport={{ once: true }}
                         className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 mb-4 pb-2"
                     >
-                        Let's Build Something Amazing
+                        {t.hero.title} {t.hero.titleHighlight}
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -55,8 +117,7 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
                         transition={{ delay: 0.1 }}
                         className="text-slate-400 max-w-2xl mx-auto text-lg"
                     >
-                        Ready to automate your workflow, launch a new project, or just say hi?
-                        Get in touch and let's make it happen.
+                        {t.hero.subtitle}
                     </motion.p>
                 </div>
 
@@ -71,7 +132,7 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
                         className="lg:col-span-4 space-y-8"
                     >
                         <div className="space-y-6">
-                            <h3 className="text-xl font-semibold text-white">Direct Contact</h3>
+                            <h3 className="text-xl font-semibold text-white">{t.direct.title}</h3>
 
                             {/* WhatsApp - Standardized */}
                             <a
@@ -85,9 +146,9 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
                                         <MessageCircle className="w-5 h-5 text-green-500" />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <span className="block text-sm text-slate-400">WhatsApp Me</span>
+                                        <span className="block text-sm text-slate-400">{t.direct.whatsapp.label}</span>
                                         <span className="block font-medium text-white truncate group-hover:text-green-400 transition-colors">
-                                            Instant Response
+                                            {t.direct.whatsapp.action}
                                         </span>
                                     </div>
                                     <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-green-400 group-hover:translate-x-1 transition-all" />
@@ -107,7 +168,7 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
                                         <Mail className="w-5 h-5 text-purple-400" />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <span className="block text-sm text-slate-400">Email Me</span>
+                                        <span className="block text-sm text-slate-400">{t.direct.email.label}</span>
                                         <span className="block font-medium text-white truncate group-hover:text-purple-300 transition-colors">
                                             contacto@appcreatorbr.com
                                         </span>
@@ -117,12 +178,12 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
                             </a>
 
                             {/* Calendar Booking */}
-                            <CalendarBooking />
+                            <CalendarBooking translations={t.calendar} />
 
                         </div>
 
                         <div className="space-y-6 pt-8 border-t border-white/10">
-                            <h3 className="text-xl font-semibold text-white">Connect</h3>
+                            <h3 className="text-xl font-semibold text-white">{t.social.title}</h3>
 
                             <div className="flex gap-4">
                                 {socialLinks.map((social) => (
@@ -140,11 +201,11 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
 
                             <div className="flex items-center gap-2 text-slate-400">
                                 <MapPin className="w-4 h-4 text-slate-500" />
-                                <span>Saltillo, Coahuila, Mexico</span>
+                                <span>{t.social.location}</span>
                             </div>
                             <div className="flex items-center gap-2 text-slate-500 text-sm">
                                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                                Open to opportunities worldwide (Remote)
+                                {t.social.availability}
                             </div>
                         </div>
                     </motion.div>
@@ -157,7 +218,7 @@ export function Contact({ lang = 'en' }: { lang?: string }) {
                         transition={{ duration: 0.5, delay: 0.2 }}
                         className="lg:col-span-8"
                     >
-                        <ContactForm />
+                        <ContactForm translations={t.form} />
                     </motion.div>
 
                 </div>

@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "badge": "Contáctame",
+    "title": "Construyamos Algo",
+    "titleHighlight": "Increíble",
+    "subtitle": "¿Listo para automatizar tu flujo de trabajo, lanzar un nuevo proyecto o simplemente saludar? Contáctame y hagámoslo realidad."
+  },
+  "direct": {
+    "title": "Contacto Directo",
+    "whatsapp": {
+      "label": "Escríbeme por WhatsApp",
+      "action": "Respuesta Instantánea"
+    },
+    "email": {
+      "label": "Envíame un Email"
+    }
+  },
+  "social": {
+    "title": "Conéctate",
+    "location": "Saltillo, Coahuila, México",
+    "availability": "Abierto a oportunidades mundiales (Remoto)"
+  },
+  "form": {
+    "title": "Envía un Mensaje",
+    "name": "Tu Nombre",
+    "namePlaceholder": "Juan Pérez",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "juan@ejemplo.com",
+    "phone": "Número de Teléfono",
+    "phonePlaceholder": "+52 (555) 123-4567",
+    "company": "Empresa (Opcional)",
+    "companyPlaceholder": "Tu Empresa",
+    "subject": "Asunto",
+    "subjectPlaceholder": "¿Cómo puedo ayudarte?",
+    "message": "Mensaje",
+    "messagePlaceholder": "Cuéntame sobre tu proyecto...",
+    "submit": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "success": "¡Mensaje enviado exitosamente! Te responderé pronto.",
+    "error": "Error al enviar el mensaje. Por favor intenta de nuevo.",
+    "validation": {
+      "nameRequired": "El nombre es obligatorio",
+      "emailRequired": "El correo electrónico es obligatorio",
+      "emailInvalid": "Por favor ingresa un correo válido",
+      "phoneRequired": "El número de teléfono es obligatorio",
+      "phoneInvalid": "Por favor ingresa un número de teléfono válido",
+      "messageRequired": "El mensaje es obligatorio",
+      "messageMinLength": "El mensaje debe tener al menos 10 caracteres"
+    }
+  },
+  "calendar": {
+    "title": "Agenda una Llamada",
+    "subtitle": "Reserva una consulta gratuita de 30 minutos para discutir tu proyecto",
+    "cta": "Reservar Ahora"
+  },
+  "toast": {
+    "emailCopied": "¡Email copiado al portapapeles!"
+  }
+}

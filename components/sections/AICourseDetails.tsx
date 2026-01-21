@@ -14,8 +14,14 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/compone
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { Loader2 } from "lucide-react";
+import type { AcademyTranslations } from "@/lib/i18n/types";
 
-// Lazy Load the Heavy Form
+interface AICourseDetailsProps {
+    lang?: string;
+    translations?: AcademyTranslations;
+}
+
+// Lazy Load the Heavy Form - loading message will be passed via props
 const CourseRegistrationForm = dynamic(
     () => import("@/components/forms/CourseRegistrationForm").then((mod) => mod.CourseRegistrationForm),
     {
@@ -28,107 +34,194 @@ const CourseRegistrationForm = dynamic(
     }
 );
 
+// Default translations for fallback
+const defaultTranslations: AcademyTranslations = {
+    hero: {
+        badge: "System v2.0 Live",
+        badgeSecondary: "Powered by Google Antigravity",
+        title: "AI FOR",
+        titleHighlight: "ENGINEERING",
+        intro: "This is not just coding; it's <strong>Agentic-Dev</strong>. Mastering AI today is the difference between leading the plant or falling behind. Learn to <strong>orchestrate autonomous systems</strong> to solve critical manufacturing problems.",
+        stats: { intensive: "8h Intensive", workflow: "Agentic Workflow", impact: "Real Impact" }
+    },
+    paths: {
+        sectionTitle: "Select Protocol",
+        sectionSubtitle: "Choose your training path",
+        initializeSequence: "Initialize Sequence",
+        items: {
+            tecSaltillo: { title: "Tec Saltillo Event", subtitle: "Exclusive for Students", description: "Join the exclusive launch event at ITS. Verification required.", badge: "FREE", date: "Jan 24" },
+            student: { title: "Peers Workshop", subtitle: "Open Session", description: "Collaborative learning environment for students and pros.", badge: "LIMITED", date: "Jan 31" },
+            corporate: { title: "Corporate Training", subtitle: "For Enterprise", description: "Custom in-house training for engineering teams.", badge: "PREMIUM" },
+            onlineGroup: { title: "Online Training", subtitle: "Remote Access", description: "Live interactive sessions via Google Meet.", badge: "-10% OFF" }
+        }
+    },
+    protocol: {
+        sectionTitle: "The Protocol",
+        sectionSubtitle: "From Zero to Architect",
+        steps: {
+            infrastructure: { time: "09:00", title: "Infrastructure & Security", header: "Secure Cloud Environment", description: "Setup of Google Antigravity IDE. Implementation of SSH keys, IP protocols, and encrypted variables to protect industrial IP." },
+            dataEngineering: { time: "10:00", title: "Data Engineering & Local AI", header: "Backend & LLMs", description: "Building a FastAPI engine with Python/Pandas to process CSV production data. Integration of local Hugging Face models (Phi-4/Llama-3)." },
+            frontend: { time: "12:00", title: "Digital Interface (Frontend)", header: "Industrial Dashboard", description: "Developing a professional UI with Next.js & Tailwind (Glassmorphism). Implementing secure Google Auth via Supabase." },
+            automation: { time: "14:00", title: "Automation & 3D", header: "Agentic Orchestration", description: "Configuring n8n for anomaly detection alerts. Using AI Agents to script 3D mechanical part generation inside Blender." },
+            bridge: { time: "16:00", title: "The Bridge (Legacy Integration)", header: "Excel & VBA Connection", description: "The final link: Creating an Excel Macro that consumes your new Python API. Controlling the AI directly from a spreadsheet." },
+            deployment: { time: "17:00", title: "Deployment", header: "Production Launch", description: "Deploying the full stack solution to Vercel. Live testing of the \"Living Platform\" accessible from any device." }
+        }
+    },
+    sidebar: {
+        upcomingSets: "Upcoming Sets",
+        schedule: "Q1 2026 Schedule",
+        checkRemote: "Check Remote Availability",
+        events: {
+            tecSaltillo: { title: "Tec Saltillo", status: "REGISTER" },
+            alebrijeModule2: { title: "Alebrije (Module II)", status: "ADVANCED", note: "Prerequisite: Level 1" },
+            alebrijeModule1: { title: "Alebrije (Module I)", status: "OPEN" }
+        }
+    },
+    requirements: {
+        title: "System Requirements",
+        tooltip: "Recommended specs for optimal performance.",
+        hardware: { label: "Hardware (Recommended)", value: "Laptop 12GB+ RAM", detail: "SSD with 50GB+ Free" },
+        knowledge: { label: "Knowledge", value: "Engineering OR Programming Logic", detail: "(Recommended)" },
+        language: { label: "Language", value: "Technical English", detail: "(Rec. for AI Chain-of-Thought)" }
+    },
+    modal: {
+        onlineCourse: "Online Course",
+        tecSaltilloEvent: "Tec Saltillo Event",
+        courseRegistration: "Course Registration",
+        registerDescription: "Register for the selected course path.",
+        loadingForm: "Loading Registration Protocol..."
+    },
+    form: {
+        title: "Register for the Course",
+        name: "Full Name",
+        namePlaceholder: "Your full name",
+        email: "Email Address",
+        emailPlaceholder: "your@email.com",
+        phone: "Phone Number",
+        phonePlaceholder: "+1 (555) 123-4567",
+        experience: "Programming Experience",
+        experienceOptions: { none: "No experience", beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" },
+        goals: "What do you want to learn?",
+        goalsPlaceholder: "Tell us about your learning goals...",
+        submit: "Submit Registration",
+        submitting: "Submitting...",
+        success: "Registration submitted! We'll contact you soon.",
+        error: "An error occurred. Please try again.",
+        validation: { nameRequired: "Name is required", emailRequired: "Email is required", emailInvalid: "Please enter a valid email", phoneRequired: "Phone number is required", phoneInvalid: "Please enter a valid phone number" }
+    }
+};
+
 // Supabase Assets
 const SUPABASE_STORAGE_URL = "https://izkevbsyeqihydfzkuzt.supabase.co/storage/v1/object/public/portfolio-assets/courses";
 
-// Updated Path Options
-const PATH_OPTIONS = [
-    {
-        id: 'tec-saltillo',
-        title: "Tec Saltillo Event",
-        subtitle: "Exclusive for Students",
-        description: "Join the exclusive launch event at ITS. Verification required.",
-        badge: "FREE",
-        date: "Jan 24",
-        img: 'tec.webp',
-        colSpan: "md:col-span-1",
-    },
-    {
-        id: 'student',
-        title: "Peers Workshop",
-        subtitle: "Open Session",
-        description: "Collaborative learning environment for students and pros.",
-        badge: "LIMITED",
-        date: "Jan 31",
-        img: 'students.webp',
-        colSpan: "md:col-span-2",
-    },
-    {
-        id: 'corporate',
-        title: "Corporate Training",
-        subtitle: "For Enterprise",
-        description: "Custom in-house training for engineering teams.",
-        badge: "PREMIUM",
-        img: 'company.webp',
-        colSpan: "md:col-span-2",
-    },
-    {
-        id: 'online-group',
-        title: "Online Training",
-        subtitle: "Remote Access",
-        description: "Live interactive sessions via Google Meet.",
-        badge: "-10% OFF",
-        img: 'online.webp',
-        colSpan: "md:col-span-1",
-    }
-];
+// Helper function to create path options from translations
+function createPathOptions(t: AcademyTranslations['paths']['items']) {
+    return [
+        {
+            id: 'tec-saltillo',
+            title: t.tecSaltillo.title,
+            subtitle: t.tecSaltillo.subtitle,
+            description: t.tecSaltillo.description,
+            badge: t.tecSaltillo.badge,
+            date: t.tecSaltillo.date,
+            img: 'tec.webp',
+            colSpan: "md:col-span-1",
+        },
+        {
+            id: 'student',
+            title: t.student.title,
+            subtitle: t.student.subtitle,
+            description: t.student.description,
+            badge: t.student.badge,
+            date: t.student.date,
+            img: 'students.webp',
+            colSpan: "md:col-span-2",
+        },
+        {
+            id: 'corporate',
+            title: t.corporate.title,
+            subtitle: t.corporate.subtitle,
+            description: t.corporate.description,
+            badge: t.corporate.badge,
+            img: 'company.webp',
+            colSpan: "md:col-span-2",
+        },
+        {
+            id: 'online-group',
+            title: t.onlineGroup.title,
+            subtitle: t.onlineGroup.subtitle,
+            description: t.onlineGroup.description,
+            badge: t.onlineGroup.badge,
+            img: 'online.webp',
+            colSpan: "md:col-span-1",
+        }
+    ];
+}
 
-const PROTOCOL_STEPS = [
-    {
-        time: "09:00",
-        title: "Infrastructure & Security",
-        header: "Secure Cloud Environment",
-        desc: "Setup of Google Antigravity IDE. Implementation of SSH keys, IP protocols, and encrypted variables to protect industrial IP.",
-        icon: ShieldCheck,
-        tags: ['SSH', 'Antigravity IDE', 'Ubuntu']
-    },
-    {
-        time: "10:00",
-        title: "Data Engineering & Local AI",
-        header: "Backend & LLMs",
-        desc: "Building a FastAPI engine with Python/Pandas to process CSV production data. Integration of local Hugging Face models (Phi-4/Llama-3).",
-        icon: Database,
-        tags: ['Python', 'Pandas', 'ETL Pipelines']
-    },
-    {
-        time: "12:00",
-        title: "Digital Interface (Frontend)",
-        header: "Industrial Dashboard",
-        desc: "Developing a professional UI with Next.js & Tailwind (Glassmorphism). Implementing secure Google Auth via Supabase.",
-        icon: Monitor,
-        tags: ['Next.js 16', 'Supabase', 'Tailwind']
-    },
-    {
-        time: "14:00",
-        title: "Automation & 3D",
-        header: "Agentic Orchestration",
-        desc: "Configuring n8n for anomaly detection alerts. Using AI Agents to script 3D mechanical part generation inside Blender.",
-        icon: Layers,
-        tags: ['n8n Workflow', 'Blender', 'Automation']
-    },
-    {
-        time: "16:00",
-        title: "The Bridge (Legacy Integration)",
-        header: "Excel & VBA Connection",
-        desc: "The final link: Creating an Excel Macro that consumes your new Python API. Controlling the AI directly from a spreadsheet.",
-        icon: LinkIcon,
-        tags: ['VBA Macros', 'Excel Integration', 'API']
-    },
-    {
-        time: "17:00",
-        title: "Deployment",
-        header: "Production Launch",
-        desc: "Deploying the full stack solution to Vercel. Live testing of the \"Living Platform\" accessible from any device.",
-        icon: Server,
-        tags: ['Vercel', 'CI/CD', 'Production'],
-        isLast: true
-    }
-];
+// Helper function to create protocol steps from translations
+function createProtocolSteps(t: AcademyTranslations['protocol']['steps']) {
+    return [
+        {
+            time: t.infrastructure.time,
+            title: t.infrastructure.title,
+            header: t.infrastructure.header,
+            desc: t.infrastructure.description,
+            icon: ShieldCheck,
+            tags: ['SSH', 'Antigravity IDE', 'Ubuntu']
+        },
+        {
+            time: t.dataEngineering.time,
+            title: t.dataEngineering.title,
+            header: t.dataEngineering.header,
+            desc: t.dataEngineering.description,
+            icon: Database,
+            tags: ['Python', 'Pandas', 'ETL Pipelines']
+        },
+        {
+            time: t.frontend.time,
+            title: t.frontend.title,
+            header: t.frontend.header,
+            desc: t.frontend.description,
+            icon: Monitor,
+            tags: ['Next.js 16', 'Supabase', 'Tailwind']
+        },
+        {
+            time: t.automation.time,
+            title: t.automation.title,
+            header: t.automation.header,
+            desc: t.automation.description,
+            icon: Layers,
+            tags: ['n8n Workflow', 'Blender', 'Automation']
+        },
+        {
+            time: t.bridge.time,
+            title: t.bridge.title,
+            header: t.bridge.header,
+            desc: t.bridge.description,
+            icon: LinkIcon,
+            tags: ['VBA Macros', 'Excel Integration', 'API']
+        },
+        {
+            time: t.deployment.time,
+            title: t.deployment.title,
+            header: t.deployment.header,
+            desc: t.deployment.description,
+            icon: Server,
+            tags: ['Vercel', 'CI/CD', 'Production'],
+            isLast: true
+        }
+    ];
+}
 
-export function AICourseDetails() {
+export function AICourseDetails({ lang = "en", translations }: AICourseDetailsProps) {
+    const t = translations ?? defaultTranslations;
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [selectedPath, setSelectedPath] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Generate translated data
+    const pathOptions = createPathOptions(t.paths.items);
+    const protocolSteps = createProtocolSteps(t.protocol.steps);
 
     // Scroll reset effect
     useEffect(() => {
@@ -151,9 +244,9 @@ export function AICourseDetails() {
 
     // Dynamic Modal Title
     const getModalTitle = () => {
-        if (selectedPath === 'online-group') return "Online Course";
-        if (selectedPath === 'tec-saltillo') return "Tec Saltillo Event";
-        return "Course Registration";
+        if (selectedPath === 'online-group') return t.modal.onlineCourse;
+        if (selectedPath === 'tec-saltillo') return t.modal.tecSaltilloEvent;
+        return t.modal.courseRegistration;
     };
 
     return (
@@ -187,40 +280,36 @@ export function AICourseDetails() {
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                                     </span>
-                                    System v2.0 Live
+                                    {t.hero.badge}
                                 </div>
                                 <div className="hidden md:inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/20 bg-purple-950/20 text-purple-300 text-xs font-mono tracking-wider uppercase backdrop-blur-md">
                                     <BrainCircuit className="w-3 h-3" />
-                                    Powered by Google Antigravity
+                                    {t.hero.badgeSecondary}
                                 </div>
                             </div>
 
                             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
-                                AI FOR <br className="hidden md:block" />
+                                {t.hero.title} <br className="hidden md:block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient-x">
-                                    ENGINEERING
+                                    {t.hero.titleHighlight}
                                 </span>
                             </h1>
 
                             <div className="max-w-2xl text-lg md:text-xl text-slate-400 leading-relaxed font-light">
-                                <p className="mb-6">
-                                    This is not just coding; it's <span className="text-white font-medium">Agentic-Dev</span>.
-                                    Dominar la IA hoy es la diferencia entre liderar la planta o quedarse atrás.
-                                    Aprende a <span className="text-cyan-300 font-medium">orquestar sistemas autónomos</span> para resolver problemas críticos de manufactura.
-                                </p>
+                                <p className="mb-6" dangerouslySetInnerHTML={{ __html: t.hero.intro }} />
                                 <div className="flex flex-wrap gap-4 text-sm font-mono text-slate-500">
-                                    <span className="flex items-center gap-1"><Terminal className="w-4 h-4 text-cyan-500" /> 8h Intensive</span>
-                                    <span className="flex items-center gap-1"><Cpu className="w-4 h-4 text-purple-500" /> Agentic Workflow</span>
-                                    <span className="flex items-center gap-1"><Activity className="w-4 h-4 text-emerald-500" /> Real Impact</span>
+                                    <span className="flex items-center gap-1"><Terminal className="w-4 h-4 text-cyan-500" /> {t.hero.stats.intensive}</span>
+                                    <span className="flex items-center gap-1"><Cpu className="w-4 h-4 text-purple-500" /> {t.hero.stats.workflow}</span>
+                                    <span className="flex items-center gap-1"><Activity className="w-4 h-4 text-emerald-500" /> {t.hero.stats.impact}</span>
                                 </div>
                             </div>
                         </motion.div>
 
                         {/* 2. BENTO GRID - PATHS */}
                         <div>
-                            <SectionHeader title="Select Protocol" subtitle="Choose your training path" />
+                            <SectionHeader title={t.paths.sectionTitle} subtitle={t.paths.sectionSubtitle} />
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                {PATH_OPTIONS.map((path, idx) => (
+                                {pathOptions.map((path, idx) => (
                                     <motion.div
                                         key={path.id}
                                         initial={{ opacity: 0, scale: 0.95 }}
@@ -260,7 +349,7 @@ export function AICourseDetails() {
                                             </p>
 
                                             <div className="flex items-center text-xs font-bold uppercase tracking-wider text-cyan-500 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                                                Initialize Sequence <ArrowRight className="ml-2 w-3 h-3" />
+                                                {t.paths.initializeSequence} <ArrowRight className="ml-2 w-3 h-3" />
                                             </div>
                                         </div>
                                     </motion.div>
@@ -270,13 +359,13 @@ export function AICourseDetails() {
 
                         {/* 3. THE PROTOCOL - MERGED TIMELINE & ARCHITECTURE */}
                         <div className="pb-12">
-                            <SectionHeader title="The Protocol" subtitle="From Zero to Architect" />
+                            <SectionHeader title={t.protocol.sectionTitle} subtitle={t.protocol.sectionSubtitle} />
 
                             <div className="relative pl-4 space-y-0">
                                 {/* Connector Line */}
                                 <div className="absolute left-[27px] top-4 bottom-4 w-0.5 bg-gradient-to-b from-cyan-500/30 via-purple-500/30 to-slate-800" />
 
-                                {PROTOCOL_STEPS.map((step, idx) => (
+                                {protocolSteps.map((step, idx) => (
                                     <ProtocolStep
                                         key={idx}
                                         time={step.time}
@@ -305,26 +394,26 @@ export function AICourseDetails() {
                                             <CalendarDays className="w-5 h-5 text-cyan-400" />
                                         </div>
                                         <div>
-                                            <h4 className="text-white font-bold">Upcoming Sets</h4>
-                                            <p className="text-xs text-slate-500">Q1 2026 Schedule</p>
+                                            <h4 className="text-white font-bold">{t.sidebar.upcomingSets}</h4>
+                                            <p className="text-xs text-slate-500">{t.sidebar.schedule}</p>
                                         </div>
                                     </div>
 
                                     <div className="space-y-4">
                                         <SidebarEvent
-                                            day="24" month="JAN" title="Tec Saltillo"
-                                            status="REGISTER" statusColor="text-emerald-400 border-emerald-500/30 bg-emerald-500/10"
+                                            day="24" month={lang === 'es' ? 'ENE' : 'JAN'} title={t.sidebar.events.tecSaltillo.title}
+                                            status={t.sidebar.events.tecSaltillo.status} statusColor="text-emerald-400 border-emerald-500/30 bg-emerald-500/10"
                                             onClick={() => handlePathSelect('tec-saltillo')}
                                         />
                                         <SidebarEvent
-                                            day="31" month="JAN" title="Alebrije (Module II)"
-                                            status="ADVANCED" statusColor="text-amber-400 border-amber-500/30 bg-amber-500/10"
+                                            day="31" month={lang === 'es' ? 'ENE' : 'JAN'} title={t.sidebar.events.alebrijeModule2.title}
+                                            status={t.sidebar.events.alebrijeModule2.status} statusColor="text-amber-400 border-amber-500/30 bg-amber-500/10"
                                             onClick={() => handlePathSelect('student')}
-                                            note="Prerequisite: Level 1"
+                                            note={t.sidebar.events.alebrijeModule2.note}
                                         />
                                         <SidebarEvent
-                                            day="07" month="FEB" title="Alebrije (Module I)"
-                                            status="OPEN" statusColor="text-emerald-400 border-emerald-500/30 bg-emerald-500/10"
+                                            day="07" month={lang === 'es' ? 'FEB' : 'FEB'} title={t.sidebar.events.alebrijeModule1.title}
+                                            status={t.sidebar.events.alebrijeModule1.status} statusColor="text-emerald-400 border-emerald-500/30 bg-emerald-500/10"
                                             onClick={() => handlePathSelect('student')}
                                         />
                                     </div>
@@ -334,7 +423,7 @@ export function AICourseDetails() {
                                         className="w-full border-slate-700 bg-slate-800/50 hover:bg-slate-800 hover:text-white text-slate-400"
                                         onClick={() => handlePathSelect('online-group')}
                                     >
-                                        Check Remote Availability
+                                        {t.sidebar.checkRemote}
                                     </Button>
                                 </div>
                             </div>
@@ -343,31 +432,31 @@ export function AICourseDetails() {
                             <div className="rounded-xl border border-white/5 bg-white/[0.02] p-6 backdrop-blur-sm">
                                 <div className="flex justify-between items-start mb-4">
                                     <h4 className="text-sm font-bold text-slate-300 flex items-center gap-2">
-                                        <ShieldCheck className="w-4 h-4 text-slate-500" /> System Requirements
+                                        <ShieldCheck className="w-4 h-4 text-slate-500" /> {t.requirements.title}
                                     </h4>
                                     <div className="group relative">
                                         <Info className="w-4 h-4 text-slate-600 cursor-help" />
                                         <div className="absolute right-0 w-48 p-2 bg-black/90 text-[10px] text-slate-400 rounded border border-slate-800 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none mb-1 bottom-full">
-                                            Recommended specs for optimal performance.
+                                            {t.requirements.tooltip}
                                         </div>
                                     </div>
                                 </div>
 
                                 <ul className="space-y-4 text-sm font-mono leading-relaxed">
                                     <li className="pb-3 border-b border-white/5">
-                                        <div className="text-xs text-slate-500 mb-1">Hardware (Recommended)</div>
-                                        <div className="text-cyan-400 font-semibold">Laptop 12GB+ RAM</div>
-                                        <div className="text-slate-500 text-xs mt-0.5">SSD with 50GB+ Free</div>
+                                        <div className="text-xs text-slate-500 mb-1">{t.requirements.hardware.label}</div>
+                                        <div className="text-cyan-400 font-semibold">{t.requirements.hardware.value}</div>
+                                        <div className="text-slate-500 text-xs mt-0.5">{t.requirements.hardware.detail}</div>
                                     </li>
                                     <li className="pb-3 border-b border-white/5">
-                                        <div className="text-xs text-slate-500 mb-1">Knowledge</div>
-                                        <div className="text-slate-300">Engineering OR Programming Logic</div>
-                                        <div className="text-slate-500 text-[10px] italic">(Recommended)</div>
+                                        <div className="text-xs text-slate-500 mb-1">{t.requirements.knowledge.label}</div>
+                                        <div className="text-slate-300">{t.requirements.knowledge.value}</div>
+                                        <div className="text-slate-500 text-[10px] italic">{t.requirements.knowledge.detail}</div>
                                     </li>
                                     <li>
-                                        <div className="text-xs text-slate-500 mb-1">Language</div>
-                                        <div className="text-slate-300">Technical English</div>
-                                        <div className="text-slate-500 text-[10px] italic">(Rec. for AI Chain-of-Thought)</div>
+                                        <div className="text-xs text-slate-500 mb-1">{t.requirements.language.label}</div>
+                                        <div className="text-slate-300">{t.requirements.language.value}</div>
+                                        <div className="text-slate-500 text-[10px] italic">{t.requirements.language.detail}</div>
                                     </li>
                                 </ul>
                             </div>
@@ -387,7 +476,7 @@ export function AICourseDetails() {
                 >
                     <DialogTitle className="sr-only">{getModalTitle()}</DialogTitle>
                     <DialogDescription className="sr-only">
-                        Register for the selected course path.
+                        {t.modal.registerDescription}
                     </DialogDescription>
 
                     <div className="flex-1 overflow-y-auto w-full custom-scrollbar">

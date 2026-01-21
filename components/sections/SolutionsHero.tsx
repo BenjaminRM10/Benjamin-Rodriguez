@@ -1,10 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Rocket, ArrowRight } from "lucide-react";
+import { Briefcase, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import type { SolutionsTranslations } from "@/lib/i18n/types";
 
-export function SolutionsHero({ lang = "en" }: { lang?: string }) {
+interface SolutionsHeroProps {
+    lang?: string;
+    translations: SolutionsTranslations['hero'];
+}
+
+export function SolutionsHero({ lang = "en", translations }: SolutionsHeroProps) {
     return (
         <section className="relative pt-8 pb-20 overflow-hidden bg-[#0a0e27]">
             {/* Background Gradients */}
@@ -21,7 +27,7 @@ export function SolutionsHero({ lang = "en" }: { lang?: string }) {
                         className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6"
                     >
                         <Briefcase className="w-4 h-4" />
-                        <span>Enterprise-Grade Solutions</span>
+                        <span>{translations.badge}</span>
                     </motion.div>
 
                     <motion.h1
@@ -30,9 +36,9 @@ export function SolutionsHero({ lang = "en" }: { lang?: string }) {
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
                     >
-                        Transform Your Business with <br />
+                        {translations.title} <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-                            Intelligent Automation
+                            {translations.titleHighlight}
                         </span>
                     </motion.h1>
 
@@ -42,7 +48,7 @@ export function SolutionsHero({ lang = "en" }: { lang?: string }) {
                         transition={{ delay: 0.2 }}
                         className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto"
                     >
-                        We build custom AI software and high-performance web applications that streamline operations and drive real ROI for your company.
+                        {translations.subtitle}
                     </motion.p>
 
                     <motion.div
@@ -55,7 +61,7 @@ export function SolutionsHero({ lang = "en" }: { lang?: string }) {
                             className="h-12 px-8 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold shadow-lg shadow-blue-500/20"
                             onClick={() => document.getElementById('roi-calculator')?.scrollIntoView({ behavior: 'smooth' })}
                         >
-                            Calculate Your ROI
+                            {translations.ctaROI}
                         </Button>
                         <Button
                             variant="outline"
@@ -63,7 +69,7 @@ export function SolutionsHero({ lang = "en" }: { lang?: string }) {
                             onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
                         >
                             <Rocket className="w-4 h-4 mr-2" />
-                            View Services
+                            {translations.ctaServices}
                         </Button>
                     </motion.div>
 

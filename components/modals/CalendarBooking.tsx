@@ -19,7 +19,22 @@ import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 
-export function CalendarBooking() {
+interface CalendarBookingProps {
+    translations?: {
+        title: string;
+        subtitle: string;
+        cta: string;
+    };
+}
+
+const defaultTranslations = {
+    title: "Schedule a Call",
+    subtitle: "Book a free 30-min consultation",
+    cta: "Book Now"
+};
+
+export function CalendarBooking({ translations }: CalendarBookingProps) {
+    const t = translations ?? defaultTranslations;
     const [date, setDate] = useState<Date | undefined>(new Date());
     const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
 
@@ -98,9 +113,9 @@ export function CalendarBooking() {
                             <CalendarIcon className="w-5 h-5 text-blue-400" />
                         </div>
                         <div className="flex-1 min-w-0 text-left">
-                            <span className="block text-sm text-slate-400">Schedule a Call</span>
+                            <span className="block text-sm text-slate-400">{t.title}</span>
                             <span className="block font-medium text-white truncate group-hover:text-blue-300 transition-colors">
-                                Book a free 30-min consultation
+                                {t.subtitle}
                             </span>
                         </div>
                         <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />

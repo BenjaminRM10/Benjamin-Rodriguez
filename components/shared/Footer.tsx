@@ -1,9 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Github, Linkedin, Mail } from "lucide-react";
+import type { Locale } from "@/lib/i18n/config";
+import type { CommonTranslations } from "@/lib/i18n/types";
 
-export default function Footer({ lang = "en" }: { lang?: string }) {
+interface FooterProps {
+    lang?: Locale;
+    translations: CommonTranslations;
+}
+
+export default function Footer({ lang = "en", translations }: FooterProps) {
     const year = new Date().getFullYear();
+
+    const t = {
+        nav: translations.nav,
+        footer: translations.footer,
+    };
 
     return (
         <footer className="bg-[#0a0e27] border-t border-slate-800 pt-16 pb-8">
@@ -26,24 +38,24 @@ export default function Footer({ lang = "en" }: { lang?: string }) {
                     <div className="space-y-4">
                         <h3 className="font-bold text-2xl text-slate-100">Benjamin Rodríguez</h3>
                         <p className="text-slate-400 max-w-xs">
-                            Where Engineering Meets Innovation. Built with AI & ❤️.
+                            {t.footer.tagline}
                         </p>
                     </div>
 
                     {/* Column 3: Quick Links */}
                     <div className="space-y-4">
-                        <h4 className="font-semibold text-slate-100">Quick Links</h4>
+                        <h4 className="font-semibold text-slate-100">{t.footer.navigation}</h4>
                         <nav className="flex flex-col space-y-2">
-                            <Link href={`/${lang}/profile`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">Profile</Link>
-                            <Link href={`/${lang}/solutions`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">Solutions</Link>
-                            <Link href={`/${lang}/academy`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">Academy</Link>
-                            <Link href={`/${lang}/contact`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">Contact</Link>
+                            <Link href={`/${lang}/profile`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.profile}</Link>
+                            <Link href={`/${lang}/solutions`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.solutions}</Link>
+                            <Link href={`/${lang}/academy`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.academy}</Link>
+                            <Link href={`/${lang}/contact`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.contact}</Link>
                         </nav>
                     </div>
 
                     {/* Column 4: Connect */}
                     <div className="space-y-4">
-                        <h4 className="font-semibold text-slate-100">Connect</h4>
+                        <h4 className="font-semibold text-slate-100">{t.footer.connect}</h4>
                         <div className="flex space-x-4">
                             <a
                                 href="https://github.com/BenjaminRM10"
@@ -74,8 +86,8 @@ export default function Footer({ lang = "en" }: { lang?: string }) {
                 </div>
 
                 <div className="border-t border-slate-800/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-600">
-                    <p>© {year} Benjamin Rodríguez. All rights reserved.</p>
-                    <p>Made with Next.js, Tailwind & Supabase</p>
+                    <p>© {year} Benjamin Rodríguez. {t.footer.copyright}</p>
+                    <p>{t.footer.builtWith}</p>
                 </div>
             </div>
         </footer>

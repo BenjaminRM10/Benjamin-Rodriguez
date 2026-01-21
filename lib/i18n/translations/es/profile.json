@@ -1,0 +1,121 @@
+{
+  "hero": {
+    "status": "Abierto a nuevos proyectos",
+    "name": "Benjamin",
+    "lastName": "Rodríguez",
+    "tagline": "Donde la Ingeniería se Encuentra con la Innovación. Conectando procesos de manufactura con tecnología de vanguardia para eliminar desperdicios y desbloquear la eficiencia.",
+    "roles": [
+      "Ingeniero OPEX",
+      "Especialista en Automatización",
+      "Desarrollador Full-Stack",
+      "POV: Tus Ideas, Automatizadas"
+    ],
+    "alt": {
+      "profilePhoto": "Benjamin Rodríguez"
+    }
+  },
+  "about": {
+    "title": "Sobre",
+    "titleHighlight": "Mí",
+    "bio": {
+      "paragraph1": "Soy un apasionado <strong>Ingeniero OPEX</strong> y <strong>Desarrollador de Software</strong> dedicado a transformar desafíos complejos en soluciones automatizadas y optimizadas.",
+      "paragraph2": "Con una combinación única de experiencia en ingeniería industrial y habilidades de desarrollo full-stack, conecto los procesos físicos con la eficiencia digital. Mi misión es simple: eliminar desperdicios, optimizar el rendimiento y desbloquear el verdadero potencial de tu negocio."
+    },
+    "quote": "El único límite es tu imaginación",
+    "whoIWorkWith": "Con Quién Trabajo",
+    "badges": ["PyMEs", "Startups", "Manufactura", "Estudiantes", "Ingenieros"],
+    "stats": {
+      "recentGraduate": {
+        "headline": "Recién Graduado",
+        "description": "Ingeniería Mecánica"
+      },
+      "experience": {
+        "headline": "1 Año",
+        "description": "Experiencia como Ingeniero OPEX"
+      },
+      "international": {
+        "headline": "Experiencia Internacional",
+        "description": "Canadá y México"
+      },
+      "certifications": {
+        "headline": "Aprendizaje Continuo",
+        "description": "18+ Certificaciones"
+      }
+    }
+  },
+  "skills": {
+    "title": "Mi Caja de Herramientas",
+    "subtitle": "Tecnologías que uso para dar vida a las ideas",
+    "categories": {
+      "devops": "DevOps",
+      "engineering": "Ingeniería Base",
+      "programming": "Programación",
+      "ai": "IA y Automatización",
+      "data": "Datos y Análisis",
+      "leadership": "Liderazgo y Habilidades Profesionales"
+    },
+    "otherSkills": {
+      "title": "Otras Habilidades Técnicas",
+      "items": [
+        "Reparación y Diagnóstico de Computadoras",
+        "Instalación y Optimización de SO",
+        "Configuración de Redes (AdGuard, Pi-hole)",
+        "Configuración de VPN y Seguridad",
+        "Gestión de IP",
+        "Sistemas Inalámbricos Punto a Punto",
+        "Instalación de Starlink",
+        "Diagnóstico de Hardware"
+      ]
+    }
+  },
+  "certifications": {
+    "badge": "Aprendizaje Continuo",
+    "title": "18+ Certificaciones Profesionales",
+    "subtitle": "Actualizando constantemente mis habilidades para estar a la vanguardia.",
+    "viewAll": "Ver Todas las Certificaciones"
+  },
+  "beyondCode": {
+    "title": "Más Allá del Código",
+    "subtitle": "Las experiencias que me formaron",
+    "quote": "El único límite es tu imaginación",
+    "cards": {
+      "toronto": {
+        "title": "Seis Meses que lo Cambiaron Todo",
+        "badges": ["Inmersión Cultural", "Dominio del Inglés"],
+        "paragraphs": [
+          "A los 20 años, pasé seis meses viviendo en <strong>Toronto, Canadá</strong>, trabajando y sumergiéndome completamente en un ambiente de habla inglesa. Vivir de forma independiente, lejos de casa, fue desafiante e increíblemente gratificante.",
+          "Compartí alojamiento con personas de Corea, China, India y Canadá. Esta experiencia multicultural no solo aceleró mi dominio del inglés sino que amplió mi visión del mundo de maneras que nunca imaginé.",
+          "Las amistades que formé perduran hasta hoy, y he regresado a Toronto por estancias de dos meses en cada uno de los últimos dos veranos."
+        ]
+      },
+      "legendarios": {
+        "title": "Un Viaje Transformador en la Naturaleza",
+        "badges": ["Resiliencia", "Transformación"],
+        "paragraphs": [
+          "En 2024, me embarqué en la experiencia <strong>Legendarios Track</strong> en Tampa, Florida—una aventura inmersiva de cuatro días diseñada para desafiar a los hombres física y espiritualmente.",
+          "Cinco días en la naturaleza con comida mínima, caminatas de larga distancia, levantamiento de peso y desafíos físicos prolongados. Cada tarea fue una lección de resiliencia, autodescubrimiento y superación de límites percibidos.",
+          "Esta experiencia me enseñó que la transformación ocurre fuera de tu zona de confort, y que el crecimiento personal requiere tanto resistencia física como fortaleza mental."
+        ]
+      },
+      "books": {
+        "title": "Filosofía de Aprendizaje Continuo",
+        "badges": ["Mentalidad de Crecimiento", "Desarrollo Personal"],
+        "intro": "Estoy profundamente influenciado por principios de desarrollo personal, comunicación efectiva y sabiduría financiera. Pilares clave de mi mentalidad:",
+        "pillars": [
+          "Vida proactiva y liderazgo basado en principios",
+          "Construir relaciones genuinas a través de la empatía",
+          "Creación de riqueza a través de la disciplina",
+          "Mejora continua y efecto compuesto"
+        ]
+      },
+      "basketball": {
+        "title": "Donde Recargo Energías",
+        "badges": ["Trabajo en Equipo", "Balance"],
+        "paragraphs": [
+          "Cuando no estoy programando u optimizando procesos, me encontrarás en la cancha de baloncesto. El baloncesto me enseñó trabajo en equipo, estrategia bajo presión y la importancia de la práctica constante.",
+          "Es mi forma de mantenerme físicamente activo, despejar mi mente y mantener el equilibrio. Ya sea jugando partidos casuales o viendo la NBA, el baloncesto me mantiene centrado y energizado."
+        ]
+      }
+    }
+  }
+}

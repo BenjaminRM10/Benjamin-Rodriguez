@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "home": "Home",
+    "profile": "Profile",
+    "solutions": "Solutions",
+    "academy": "Academy",
+    "contact": "Contact",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio"
+  },
+  "footer": {
+    "tagline": "Transforming ideas into intelligent solutions",
+    "navigation": "Navigation",
+    "connect": "Connect",
+    "services": "Services",
+    "automation": "Automation",
+    "aiIntegration": "AI Integration",
+    "webDevelopment": "Web Development",
+    "consulting": "Consulting",
+    "copyright": "All rights reserved.",
+    "builtWith": "Built with Next.js & Tailwind CSS"
+  },
+  "buttons": {
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "viewMore": "View More",
+    "submit": "Submit",
+    "send": "Send",
+    "cancel": "Cancel",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "loading": "Loading...",
+    "download": "Download",
+    "share": "Share"
+  },
+  "form": {
+    "required": "Required",
+    "optional": "Optional",
+    "invalidEmail": "Invalid email address",
+    "invalidPhone": "Invalid phone number",
+    "minLength": "Minimum {{min}} characters required",
+    "maxLength": "Maximum {{max}} characters allowed",
+    "success": "Form submitted successfully!",
+    "error": "An error occurred. Please try again."
+  },
+  "aria": {
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "toggleLanguage": "Toggle language",
+    "scrollToTop": "Scroll to top",
+    "externalLink": "Opens in new tab"
+  }
+}

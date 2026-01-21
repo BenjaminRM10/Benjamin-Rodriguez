@@ -113,28 +113,23 @@ export async function POST(req: Request) {
             // Fix: Add '/es' locale prefix because page is under [lang]
             const callbackUrl = `${siteUrl}/api/auth/callback?next=${encodeURIComponent(`/es/academy/verify-callback?registrationId=${record.id}`)}`;
 
-            let authError;
+            // 5. Send Verification Email (Magic Link) via PKCE Flow
+            // We use signInWithOtp for ALL students (new or existing).
+            // This ensures consistent behavior and avoids "Invite" flow issues.
 
-            // If it's the admin/test account, use signInWithOtp because they likely already exist
-            if (emailToSendTo === 'benjaminrm14032018@gmail.com') {
-                // Use Server Client (with cookies) for PKCE compatibility
-                const supabase = await createServerSupabaseClient();
-                const { error } = await supabase.auth.signInWithOtp({
-                    email: emailToSendTo,
-                    options: {
-                        emailRedirectTo: callbackUrl
+            const supabase = await createServerSupabaseClient();
+            const { error: authError } = await supabase.auth.signInWithOtp({
+                email: emailToSendTo,
+                options: {
+                    emailRedirectTo: callbackUrl,
+                    shouldCreateUser: true,
+                    data: {
+                        full_name: data.fullName,
+                        registration_id: record.id,
+                        attendee_type: data.attendeeType
                     }
-                });
-                authError = error;
-            } else {
-                // For new students, invite them (Admin action)
-                // Note: invites might send token_hash, not code. Callback should handle both.
-                const { error } = await supabaseAdmin.auth.admin.inviteUserByEmail(emailToSendTo, {
-                    data: { full_name: data.fullName, type: 'student_registration', registration_id: record.id },
-                    redirectTo: callbackUrl
-                });
-                authError = error;
-            }
+                }
+            });
 
             if (authError) {
                 console.error('Auth Error:', authError);

@@ -22,23 +22,46 @@ import { ServiceCard } from "@/components/shared/ServiceCard";
 
 // ... (ServiceCardProps interface remains)
 
-interface ServicesProps {
-    mode?: 'all' | 'business' | 'academy';
+interface ServiceItem {
+    title: string;
+    description: string;
+    cta: string;
 }
 
-export function Services({ mode = 'all' }: ServicesProps) {
+interface ServicesProps {
+    mode?: 'all' | 'business' | 'academy';
+    lang?: string;
+    translations?: {
+        title: string;
+        titleHighlight: string;
+        subtitle: string;
+        professionalServices: string;
+        availableCourses: string;
+        items?: {
+            webDev?: ServiceItem;
+            whatsapp?: ServiceItem;
+            excel?: ServiceItem;
+            data?: ServiceItem;
+            pythonAI?: ServiceItem;
+        };
+    };
+}
+
+export function Services({ mode = 'all', lang, translations }: ServicesProps) {
     // SelectedCourse state removed
 
     // Courses array removed as legacy modules are no longer displayed
 
+    const t = translations?.items;
+
     const services = [
-        // ... (services array content remains identical)
         {
-            title: "Web Development",
-            description: "Custom, high-performance web applications tailored to your business needs. SEO-optimized and built for scale.",
+            id: "webDev",
+            title: t?.webDev?.title ?? "Web Development",
+            description: t?.webDev?.description ?? "Custom, high-performance web applications tailored to your business needs. SEO-optimized and built for scale.",
             icon: Globe,
             gradient: "from-purple-500 to-violet-500",
-            secondaryCtaText: "Get a Quote",
+            secondaryCtaText: t?.webDev?.cta ?? "Get a Quote",
             secondaryCtaLink: "https://wa.me/528661479075?text=Hi!%20I'm%20interested%20in%20Web%20Development%20services",
             techStack: [
                 { icon: Code, name: "React" },
@@ -47,11 +70,12 @@ export function Services({ mode = 'all' }: ServicesProps) {
             ]
         },
         {
-            title: "WhatsApp Automation",
-            description: "Automate your customer service and sales with intelligent WhatsApp bots. 24/7 availability for your clients.",
+            id: "whatsapp",
+            title: t?.whatsapp?.title ?? "WhatsApp Automation",
+            description: t?.whatsapp?.description ?? "Automate your customer service and sales with intelligent WhatsApp bots. 24/7 availability for your clients.",
             icon: MessageSquare,
             gradient: "from-green-500 to-emerald-500",
-            secondaryCtaText: "Start Automating",
+            secondaryCtaText: t?.whatsapp?.cta ?? "Start Automating",
             secondaryCtaLink: "https://wa.me/528661479075?text=Hi!%20I'm%20interested%20in%20WhatsApp%20Automation",
             techStack: [
                 { icon: Bot, name: "Chatbots" },
@@ -60,11 +84,12 @@ export function Services({ mode = 'all' }: ServicesProps) {
             ]
         },
         {
-            title: "Excel Automation",
-            description: "Say goodbye to manual data entry. Custom dashboards, VBA macros, and Python scripts to automate your spreadsheets.",
+            id: "excel",
+            title: t?.excel?.title ?? "Excel Automation",
+            description: t?.excel?.description ?? "Say goodbye to manual data entry. Custom dashboards, VBA macros, and Python scripts to automate your spreadsheets.",
             icon: FileSpreadsheet,
             gradient: "from-orange-500 to-red-500",
-            secondaryCtaText: "Get Custom Solution",
+            secondaryCtaText: t?.excel?.cta ?? "Get Custom Solution",
             secondaryCtaLink: "https://wa.me/528661479075?text=Hi!%20I'm%20interested%20in%20Excel%20Automation",
             techStack: [
                 { icon: FileSpreadsheet, name: "Excel" },
@@ -73,11 +98,12 @@ export function Services({ mode = 'all' }: ServicesProps) {
             ]
         },
         {
-            title: "Data Analysis",
-            description: "Turn your raw data into actionable insights. Interactive dashboards, reporting pipelines, and predictive analytics.",
+            id: "data",
+            title: t?.data?.title ?? "Data Analysis",
+            description: t?.data?.description ?? "Turn your raw data into actionable insights. Interactive dashboards, reporting pipelines, and predictive analytics.",
             icon: BarChart3,
             gradient: "from-pink-500 to-rose-500",
-            secondaryCtaText: "Analyze My Data",
+            secondaryCtaText: t?.data?.cta ?? "Analyze My Data",
             secondaryCtaLink: "https://wa.me/528661479075?text=Hi!%20I'm%20interested%20in%20Data%20Analysis%20services",
             techStack: [
                 { icon: BarChart3, name: "PowerBI" },
@@ -86,11 +112,12 @@ export function Services({ mode = 'all' }: ServicesProps) {
             ]
         },
         {
-            title: "Python + AI Integration",
-            description: "Learn to build FastAPI applications, deploy local LLMs (Llama), integrate AI into Excel, and create your own AI-powered tools.",
+            id: "pythonAI",
+            title: t?.pythonAI?.title ?? "Python + AI Integration",
+            description: t?.pythonAI?.description ?? "Learn to build FastAPI applications, deploy local LLMs (Llama), integrate AI into Excel, and create your own AI-powered tools.",
             icon: BrainCircuit,
             gradient: "from-emerald-500 to-teal-500",
-            secondaryCtaText: "Enroll Now",
+            secondaryCtaText: t?.pythonAI?.cta ?? "Enroll Now",
             secondaryCtaLink: "/academy",
             techStack: [
                 { icon: Code, name: "FastAPI" },
@@ -119,10 +146,10 @@ export function Services({ mode = 'all' }: ServicesProps) {
                         transition={{ duration: 0.5 }}
                     >
                         <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                            Solutions for the <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">Future</span>
+                            {translations?.title ?? "Solutions for the"} <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">{translations?.titleHighlight ?? "Future"}</span>
                         </h2>
                         <p className="text-slate-400 text-lg md:text-xl leading-relaxed">
-                            Whether you need to automate your workflows, analyze your data, or build the next big thing, I have the stack to make it happen.
+                            {translations?.subtitle ?? "Whether you need to automate your workflows, analyze your data, or build the next big thing, I have the stack to make it happen."}
                         </p>
                     </motion.div>
                 </div>
@@ -134,14 +161,14 @@ export function Services({ mode = 'all' }: ServicesProps) {
                     {(mode === 'academy') && (
                         <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
                             <span className="w-1 h-8 bg-gradient-to-b from-yellow-400 to-orange-600 rounded-full inline-block"></span>
-                            Available Courses
+                            {translations?.availableCourses ?? "Available Courses"}
                         </h3>
                     )}
 
                     {(mode === 'all' || mode === 'business') && (
                         <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
                             <span className="w-1 h-8 bg-gradient-to-b from-blue-400 to-cyan-600 rounded-full inline-block"></span>
-                            Professional Services
+                            {translations?.professionalServices ?? "Professional Services"}
                         </h3>
                     )}
 
@@ -149,8 +176,8 @@ export function Services({ mode = 'all' }: ServicesProps) {
                         {services
                             .filter(service => {
                                 if (mode === 'all') return true;
-                                if (mode === 'academy') return service.title.includes("Python");
-                                if (mode === 'business') return !service.title.includes("Python");
+                                if (mode === 'academy') return service.id === "pythonAI";
+                                if (mode === 'business') return service.id !== "pythonAI";
                                 return true;
                             })
                             .map((service, index) => (

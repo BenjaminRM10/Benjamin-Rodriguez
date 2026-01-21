@@ -1,0 +1,121 @@
+{
+  "hero": {
+    "status": "Open to new projects",
+    "name": "Benjamin",
+    "lastName": "Rodríguez",
+    "tagline": "Where Engineering Meets Innovation. bridging the gap between manufacturing processes and cutting-edge technology to eliminate waste and unlock efficiency.",
+    "roles": [
+      "OPEX Engineer",
+      "Automation Specialist",
+      "Full-Stack Developer",
+      "POV: Your Ideas, Automated"
+    ],
+    "alt": {
+      "profilePhoto": "Benjamin Rodríguez"
+    }
+  },
+  "about": {
+    "title": "About",
+    "titleHighlight": "Me",
+    "bio": {
+      "paragraph1": "I am a passionate <strong>OPEX Engineer</strong> and <strong>Software Developer</strong> dedicated to transforming complex challenges into streamlined, automated solutions.",
+      "paragraph2": "With a unique blend of industrial engineering expertise and full-stack development skills, I bridge the gap between physical processes and digital efficiency. My mission is simple: eliminate waste, optimize performance, and unlock the true potential of your business."
+    },
+    "quote": "The only limit is your imagination",
+    "whoIWorkWith": "Who I Work With",
+    "badges": ["PyMEs", "Startups", "Manufacturing", "Students", "Engineers"],
+    "stats": {
+      "recentGraduate": {
+        "headline": "Recent Graduate",
+        "description": "Mechanical Engineering"
+      },
+      "experience": {
+        "headline": "1 Year",
+        "description": "OPEX Engineer Experience"
+      },
+      "international": {
+        "headline": "International Experience",
+        "description": "Canada & Mexico"
+      },
+      "certifications": {
+        "headline": "Continuous Learner",
+        "description": "18+ Certifications"
+      }
+    }
+  },
+  "skills": {
+    "title": "My Toolkit",
+    "subtitle": "Technologies I use to bring ideas to life",
+    "categories": {
+      "devops": "DevOps",
+      "engineering": "Core Engineering",
+      "programming": "Programming",
+      "ai": "AI & Automation",
+      "data": "Data & Analytics",
+      "leadership": "Leadership & Professional Skills"
+    },
+    "otherSkills": {
+      "title": "Other Technical Skills",
+      "items": [
+        "Computer Repair & Troubleshooting",
+        "OS Installation & Optimization",
+        "Network Configuration (AdGuard, Pi-hole)",
+        "VPN Setup & Security",
+        "IP Management",
+        "Point-to-point Wireless Systems",
+        "Starlink Installation",
+        "Hardware Diagnostics"
+      ]
+    }
+  },
+  "certifications": {
+    "badge": "Continuous Learning",
+    "title": "18+ Professional Certifications",
+    "subtitle": "Constantly upgrading my skills to stay ahead of the curve.",
+    "viewAll": "View All Certifications"
+  },
+  "beyondCode": {
+    "title": "Beyond the Code",
+    "subtitle": "The experiences that shaped who I am",
+    "quote": "The only limit is your imagination",
+    "cards": {
+      "toronto": {
+        "title": "Six Months That Changed Everything",
+        "badges": ["Cultural Immersion", "English Mastery"],
+        "paragraphs": [
+          "At 20, I spent six months living in <strong>Toronto, Canada</strong>, working and fully immersing myself in an English-speaking environment. Living independently, far from home, was both challenging and incredibly rewarding.",
+          "I shared accommodations with people from Korea, China, India, and Canada. This multicultural experience not only accelerated my English proficiency but broadened my worldview in ways I never imagined.",
+          "The friendships I formed endure to this day, and I've returned to Toronto for two-month stays in each of the past two summers."
+        ]
+      },
+      "legendarios": {
+        "title": "A Transformative Wilderness Journey",
+        "badges": ["Resilience", "Transformation"],
+        "paragraphs": [
+          "In 2024, I embarked on the <strong>Legendarios Track</strong> experience in Tampa, Florida—a four-day immersive adventure designed to challenge men physically and spiritually.",
+          "Five days in the wilderness with minimal food, long-distance hikes, heavy lifting, and extended physical challenges. Each task was a lesson in resilience, self-discovery, and pushing beyond perceived limits.",
+          "This experience taught me that transformation happens outside your comfort zone, and that personal growth requires both physical endurance and mental fortitude."
+        ]
+      },
+      "books": {
+        "title": "Lifelong Learning Philosophy",
+        "badges": ["Growth Mindset", "Personal Development"],
+        "intro": "I'm deeply influenced by principles of personal development, effective communication, and financial wisdom. Key pillars of my mindset:",
+        "pillars": [
+          "Proactive living & principle-centered leadership",
+          "Building genuine relationships through empathy",
+          "Wealth-building through discipline",
+          "Continuous improvement & compound effect"
+        ]
+      },
+      "basketball": {
+        "title": "Where I Recharge",
+        "badges": ["Team Player", "Balance"],
+        "paragraphs": [
+          "When I'm not coding or optimizing processes, you'll find me on the basketball court. Basketball taught me teamwork, strategy under pressure, and the importance of consistent practice.",
+          "It's my way of staying physically active, clearing my mind, and maintaining balance. Whether playing pickup games or watching the NBA, basketball keeps me grounded and energized."
+        ]
+      }
+    }
+  }
+}

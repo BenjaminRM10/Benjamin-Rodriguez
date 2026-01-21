@@ -6,15 +6,21 @@ import { Menu } from "lucide-react";
 import Link from "next/link";
 import LanguageToggle from "./LanguageToggle";
 import { useState } from "react";
+import type { CommonTranslations } from "@/lib/i18n/types";
 
-export default function MobileMenu({ lang }: { lang: string }) {
+interface MobileMenuProps {
+    lang: string;
+    translations: CommonTranslations;
+}
+
+export default function MobileMenu({ lang, translations }: MobileMenuProps) {
     const [open, setOpen] = useState(false);
 
     const navLinks = [
-        { href: `/profile`, label: "Profile" },
-        { href: `/solutions`, label: "Solutions" },
-        { href: `/academy`, label: "Academy" },
-        { href: `/contact`, label: "Contact" },
+        { href: `/profile`, label: translations.nav.profile },
+        { href: `/solutions`, label: translations.nav.solutions },
+        { href: `/academy`, label: translations.nav.academy },
+        { href: `/contact`, label: translations.nav.contact },
     ];
 
     return (

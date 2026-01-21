@@ -13,12 +13,14 @@ import {
 import { CertificationCard, Certification } from "@/components/shared/CertificationCard";
 import { CertificationsModal } from "@/components/modals/CertificationsModal";
 import { Award } from "lucide-react";
+import type { ProfileTranslations } from "@/lib/i18n/types";
 
 interface CertificationsClientProps {
     certifications: Certification[];
+    translations: ProfileTranslations['certifications'];
 }
 
-export function CertificationsClient({ certifications }: CertificationsClientProps) {
+export function CertificationsClient({ certifications, translations }: CertificationsClientProps) {
     const [modalOpen, setModalOpen] = useState(false);
 
     return (
@@ -34,7 +36,7 @@ export function CertificationsClient({ certifications }: CertificationsClientPro
                             className="flex items-center gap-2 text-blue-400 mb-4 font-medium"
                         >
                             <Award className="w-5 h-5" />
-                            <span>Continuous Learning</span>
+                            <span>{translations.badge}</span>
                         </motion.div>
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
@@ -42,7 +44,7 @@ export function CertificationsClient({ certifications }: CertificationsClientPro
                             viewport={{ once: true }}
                             className="text-3xl md:text-5xl font-bold text-white mb-4"
                         >
-                            18+ Professional Certifications
+                            {translations.title}
                         </motion.h2>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
@@ -51,7 +53,7 @@ export function CertificationsClient({ certifications }: CertificationsClientPro
                             transition={{ delay: 0.1 }}
                             className="text-slate-400 text-lg"
                         >
-                            Constantly upgrading my skills to stay ahead of the curve.
+                            {translations.subtitle}
                         </motion.p>
                     </div>
 
@@ -65,7 +67,7 @@ export function CertificationsClient({ certifications }: CertificationsClientPro
                             size="lg"
                             className="bg-white/10 hover:bg-white/20 text-white border-0"
                         >
-                            View All Certifications
+                            {translations.viewAll}
                         </Button>
                     </motion.div>
                 </div>

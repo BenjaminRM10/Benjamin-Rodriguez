@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "profile": "Perfil",
+    "solutions": "Soluciones",
+    "academy": "Academia",
+    "contact": "Contacto",
+    "about": "Acerca",
+    "services": "Servicios",
+    "portfolio": "Portafolio"
+  },
+  "footer": {
+    "tagline": "Transformando ideas en soluciones inteligentes",
+    "navigation": "Navegación",
+    "connect": "Conectar",
+    "services": "Servicios",
+    "automation": "Automatización",
+    "aiIntegration": "Integración de IA",
+    "webDevelopment": "Desarrollo Web",
+    "consulting": "Consultoría",
+    "copyright": "Todos los derechos reservados.",
+    "builtWith": "Desarrollado con Next.js & Tailwind CSS"
+  },
+  "buttons": {
+    "learnMore": "Saber Más",
+    "getStarted": "Comenzar",
+    "viewMore": "Ver Más",
+    "submit": "Enviar",
+    "send": "Enviar",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "loading": "Cargando...",
+    "download": "Descargar",
+    "share": "Compartir"
+  },
+  "form": {
+    "required": "Obligatorio",
+    "optional": "Opcional",
+    "invalidEmail": "Correo electrónico inválido",
+    "invalidPhone": "Número de teléfono inválido",
+    "minLength": "Mínimo {{min}} caracteres requeridos",
+    "maxLength": "Máximo {{max}} caracteres permitidos",
+    "success": "¡Formulario enviado exitosamente!",
+    "error": "Ocurrió un error. Por favor intenta de nuevo."
+  },
+  "aria": {
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "toggleLanguage": "Cambiar idioma",
+    "scrollToTop": "Volver arriba",
+    "externalLink": "Abre en nueva pestaña"
+  }
+}

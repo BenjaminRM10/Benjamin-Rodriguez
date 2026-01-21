@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "name": "Benjamin",
+    "lastName": "Rodríguez",
+    "roles": [
+      "Ingeniero OPEX & Especialista en Automatización",
+      "Desarrollador Full-Stack",
+      "Experto en Integración de IA",
+      "Tus Ideas, Automatizadas"
+    ]
+  },
+  "cards": {
+    "profile": {
+      "title": "Perfil",
+      "description": "Ver mi CV, Habilidades y Certificaciones."
+    },
+    "solutions": {
+      "title": "Soluciones Empresariales",
+      "description": "Automatiza tu flujo de trabajo. Ver ROI y Servicios."
+    },
+    "academy": {
+      "title": "Academia / Cursos",
+      "description": "Aprende IA y Desarrollo Full-Stack."
+    },
+    "enter": "Entrar"
+  },
+  "footer": {
+    "copyright": "© 2026 AppCreatorBR. Todos los derechos reservados."
+  },
+  "alt": {
+    "logo": "Logo de AppCreatorBR",
+    "profilePhoto": "Benjamin Rodriguez"
+  }
+}

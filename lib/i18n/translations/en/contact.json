@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "badge": "Get in Touch",
+    "title": "Let's Build Something",
+    "titleHighlight": "Amazing",
+    "subtitle": "Ready to automate your workflow, launch a new project, or just say hi? Get in touch and let's make it happen."
+  },
+  "direct": {
+    "title": "Direct Contact",
+    "whatsapp": {
+      "label": "WhatsApp Me",
+      "action": "Instant Response"
+    },
+    "email": {
+      "label": "Email Me"
+    }
+  },
+  "social": {
+    "title": "Connect",
+    "location": "Saltillo, Coahuila, Mexico",
+    "availability": "Open to opportunities worldwide (Remote)"
+  },
+  "form": {
+    "title": "Send a Message",
+    "name": "Your Name",
+    "namePlaceholder": "John Doe",
+    "email": "Email Address",
+    "emailPlaceholder": "john@example.com",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+1 (555) 123-4567",
+    "company": "Company (Optional)",
+    "companyPlaceholder": "Your Company",
+    "subject": "Subject",
+    "subjectPlaceholder": "How can I help you?",
+    "message": "Message",
+    "messagePlaceholder": "Tell me about your project...",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully! I'll get back to you soon.",
+    "error": "Failed to send message. Please try again.",
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Please enter a valid phone number",
+      "messageRequired": "Message is required",
+      "messageMinLength": "Message must be at least 10 characters"
+    }
+  },
+  "calendar": {
+    "title": "Schedule a Call",
+    "subtitle": "Book a free 30-minute consultation to discuss your project",
+    "cta": "Book Now"
+  },
+  "toast": {
+    "emailCopied": "Email copied to clipboard!"
+  }
+}

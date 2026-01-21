@@ -47,3 +47,5 @@ next-env.d.ts
 # CV files (personal documents)
 /cv/
 
+#agente de claude
+/claude/

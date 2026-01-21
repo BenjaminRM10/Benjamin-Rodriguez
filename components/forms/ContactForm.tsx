@@ -26,16 +26,40 @@ import {
     FormMessage,
 } from '@/components/ui/form';
 import { useSearchParams } from 'next/navigation';
+import type { ContactTranslations } from '@/lib/i18n/types';
 
-const formSchema = z.object({
-    name: z.string().min(2, 'Name is required'),
-    email: z.string().email('Invalid email address'),
-    company: z.string().optional(),
-    service: z.string().min(1, 'Please select a service'),
-    message: z.string().min(10, 'Message must be at least 10 characters'),
-});
+interface ContactFormProps {
+    translations?: ContactTranslations['form'];
+}
 
-type FormValues = z.infer<typeof formSchema>;
+const defaultTranslations: ContactTranslations['form'] = {
+    title: "Send a Message",
+    name: "Name",
+    namePlaceholder: "John Doe",
+    email: "Email",
+    emailPlaceholder: "john@example.com",
+    phone: "Phone Number",
+    phonePlaceholder: "+1 (555) 123-4567",
+    company: "Company (Optional)",
+    companyPlaceholder: "Your Company",
+    subject: "Service",
+    subjectPlaceholder: "Select a service",
+    message: "Message",
+    messagePlaceholder: "Tell me about your project...",
+    submit: "Send Message",
+    sending: "Sending...",
+    success: "Message sent successfully! I'll get back to you soon.",
+    error: "Something went wrong. Please try again.",
+    validation: {
+        nameRequired: "Name is required",
+        emailRequired: "Email is required",
+        emailInvalid: "Invalid email address",
+        phoneRequired: "Phone number is required",
+        phoneInvalid: "Please enter a valid phone number",
+        messageRequired: "Message is required",
+        messageMinLength: "Message must be at least 10 characters"
+    }
+};
 
 const services = [
     'Recruiter / Hiring Opportunity',
@@ -44,7 +68,18 @@ const services = [
     'Other',
 ];
 
-export function ContactForm() {
+export function ContactForm({ translations }: ContactFormProps) {
+    const t = translations ?? defaultTranslations;
+
+    const formSchema = z.object({
+        name: z.string().min(2, t.validation.nameRequired),
+        email: z.string().email(t.validation.emailInvalid),
+        company: z.string().optional(),
+        service: z.string().min(1, 'Please select a service'),
+        message: z.string().min(10, t.validation.messageMinLength),
+    });
+    type FormValues = z.infer<typeof formSchema>;
+
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
     const searchParams = useSearchParams();
 
@@ -85,9 +120,9 @@ export function ContactForm() {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
             <div className="relative z-10">
-                <h3 className="text-2xl font-bold text-white mb-2">Send a Message</h3>
+                <h3 className="text-2xl font-bold text-white mb-2">{t.title}</h3>
                 <p className="text-slate-400 mb-8">
-                    Fill out the form below and I'll get back to you within 24 hours.
+                    {t.success.includes('!') ? "Fill out the form below and I'll get back to you within 24 hours." : "Llena el formulario y te responderé en 24 horas."}
                 </p>
 
                 <AnimatePresence mode="wait">
@@ -101,16 +136,16 @@ export function ContactForm() {
                             <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mb-4">
                                 <CheckCircle2 className="w-8 h-8 text-green-500" />
                             </div>
-                            <h4 className="text-xl font-bold text-white mb-2">Message Sent!</h4>
+                            <h4 className="text-xl font-bold text-white mb-2">{t.success.split('!')[0]}!</h4>
                             <p className="text-slate-400 max-w-xs mx-auto mb-6">
-                                Thanks for reaching out. I've received your message and sent a confirmation to your email.
+                                {t.success}
                             </p>
                             <Button
                                 variant="outline"
                                 onClick={() => setStatus('idle')}
                                 className="border-white/10 hover:bg-white/5"
                             >
-                                Send Another Message
+                                {t.submit}
                             </Button>
                         </motion.div>
                     ) : (
@@ -127,9 +162,9 @@ export function ContactForm() {
                                             name="name"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel className="text-slate-300">Name</FormLabel>
+                                                    <FormLabel className="text-slate-300">{t.name}</FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="John Doe" {...field} className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-blue-500/50" />
+                                                        <Input placeholder={t.namePlaceholder} {...field} className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-blue-500/50" />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -140,9 +175,9 @@ export function ContactForm() {
                                             name="email"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel className="text-slate-300">Email</FormLabel>
+                                                    <FormLabel className="text-slate-300">{t.email}</FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="john@example.com" {...field} className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-blue-500/50" />
+                                                        <Input placeholder={t.emailPlaceholder} {...field} className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-blue-500/50" />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -156,9 +191,9 @@ export function ContactForm() {
                                             name="company"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel className="text-slate-300">Company (Optional)</FormLabel>
+                                                    <FormLabel className="text-slate-300">{t.company}</FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="Your Company" {...field} className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-blue-500/50" />
+                                                        <Input placeholder={t.companyPlaceholder} {...field} className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-blue-500/50" />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -169,11 +204,11 @@ export function ContactForm() {
                                             name="service"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel className="text-slate-300">Service</FormLabel>
+                                                    <FormLabel className="text-slate-300">{t.subject}</FormLabel>
                                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                         <FormControl>
                                                             <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-blue-500/50">
-                                                                <SelectValue placeholder="Select a service" />
+                                                                <SelectValue placeholder={t.subjectPlaceholder} />
                                                             </SelectTrigger>
                                                         </FormControl>
                                                         <SelectContent className="bg-slate-900 border-white/10 text-white">
@@ -195,10 +230,10 @@ export function ContactForm() {
                                         name="message"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-slate-300">Message</FormLabel>
+                                                <FormLabel className="text-slate-300">{t.message}</FormLabel>
                                                 <FormControl>
                                                     <Textarea
-                                                        placeholder="Tell me about your project..."
+                                                        placeholder={t.messagePlaceholder}
                                                         className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-blue-500/50 min-h-[120px] resize-none"
                                                         {...field}
                                                     />
@@ -211,7 +246,7 @@ export function ContactForm() {
                                     {status === 'error' && (
                                         <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center gap-2 text-red-400 text-sm">
                                             <AlertCircle className="w-4 h-4" />
-                                            Something went wrong. Please try again.
+                                            {t.error}
                                         </div>
                                     )}
 
@@ -223,11 +258,11 @@ export function ContactForm() {
                                         {status === 'submitting' ? (
                                             <>
                                                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                                Sending...
+                                                {t.sending}
                                             </>
                                         ) : (
                                             <>
-                                                Send Message
+                                                {t.submit}
                                                 <Send className="w-4 h-4 ml-2" />
                                             </>
                                         )}

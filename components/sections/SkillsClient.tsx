@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { SkillBadge } from "@/components/shared/SkillBadge";
 import { Laptop, Database, Cpu, Wrench, BarChart3, Globe, Users } from "lucide-react";
+import type { ProfileTranslations } from "@/lib/i18n/types";
 
 interface Skill {
     name: string;
@@ -27,20 +28,31 @@ interface SkillCategory {
 }
 
 interface SkillsClientProps {
-    initialSkills: any[]; // Using any[] for now matching server return, strictly should be Skill[]
+    initialSkills: any[];
+    translations: ProfileTranslations['skills'];
 }
 
-// Define category metadata (icons, labels) statically
-const categoryMetadata: Record<string, { label: string, icon: any }> = {
-    "devops": { label: "DevOps", icon: Globe },
-    "engineering": { label: "Core Engineering", icon: Wrench },
-    "programming": { label: "Programming", icon: Laptop },
-    "ai": { label: "AI & Automation", icon: Cpu },
-    "data": { label: "Data & Analytics", icon: BarChart3 },
-    "leadership": { label: "Leadership & Professional Skills", icon: Users }
+// Define category icons statically
+const categoryIcons: Record<string, any> = {
+    "devops": Globe,
+    "engineering": Wrench,
+    "programming": Laptop,
+    "ai": Cpu,
+    "data": BarChart3,
+    "leadership": Users
 };
 
-export function SkillsClient({ initialSkills }: SkillsClientProps) {
+export function SkillsClient({ initialSkills, translations }: SkillsClientProps) {
+
+    // Map category IDs to translation keys
+    const categoryLabels: Record<string, string> = {
+        "devops": translations.categories.devops,
+        "engineering": translations.categories.engineering,
+        "programming": translations.categories.programming,
+        "ai": translations.categories.ai,
+        "data": translations.categories.data,
+        "leadership": translations.categories.leadership
+    };
 
     const skillCategories = useMemo(() => {
         const categories: SkillCategory[] = [];
@@ -54,12 +66,10 @@ export function SkillsClient({ initialSkills }: SkillsClientProps) {
             skillsByCategory[skill.categoryId].push(skill);
         });
 
-        // Build categories based on metadata order
-        Object.keys(categoryMetadata).forEach(catId => {
+        // Build categories based on icons order
+        Object.keys(categoryIcons).forEach(catId => {
             const catSkills = skillsByCategory[catId] || [];
             if (catSkills.length === 0) return;
-
-            const metadata = categoryMetadata[catId];
 
             // Group by groupTitle if present
             const groups: SkillGroup[] = [];
@@ -84,37 +94,25 @@ export function SkillsClient({ initialSkills }: SkillsClientProps) {
                 }
             });
 
-            // Add ungrouped first or last? Based on original data, sometimes ungrouped is wrapped in a group without title.
             if (ungroupedSkills.length > 0) {
                 groups.push({ skills: ungroupedSkills });
             }
 
-            // Add named groups
             Object.entries(skillsByGroup).forEach(([title, groupSkills]) => {
                 groups.push({ title, skills: groupSkills });
             });
 
             categories.push({
                 id: catId,
-                label: metadata.label,
-                icon: metadata.icon,
+                label: categoryLabels[catId] || catId,
+                icon: categoryIcons[catId],
                 groups
             });
         });
 
         return categories;
-    }, [initialSkills]);
+    }, [initialSkills, categoryLabels]);
 
-    const otherSkills = [
-        "Computer Repair & Troubleshooting",
-        "OS Installation & Optimization",
-        "Network Configuration (AdGuard, Pi-hole)",
-        "VPN Setup & Security",
-        "IP Management",
-        "Point-to-point Wireless Systems",
-        "Starlink Installation",
-        "Hardware Diagnostics",
-    ];
     return (
         <section className="py-24 relative overflow-hidden" id="skills">
             {/* Background Decor */}
@@ -131,7 +129,7 @@ export function SkillsClient({ initialSkills }: SkillsClientProps) {
                         viewport={{ once: true }}
                         className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 mb-4"
                     >
-                        My Toolkit
+                        {translations.title}
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -140,7 +138,7 @@ export function SkillsClient({ initialSkills }: SkillsClientProps) {
                         transition={{ delay: 0.1 }}
                         className="text-slate-400 max-w-2xl mx-auto text-lg"
                     >
-                        Technologies I use to bring ideas to life
+                        {translations.subtitle}
                     </motion.p>
                 </div>
 
@@ -200,11 +198,11 @@ export function SkillsClient({ initialSkills }: SkillsClientProps) {
                     <Accordion type="single" collapsible>
                         <AccordionItem value="other-skills" className="border-white/10">
                             <AccordionTrigger className="text-slate-300 hover:text-white hover:no-underline">
-                                Other Technical Skills
+                                {translations.otherSkills.title}
                             </AccordionTrigger>
                             <AccordionContent>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-4">
-                                    {otherSkills.map((skill, idx) => (
+                                    {translations.otherSkills.items.map((skill, idx) => (
                                         <div key={idx} className="flex items-center gap-2 text-slate-400">
                                             <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
                                             {skill}

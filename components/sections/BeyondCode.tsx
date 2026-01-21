@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { MapPin, Mountain, BookOpen, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { ProfileTranslations } from "@/lib/i18n/types";
 
 interface BeyondCardProps {
     title: string;
@@ -52,7 +53,11 @@ function BeyondCard({ title, description, badge, icon: Icon, className, gradient
     );
 }
 
-export function BeyondCode() {
+interface BeyondCodeProps {
+    translations: ProfileTranslations['beyondCode'];
+}
+
+export function BeyondCode({ translations }: BeyondCodeProps) {
     return (
         <section className="py-24 relative overflow-hidden">
             <div className="container relative mx-auto px-4">
@@ -63,7 +68,7 @@ export function BeyondCode() {
                         viewport={{ once: true }}
                         className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400 mb-4"
                     >
-                        Beyond the Code
+                        {translations.title}
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -72,71 +77,58 @@ export function BeyondCode() {
                         transition={{ delay: 0.1 }}
                         className="text-slate-400 max-w-2xl mx-auto text-lg"
                     >
-                        The experiences that shaped who I am
+                        {translations.subtitle}
                     </motion.p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
                     {/* Card 1: Toronto */}
                     <BeyondCard
-                        title="Six Months That Changed Everything"
+                        title={translations.cards.toronto.title}
                         icon={MapPin}
                         gradient="bg-gradient-to-br from-red-500 to-orange-500"
-                        badge={["🌍 Cultural Immersion", "🗣️ English Mastery"]}
+                        badge={translations.cards.toronto.badges}
                         className="min-h-[400px]"
                         description={
                             <>
-                                <p>
-                                    At 20, I spent six months living in <strong>Toronto, Canada</strong>, working and fully immersing myself in an English-speaking environment. Living independently, far from home, was both challenging and incredibly rewarding.
-                                </p>
-                                <p>
-                                    I shared accommodations with people from Korea, China, India, and Canada. This multicultural experience not only accelerated my English proficiency but broadened my worldview in ways I never imagined.
-                                </p>
-                                <p>
-                                    The friendships I formed endure to this day, and I've returned to Toronto for two-month stays in each of the past two summers.
-                                </p>
+                                {translations.cards.toronto.paragraphs.map((p, i) => (
+                                    <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+                                ))}
                             </>
                         }
                     />
 
                     {/* Card 2: Legendarios */}
                     <BeyondCard
-                        title="A Transformative Wilderness Journey"
+                        title={translations.cards.legendarios.title}
                         icon={Mountain}
                         gradient="bg-gradient-to-br from-emerald-600 to-teal-600"
-                        badge={["💪 Resilience", "🏔️ Transformation"]}
+                        badge={translations.cards.legendarios.badges}
                         className="min-h-[400px]"
                         description={
                             <>
-                                <p>
-                                    In 2024, I embarked on the <strong>Legendarios Track</strong> experience in Tampa, Florida—a four-day immersive adventure designed to challenge men physically and spiritually.
-                                </p>
-                                <p>
-                                    Five days in the wilderness with minimal food, long-distance hikes, heavy lifting, and extended physical challenges. Each task was a lesson in resilience, self-discovery, and pushing beyond perceived limits.
-                                </p>
-                                <p>
-                                    This experience taught me that transformation happens outside your comfort zone, and that personal growth requires both physical endurance and mental fortitude.
-                                </p>
+                                {translations.cards.legendarios.paragraphs.map((p, i) => (
+                                    <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+                                ))}
                             </>
                         }
                     />
 
                     {/* Card 3: Books */}
                     <BeyondCard
-                        title="Lifelong Learning Philosophy"
+                        title={translations.cards.books.title}
                         icon={BookOpen}
                         gradient="bg-gradient-to-br from-blue-500 to-indigo-500"
-                        badge={["📖 Growth Mindset", "🧠 Personal Development"]}
+                        badge={translations.cards.books.badges}
                         description={
                             <>
                                 <p className="mb-4">
-                                    I'm deeply influenced by principles of personal development, effective communication, and financial wisdom. Key pillars of my mindset:
+                                    {translations.cards.books.intro}
                                 </p>
                                 <ul className="list-disc list-inside space-y-1 text-slate-400">
-                                    <li>Proactive living & principle-centered leadership</li>
-                                    <li>Building genuine relationships through empathy</li>
-                                    <li>Wealth-building through discipline</li>
-                                    <li>Continuous improvement & compound effect</li>
+                                    {translations.cards.books.pillars.map((pillar, i) => (
+                                        <li key={i}>{pillar}</li>
+                                    ))}
                                 </ul>
                             </>
                         }
@@ -144,18 +136,15 @@ export function BeyondCode() {
 
                     {/* Card 4: Basketball */}
                     <BeyondCard
-                        title="Where I Recharge"
+                        title={translations.cards.basketball.title}
                         icon={Trophy}
                         gradient="bg-gradient-to-br from-orange-500 to-amber-500"
-                        badge={["🏀 Team Player", "⚡ Balance"]}
+                        badge={translations.cards.basketball.badges}
                         description={
                             <>
-                                <p>
-                                    When I'm not coding or optimizing processes, you'll find me on the basketball court. Basketball taught me teamwork, strategy under pressure, and the importance of consistent practice.
-                                </p>
-                                <p className="mt-4">
-                                    It's my way of staying physically active, clearing my mind, and maintaining balance. Whether playing pickup games or watching the NBA, basketball keeps me grounded and energized.
-                                </p>
+                                {translations.cards.basketball.paragraphs.map((p, i) => (
+                                    <p key={i} className={i > 0 ? "mt-4" : ""}>{p}</p>
+                                ))}
                             </>
                         }
                     />
@@ -163,7 +152,7 @@ export function BeyondCode() {
 
                 <div className="mt-16 text-center">
                     <p className="text-xl md:text-2xl font-light text-slate-300 italic">
-                        "The only limit is your imagination"
+                        "{translations.quote}"
                     </p>
                 </div>
             </div>

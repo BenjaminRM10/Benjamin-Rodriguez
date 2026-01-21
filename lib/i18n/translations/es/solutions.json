@@ -1,0 +1,79 @@
+{
+  "hero": {
+    "badge": "Soluciones de Nivel Empresarial",
+    "title": "Transforma tu Negocio con",
+    "titleHighlight": "Automatización Inteligente",
+    "subtitle": "Construimos software de IA personalizado y aplicaciones web de alto rendimiento que optimizan operaciones e impulsan ROI real para tu empresa.",
+    "ctaROI": "Calcula tu ROI",
+    "ctaServices": "Ver Servicios"
+  },
+  "brand": {
+    "badge": "La Marca",
+    "description": "Todos mis servicios profesionales y soluciones digitales se entregan a través de",
+    "brandName": "AppCreatorBR",
+    "tagline": "mi plataforma dedicada a la excelencia en ingeniería y automatización."
+  },
+  "services": {
+    "title": "Soluciones para el",
+    "titleHighlight": "Futuro",
+    "subtitle": "Ya sea que necesites automatizar tus flujos de trabajo, analizar tus datos o construir lo próximo grande, tengo el stack para hacerlo realidad.",
+    "professionalServices": "Servicios Profesionales",
+    "availableCourses": "Cursos Disponibles",
+    "items": {
+      "webDev": {
+        "title": "Desarrollo Web",
+        "description": "Aplicaciones web personalizadas y de alto rendimiento adaptadas a las necesidades de tu negocio. Optimizadas para SEO y construidas para escalar.",
+        "cta": "Obtener Cotización"
+      },
+      "whatsapp": {
+        "title": "Automatización de WhatsApp",
+        "description": "Automatiza tu servicio al cliente y ventas con bots inteligentes de WhatsApp. Disponibilidad 24/7 para tus clientes.",
+        "cta": "Comenzar a Automatizar"
+      },
+      "excel": {
+        "title": "Automatización de Excel",
+        "description": "Despídete de la entrada manual de datos. Dashboards personalizados, macros VBA y scripts de Python para automatizar tus hojas de cálculo.",
+        "cta": "Obtener Solución Personalizada"
+      },
+      "data": {
+        "title": "Análisis de Datos",
+        "description": "Convierte tus datos crudos en insights accionables. Dashboards interactivos, pipelines de reportes y análisis predictivo.",
+        "cta": "Analizar Mis Datos"
+      },
+      "pythonAI": {
+        "title": "Python + Integración de IA",
+        "description": "Aprende a construir aplicaciones FastAPI, desplegar LLMs locales (Llama), integrar IA en Excel y crear tus propias herramientas potenciadas por IA.",
+        "cta": "Inscríbete Ahora"
+      }
+    }
+  },
+  "roi": {
+    "badge": "Calculadora de ROI",
+    "title": "Ve tu Potencial de",
+    "titleHighlight": "Ahorro",
+    "subtitle": "Descubre cuánto tiempo y dinero podrías ahorrar con automatización. Obtén una estimación personalizada basada en tus flujos de trabajo actuales.",
+    "form": {
+      "taskName": "Descripción de la Tarea",
+      "taskNamePlaceholder": "ej., Entrada de datos, Generación de reportes",
+      "hoursPerWeek": "Horas Semanales",
+      "hourlyRate": "Costo por Hora ($)",
+      "automationPercent": "% de Automatización Estimado",
+      "calculate": "Calcular Ahorros"
+    },
+    "results": {
+      "title": "Tu Ahorro Potencial",
+      "weeklySavings": "Ahorro Semanal",
+      "monthlySavings": "Ahorro Mensual",
+      "yearlySavings": "Ahorro Anual",
+      "hoursSaved": "Horas Ahorradas/Año",
+      "cta": "Comenzar",
+      "disclaimer": "Estimaciones basadas en resultados típicos de automatización. Los resultados reales pueden variar."
+    }
+  },
+  "portfolio": {
+    "badge": "Portafolio",
+    "title": "Proyectos",
+    "titleHighlight": "Destacados",
+    "subtitle": "Una selección de trabajos recientes que muestran el impacto de la ingeniería reflexiva y la tecnología moderna."
+  }
+}

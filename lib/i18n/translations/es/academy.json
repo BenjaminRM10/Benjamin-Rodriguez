@@ -1,0 +1,164 @@
+{
+  "hero": {
+    "badge": "Sistema v2.0 Activo",
+    "badgeSecondary": "Potenciado por Google Antigravity",
+    "title": "IA PARA",
+    "titleHighlight": "INGENIERÍA",
+    "intro": "Esto no es solo programar; es <strong>Agentic-Dev</strong>. Dominar la IA hoy es la diferencia entre liderar la planta o quedarse atrás. Aprende a <strong>orquestar sistemas autónomos</strong> para resolver problemas críticos de manufactura.",
+    "stats": {
+      "intensive": "8h Intensivas",
+      "workflow": "Flujo Agéntico",
+      "impact": "Impacto Real"
+    }
+  },
+  "paths": {
+    "sectionTitle": "Selecciona Protocolo",
+    "sectionSubtitle": "Elige tu ruta de entrenamiento",
+    "initializeSequence": "Iniciar Secuencia",
+    "items": {
+      "tecSaltillo": {
+        "title": "Evento Tec Saltillo",
+        "subtitle": "Exclusivo para Estudiantes",
+        "description": "Únete al evento de lanzamiento exclusivo en ITS. Verificación requerida.",
+        "badge": "GRATIS",
+        "date": "24 Ene"
+      },
+      "student": {
+        "title": "Taller de Pares",
+        "subtitle": "Sesión Abierta",
+        "description": "Ambiente de aprendizaje colaborativo para estudiantes y profesionales.",
+        "badge": "LIMITADO",
+        "date": "31 Ene"
+      },
+      "corporate": {
+        "title": "Capacitación Corporativa",
+        "subtitle": "Para Empresas",
+        "description": "Entrenamiento personalizado in-house para equipos de ingeniería.",
+        "badge": "PREMIUM"
+      },
+      "onlineGroup": {
+        "title": "Entrenamiento Online",
+        "subtitle": "Acceso Remoto",
+        "description": "Sesiones interactivas en vivo vía Google Meet.",
+        "badge": "-10% DESC"
+      }
+    }
+  },
+  "protocol": {
+    "sectionTitle": "El Protocolo",
+    "sectionSubtitle": "De Cero a Arquitecto",
+    "steps": {
+      "infrastructure": {
+        "time": "09:00",
+        "title": "Infraestructura y Seguridad",
+        "header": "Ambiente Cloud Seguro",
+        "description": "Configuración de Google Antigravity IDE. Implementación de llaves SSH, protocolos IP y variables encriptadas para proteger IP industrial."
+      },
+      "dataEngineering": {
+        "time": "10:00",
+        "title": "Ingeniería de Datos e IA Local",
+        "header": "Backend y LLMs",
+        "description": "Construyendo un motor FastAPI con Python/Pandas para procesar datos de producción CSV. Integración de modelos locales de Hugging Face (Phi-4/Llama-3)."
+      },
+      "frontend": {
+        "time": "12:00",
+        "title": "Interfaz Digital (Frontend)",
+        "header": "Dashboard Industrial",
+        "description": "Desarrollando una UI profesional con Next.js y Tailwind (Glassmorphism). Implementando autenticación segura de Google vía Supabase."
+      },
+      "automation": {
+        "time": "14:00",
+        "title": "Automatización y 3D",
+        "header": "Orquestación Agéntica",
+        "description": "Configurando n8n para alertas de detección de anomalías. Usando AI Agents para generar piezas mecánicas 3D dentro de Blender."
+      },
+      "bridge": {
+        "time": "16:00",
+        "title": "El Puente (Integración Legacy)",
+        "header": "Conexión Excel y VBA",
+        "description": "El enlace final: Creando una Macro de Excel que consume tu nueva API de Python. Controlando la IA directamente desde una hoja de cálculo."
+      },
+      "deployment": {
+        "time": "17:00",
+        "title": "Despliegue",
+        "header": "Lanzamiento a Producción",
+        "description": "Desplegando la solución full stack a Vercel. Pruebas en vivo de la \"Plataforma Viviente\" accesible desde cualquier dispositivo."
+      }
+    }
+  },
+  "sidebar": {
+    "upcomingSets": "Próximas Sesiones",
+    "schedule": "Calendario Q1 2026",
+    "checkRemote": "Ver Disponibilidad Remota",
+    "events": {
+      "tecSaltillo": {
+        "title": "Tec Saltillo",
+        "status": "REGISTRAR"
+      },
+      "alebrijeModule2": {
+        "title": "Alebrije (Módulo II)",
+        "status": "AVANZADO",
+        "note": "Prerrequisito: Nivel 1"
+      },
+      "alebrijeModule1": {
+        "title": "Alebrije (Módulo I)",
+        "status": "ABIERTO"
+      }
+    }
+  },
+  "requirements": {
+    "title": "Requisitos del Sistema",
+    "tooltip": "Especificaciones recomendadas para rendimiento óptimo.",
+    "hardware": {
+      "label": "Hardware (Recomendado)",
+      "value": "Laptop 12GB+ RAM",
+      "detail": "SSD con 50GB+ Libre"
+    },
+    "knowledge": {
+      "label": "Conocimiento",
+      "value": "Ingeniería O Lógica de Programación",
+      "detail": "(Recomendado)"
+    },
+    "language": {
+      "label": "Idioma",
+      "value": "Inglés Técnico",
+      "detail": "(Rec. para Chain-of-Thought de IA)"
+    }
+  },
+  "modal": {
+    "onlineCourse": "Curso Online",
+    "tecSaltilloEvent": "Evento Tec Saltillo",
+    "courseRegistration": "Registro del Curso",
+    "registerDescription": "Regístrate para la ruta de curso seleccionada.",
+    "loadingForm": "Cargando Protocolo de Registro..."
+  },
+  "form": {
+    "title": "Regístrate para el Curso",
+    "name": "Nombre Completo",
+    "namePlaceholder": "Tu nombre completo",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "tu@correo.com",
+    "phone": "Número de Teléfono",
+    "phonePlaceholder": "+52 (555) 123-4567",
+    "experience": "Experiencia en Programación",
+    "experienceOptions": {
+      "none": "Sin experiencia",
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    },
+    "goals": "¿Qué quieres aprender?",
+    "goalsPlaceholder": "Cuéntanos sobre tus metas de aprendizaje...",
+    "submit": "Enviar Registro",
+    "submitting": "Enviando...",
+    "success": "¡Registro enviado! Te contactaremos pronto.",
+    "error": "Ocurrió un error. Por favor intenta de nuevo.",
+    "validation": {
+      "nameRequired": "El nombre es obligatorio",
+      "emailRequired": "El correo electrónico es obligatorio",
+      "emailInvalid": "Por favor ingresa un correo válido",
+      "phoneRequired": "El número de teléfono es obligatorio",
+      "phoneInvalid": "Por favor ingresa un número de teléfono válido"
+    }
+  }
+}

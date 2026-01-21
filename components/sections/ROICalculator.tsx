@@ -2,8 +2,14 @@
 
 import { motion } from "framer-motion";
 import { ROIForm } from "@/components/forms/ROIForm";
+import type { SolutionsTranslations } from "@/lib/i18n/types";
 
-export function ROICalculator() {
+interface ROICalculatorProps {
+    lang?: string;
+    translations: SolutionsTranslations['roi'];
+}
+
+export function ROICalculator({ lang, translations }: ROICalculatorProps) {
     return (
         <section className="relative w-full py-24 px-4 overflow-hidden" id="roi-calculator">
             {/* Dynamic Background Pattern */}
@@ -27,11 +33,10 @@ export function ROICalculator() {
                         viewport={{ once: true }}
                     >
                         <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 mb-4">
-                            See Your Automation ROI
+                            {translations.title} <span>{translations.titleHighlight}</span>
                         </h2>
                         <p className="text-xl text-slate-400">
-                            Discover how much time and money you could save by automating repetitive tasks.
-                            Our AI analyzes your specific use case.
+                            {translations.subtitle}
                         </p>
                     </motion.div>
                 </div>
@@ -42,7 +47,7 @@ export function ROICalculator() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     viewport={{ once: true }}
                 >
-                    <ROIForm />
+                    <ROIForm translations={translations} />
                 </motion.div>
             </div>
         </section>

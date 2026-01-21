@@ -15,7 +15,8 @@
       "Bash(pdfinfo:*)",
       "Bash(pdftk:*)",
       "Bash(python3:*)",
-      "Bash(qpdf --show-npages:*)"
+      "Bash(qpdf --show-npages:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

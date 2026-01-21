@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "name": "Benjamin",
+    "lastName": "Rodríguez",
+    "roles": [
+      "OPEX Engineer & Automation Specialist",
+      "Full-Stack Developer",
+      "AI Integration Expert",
+      "Your Ideas, Automated"
+    ]
+  },
+  "cards": {
+    "profile": {
+      "title": "Profile",
+      "description": "View my CV, Skills, and Certifications."
+    },
+    "solutions": {
+      "title": "Business Solutions",
+      "description": "Automate your workflow. See ROI & Services."
+    },
+    "academy": {
+      "title": "Academy / Courses",
+      "description": "Learn AI & Full-Stack Development."
+    },
+    "enter": "Enter"
+  },
+  "footer": {
+    "copyright": "© 2026 AppCreatorBR. All rights reserved."
+  },
+  "alt": {
+    "logo": "AppCreatorBR Logo",
+    "profilePhoto": "Benjamin Rodriguez"
+  }
+}

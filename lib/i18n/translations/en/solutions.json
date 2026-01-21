@@ -1,0 +1,79 @@
+{
+  "hero": {
+    "badge": "Enterprise-Grade Solutions",
+    "title": "Transform Your Business with",
+    "titleHighlight": "Intelligent Automation",
+    "subtitle": "We build custom AI software and high-performance web applications that streamline operations and drive real ROI for your company.",
+    "ctaROI": "Calculate Your ROI",
+    "ctaServices": "View Services"
+  },
+  "brand": {
+    "badge": "The Brand",
+    "description": "All my professional services and digital solutions are delivered through",
+    "brandName": "AppCreatorBR",
+    "tagline": "my dedicated platform for engineering & automation excellence."
+  },
+  "services": {
+    "title": "Solutions for the",
+    "titleHighlight": "Future",
+    "subtitle": "Whether you need to automate your workflows, analyze your data, or build the next big thing, I have the stack to make it happen.",
+    "professionalServices": "Professional Services",
+    "availableCourses": "Available Courses",
+    "items": {
+      "webDev": {
+        "title": "Web Development",
+        "description": "Custom, high-performance web applications tailored to your business needs. SEO-optimized and built for scale.",
+        "cta": "Get a Quote"
+      },
+      "whatsapp": {
+        "title": "WhatsApp Automation",
+        "description": "Automate your customer service and sales with intelligent WhatsApp bots. 24/7 availability for your clients.",
+        "cta": "Start Automating"
+      },
+      "excel": {
+        "title": "Excel Automation",
+        "description": "Say goodbye to manual data entry. Custom dashboards, VBA macros, and Python scripts to automate your spreadsheets.",
+        "cta": "Get Custom Solution"
+      },
+      "data": {
+        "title": "Data Analysis",
+        "description": "Turn your raw data into actionable insights. Interactive dashboards, reporting pipelines, and predictive analytics.",
+        "cta": "Analyze My Data"
+      },
+      "pythonAI": {
+        "title": "Python + AI Integration",
+        "description": "Learn to build FastAPI applications, deploy local LLMs (Llama), integrate AI into Excel, and create your own AI-powered tools.",
+        "cta": "Enroll Now"
+      }
+    }
+  },
+  "roi": {
+    "badge": "ROI Calculator",
+    "title": "See Your Potential",
+    "titleHighlight": "Savings",
+    "subtitle": "Discover how much time and money you could save with automation. Get a personalized estimate based on your current workflows.",
+    "form": {
+      "taskName": "Task Description",
+      "taskNamePlaceholder": "e.g., Data entry, Report generation",
+      "hoursPerWeek": "Hours Spent Weekly",
+      "hourlyRate": "Hourly Cost ($)",
+      "automationPercent": "Estimated Automation %",
+      "calculate": "Calculate Savings"
+    },
+    "results": {
+      "title": "Your Potential Savings",
+      "weeklySavings": "Weekly Savings",
+      "monthlySavings": "Monthly Savings",
+      "yearlySavings": "Yearly Savings",
+      "hoursSaved": "Hours Saved/Year",
+      "cta": "Get Started",
+      "disclaimer": "Estimates based on typical automation outcomes. Actual results may vary."
+    }
+  },
+  "portfolio": {
+    "badge": "Portfolio",
+    "title": "Featured",
+    "titleHighlight": "Projects",
+    "subtitle": "A selection of recent work showcasing the impact of thoughtful engineering and modern technology."
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "hero": {
+    "badge": "System v2.0 Live",
+    "badgeSecondary": "Powered by Google Antigravity",
+    "title": "AI FOR",
+    "titleHighlight": "ENGINEERING",
+    "intro": "This is not just coding; it's <strong>Agentic-Dev</strong>. Mastering AI today is the difference between leading the plant or falling behind. Learn to <strong>orchestrate autonomous systems</strong> to solve critical manufacturing problems.",
+    "stats": {
+      "intensive": "8h Intensive",
+      "workflow": "Agentic Workflow",
+      "impact": "Real Impact"
+    }
+  },
+  "paths": {
+    "sectionTitle": "Select Protocol",
+    "sectionSubtitle": "Choose your training path",
+    "initializeSequence": "Initialize Sequence",
+    "items": {
+      "tecSaltillo": {
+        "title": "Tec Saltillo Event",
+        "subtitle": "Exclusive for Students",
+        "description": "Join the exclusive launch event at ITS. Verification required.",
+        "badge": "FREE",
+        "date": "Jan 24"
+      },
+      "student": {
+        "title": "Peers Workshop",
+        "subtitle": "Open Session",
+        "description": "Collaborative learning environment for students and pros.",
+        "badge": "LIMITED",
+        "date": "Jan 31"
+      },
+      "corporate": {
+        "title": "Corporate Training",
+        "subtitle": "For Enterprise",
+        "description": "Custom in-house training for engineering teams.",
+        "badge": "PREMIUM"
+      },
+      "onlineGroup": {
+        "title": "Online Training",
+        "subtitle": "Remote Access",
+        "description": "Live interactive sessions via Google Meet.",
+        "badge": "-10% OFF"
+      }
+    }
+  },
+  "protocol": {
+    "sectionTitle": "The Protocol",
+    "sectionSubtitle": "From Zero to Architect",
+    "steps": {
+      "infrastructure": {
+        "time": "09:00",
+        "title": "Infrastructure & Security",
+        "header": "Secure Cloud Environment",
+        "description": "Setup of Google Antigravity IDE. Implementation of SSH keys, IP protocols, and encrypted variables to protect industrial IP."
+      },
+      "dataEngineering": {
+        "time": "10:00",
+        "title": "Data Engineering & Local AI",
+        "header": "Backend & LLMs",
+        "description": "Building a FastAPI engine with Python/Pandas to process CSV production data. Integration of local Hugging Face models (Phi-4/Llama-3)."
+      },
+      "frontend": {
+        "time": "12:00",
+        "title": "Digital Interface (Frontend)",
+        "header": "Industrial Dashboard",
+        "description": "Developing a professional UI with Next.js & Tailwind (Glassmorphism). Implementing secure Google Auth via Supabase."
+      },
+      "automation": {
+        "time": "14:00",
+        "title": "Automation & 3D",
+        "header": "Agentic Orchestration",
+        "description": "Configuring n8n for anomaly detection alerts. Using AI Agents to script 3D mechanical part generation inside Blender."
+      },
+      "bridge": {
+        "time": "16:00",
+        "title": "The Bridge (Legacy Integration)",
+        "header": "Excel & VBA Connection",
+        "description": "The final link: Creating an Excel Macro that consumes your new Python API. Controlling the AI directly from a spreadsheet."
+      },
+      "deployment": {
+        "time": "17:00",
+        "title": "Deployment",
+        "header": "Production Launch",
+        "description": "Deploying the full stack solution to Vercel. Live testing of the \"Living Platform\" accessible from any device."
+      }
+    }
+  },
+  "sidebar": {
+    "upcomingSets": "Upcoming Sets",
+    "schedule": "Q1 2026 Schedule",
+    "checkRemote": "Check Remote Availability",
+    "events": {
+      "tecSaltillo": {
+        "title": "Tec Saltillo",
+        "status": "REGISTER"
+      },
+      "alebrijeModule2": {
+        "title": "Alebrije (Module II)",
+        "status": "ADVANCED",
+        "note": "Prerequisite: Level 1"
+      },
+      "alebrijeModule1": {
+        "title": "Alebrije (Module I)",
+        "status": "OPEN"
+      }
+    }
+  },
+  "requirements": {
+    "title": "System Requirements",
+    "tooltip": "Recommended specs for optimal performance.",
+    "hardware": {
+      "label": "Hardware (Recommended)",
+      "value": "Laptop 12GB+ RAM",
+      "detail": "SSD with 50GB+ Free"
+    },
+    "knowledge": {
+      "label": "Knowledge",
+      "value": "Engineering OR Programming Logic",
+      "detail": "(Recommended)"
+    },
+    "language": {
+      "label": "Language",
+      "value": "Technical English",
+      "detail": "(Rec. for AI Chain-of-Thought)"
+    }
+  },
+  "modal": {
+    "onlineCourse": "Online Course",
+    "tecSaltilloEvent": "Tec Saltillo Event",
+    "courseRegistration": "Course Registration",
+    "registerDescription": "Register for the selected course path.",
+    "loadingForm": "Loading Registration Protocol..."
+  },
+  "form": {
+    "title": "Register for the Course",
+    "name": "Full Name",
+    "namePlaceholder": "Your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "your@email.com",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+1 (555) 123-4567",
+    "experience": "Programming Experience",
+    "experienceOptions": {
+      "none": "No experience",
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "goals": "What do you want to learn?",
+    "goalsPlaceholder": "Tell us about your learning goals...",
+    "submit": "Submit Registration",
+    "submitting": "Submitting...",
+    "success": "Registration submitted! We'll contact you soon.",
+    "error": "An error occurred. Please try again.",
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Please enter a valid phone number"
+    }
+  }
+}

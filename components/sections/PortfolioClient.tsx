@@ -19,11 +19,19 @@ import { getImageUrl } from "@/lib/storage/supabase-images";
 
 const categories = ["All", "Web", "AI", "Automation", "Excel", "Full-Stack"];
 
-export interface PortfolioClientProps {
-    initialProjects: Project[];
+interface PortfolioTranslations {
+    badge: string;
+    title: string;
+    titleHighlight: string;
+    subtitle: string;
 }
 
-export function PortfolioClient({ initialProjects }: PortfolioClientProps) {
+export interface PortfolioClientProps {
+    initialProjects: Project[];
+    translations?: PortfolioTranslations;
+}
+
+export function PortfolioClient({ initialProjects, translations }: PortfolioClientProps) {
     const [activeCategory, setActiveCategory] = useState("All");
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-// import ParticleBackground from "@/components/shared/ParticleBackground";
 import dynamic from "next/dynamic";
 const ParticleBackground = dynamic(() => import("@/components/shared/ParticleBackground"));
 import { Briefcase, GraduationCap, UserCircle, ArrowRight } from "lucide-react";
 import { getImageUrl } from "@/lib/storage/supabase-images";
 import { RoleTyper } from "@/components/shared/RoleTyper";
+import { getTranslations } from "@/lib/i18n/server";
+import type { HomeTranslations } from "@/lib/i18n/types";
+import type { Locale } from "@/lib/i18n/config";
 
 export default async function GatewayPage({
   params,
@@ -13,28 +15,29 @@ export default async function GatewayPage({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
+  const t = await getTranslations<HomeTranslations>(lang as Locale, 'home');
 
   const cards = [
     {
       href: `/${lang}/profile`,
-      title: "Profile",
-      description: "View my CV, Skills, and Certifications.",
+      title: t.cards.profile.title,
+      description: t.cards.profile.description,
       icon: UserCircle,
       gradient: "from-blue-500 to-indigo-600",
       delay: "delay-100",
     },
     {
       href: `/${lang}/solutions`,
-      title: "Business Solutions",
-      description: "Automate your workflow. See ROI & Services.",
+      title: t.cards.solutions.title,
+      description: t.cards.solutions.description,
       icon: Briefcase,
       gradient: "from-purple-500 to-pink-600",
       delay: "delay-200",
     },
     {
       href: `/${lang}/academy`,
-      title: "Academy / Courses",
-      description: "Learn AI & Full-Stack Development.",
+      title: t.cards.academy.title,
+      description: t.cards.academy.description,
       icon: GraduationCap,
       gradient: "from-yellow-500 to-orange-600",
       delay: "delay-300",
@@ -55,7 +58,7 @@ export default async function GatewayPage({
           <div className="relative w-24 h-24 md:w-32 md:h-32 shrink-0">
             <Image
               src="/logo.png"
-              alt="AppCreatorBR Logo"
+              alt={t.alt.logo}
               fill
               className="object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]"
               priority
@@ -67,11 +70,11 @@ export default async function GatewayPage({
           {/* Center: Name & Tagline */}
           <div className="text-center md:text-left flex flex-col items-center md:items-start">
             <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tight mb-2">
-              Benjamin <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Rodríguez</span>
+              {t.hero.name} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">{t.hero.lastName}</span>
             </h1>
 
             <div className="mb-4 w-full flex justify-center md:justify-start">
-              <RoleTyper />
+              <RoleTyper roles={t.hero.roles} />
             </div>
 
           </div>
@@ -80,7 +83,7 @@ export default async function GatewayPage({
           <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-white/10 shadow-[0_0_50px_rgba(59,130,246,0.3)] shrink-0">
             <Image
               src={getImageUrl("profile.webp")}
-              alt="Benjamin Rodriguez"
+              alt={t.alt.profilePhoto}
               fill
               className="object-cover"
               priority
@@ -103,7 +106,7 @@ export default async function GatewayPage({
                 <h3 className="text-2xl font-bold text-white mb-2">{card.title}</h3>
                 <p className="text-slate-400 mb-8 flex-grow">{card.description}</p>
                 <div className="flex items-center text-sm font-medium text-white/70 group-hover:text-white transition-colors">
-                  Enter
+                  {t.cards.enter}
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
@@ -115,7 +118,7 @@ export default async function GatewayPage({
 
       {/* Footer minimal */}
       <div className="absolute bottom-6 text-slate-600 text-sm">
-        © 2026 AppCreatorBR. All rights reserved.
+        {t.footer.copyright}
       </div>
     </div>
   );

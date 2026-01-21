@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { Locale } from "@/lib/i18n/config";
+import { getTranslations } from "@/lib/i18n/server";
+import { LocaleProvider } from "@/lib/i18n/client";
+import type { CommonTranslations } from "@/lib/i18n/types";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import ScrollProgress from "@/components/shared/ScrollProgress";
@@ -88,18 +91,24 @@ export default async function RootLayout({
 }>) {
   const { lang } = await params;
   const validLang = lang as Locale;
+
+  // Load common translations for shared components
+  const commonTranslations = await getTranslations<CommonTranslations>(validLang, 'common');
+
   return (
     <html lang={validLang}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0a0e27] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-100`}
       >
-        <ScrollProgress />
-        <Navbar />
-        <main className="min-h-screen pt-16">
-          {children}
-        </main>
-        <ScrollToTop />
-        <Footer />
+        <LocaleProvider value={{ locale: validLang }}>
+          <ScrollProgress />
+          <Navbar lang={validLang} translations={commonTranslations} />
+          <main className="min-h-screen pt-16">
+            {children}
+          </main>
+          <ScrollToTop />
+          <Footer lang={validLang} translations={commonTranslations} />
+        </LocaleProvider>
       </body>
     </html>
   );

@@ -1,22 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { getImageUrl } from "@/lib/storage/supabase-images";
 import { RoleTyper } from "@/components/shared/RoleTyper";
+import type { ProfileTranslations } from "@/lib/i18n/types";
 
-export default function Hero({ lang = "en" }: { lang?: string }) {
-    const titles = [
-        "OPEX Engineer",
-        "Automation Specialist",
-        "Full-Stack Developer",
-        "POV: Your Ideas, Automated",
-    ];
+interface HeroProps {
+    lang?: string;
+    translations: ProfileTranslations['hero'];
+}
 
+export default function Hero({ lang = "en", translations }: HeroProps) {
     return (
         <section className="relative min-h-[calc(100vh-4rem)] flex items-start justify-center overflow-hidden pt-0 pb-0 px-4">
             {/* Background Elements */}
@@ -37,25 +32,19 @@ export default function Hero({ lang = "en" }: { lang?: string }) {
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                         </span>
                         <span className="text-sm font-medium text-slate-300">
-                            Open to new projects
+                            {translations.status}
                         </span>
                     </div>
 
-
-
                     <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white whitespace-nowrap">
-                        Benjamin <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Rodríguez</span>
+                        {translations.name} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">{translations.lastName}</span>
                     </h1>
 
-                    <RoleTyper />
+                    <RoleTyper roles={translations.roles} />
 
                     <p className="text-lg text-slate-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                        Where Engineering Meets Innovation. bridging the gap between manufacturing processes and cutting-edge technology to eliminate waste and unlock efficiency.
+                        {translations.tagline}
                     </p>
-
-                    {/* Buttons removed as per request */}
-
-
                 </motion.div>
 
                 {/* Right Column: Image */}
@@ -74,7 +63,7 @@ export default function Hero({ lang = "en" }: { lang?: string }) {
                         <div className="absolute inset-2 rounded-full overflow-hidden z-20 border-4 border-slate-800/50 shadow-2xl">
                             <Image
                                 src={getImageUrl("profile.webp")}
-                                alt="Benjamin Rodríguez"
+                                alt={translations.alt.profilePhoto}
                                 unoptimized
                                 fill
                                 sizes="(max-width: 768px) 288px, (max-width: 1024px) 384px, 384px"
@@ -83,12 +72,8 @@ export default function Hero({ lang = "en" }: { lang?: string }) {
                                 quality={90}
                             />
                         </div>
-
-                        {/* Floating Elements */}
-
                     </div>
                 </motion.div>
-
             </div>
         </section>
     );

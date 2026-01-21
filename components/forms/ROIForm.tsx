@@ -42,7 +42,35 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function ROIForm() {
+interface ROIFormTranslations {
+    badge?: string;
+    title?: string;
+    titleHighlight?: string;
+    subtitle?: string;
+    form?: {
+        taskName?: string;
+        taskNamePlaceholder?: string;
+        hoursPerWeek?: string;
+        hourlyRate?: string;
+        automationPercent?: string;
+        calculate?: string;
+    };
+    results?: {
+        title?: string;
+        weeklySavings?: string;
+        monthlySavings?: string;
+        yearlySavings?: string;
+        hoursSaved?: string;
+        cta?: string;
+        disclaimer?: string;
+    };
+}
+
+interface ROIFormProps {
+    translations?: ROIFormTranslations;
+}
+
+export function ROIForm({ translations }: ROIFormProps) {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [currency, setCurrency] = useState<"USD" | "MXN">("MXN");

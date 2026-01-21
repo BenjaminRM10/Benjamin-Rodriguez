@@ -2,8 +2,13 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import type { SolutionsTranslations } from "@/lib/i18n/types";
 
-export const Brand = () => {
+interface BrandProps {
+    translations: SolutionsTranslations['brand'];
+}
+
+export const Brand = ({ translations }: BrandProps) => {
     return (
         <section className="py-0 md:py-8 px-4 relative z-10">
             <motion.div
@@ -28,12 +33,12 @@ export const Brand = () => {
                         </div>
                         <div className="text-center sm:text-left relative z-10">
                             <div className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-semibold uppercase tracking-wider mb-2">
-                                The Brand
+                                {translations.badge}
                             </div>
                             <p className="text-slate-300 text-sm leading-relaxed">
-                                All my professional services and digital solutions are delivered through
-                                <span className="text-white font-bold mx-1">AppCreatorBR</span>,
-                                my dedicated platform for engineering & automation excellence.
+                                {translations.description}
+                                <span className="text-white font-bold mx-1">{translations.brandName}</span>,
+                                {translations.tagline}
                             </p>
                         </div>
                     </div>
