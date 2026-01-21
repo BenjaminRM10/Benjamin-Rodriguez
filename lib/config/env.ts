@@ -16,11 +16,17 @@ export async function getEnvVar(key: string): Promise<string | null> {
         });
 
     if (error) {
-        console.error(`Error fetching config for ${key}:`, error.message);
-        return null;
+        console.warn(`[Config] Error fetching config for ${key} from DB:`, error.message);
+        // Fallback to process.env
+        return process.env[key] || null;
     }
 
-    return data as string | null;
+    // If data is null/empty from DB, check process.env
+    if (!data) {
+        return process.env[key] || null;
+    }
+
+    return data as string;
 }
 
 // Memory cache for performance

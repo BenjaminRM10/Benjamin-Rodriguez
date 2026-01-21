@@ -46,7 +46,7 @@ const createFormSchema = (eventType: CourseRegistrationFormProps['eventType']) =
     return z.object({
         fullName: z.string().min(2, "Name must be at least 2 characters."),
         email: z.string().email("Invalid email address."),
-        phone: z.string().optional(),
+        phone: z.string().min(10, "Phone number must be at least 10 digits."),
         attendeeType: z.enum(["student", "professional", "company"]),
         numberOfAttendees: z.number().optional(),
         preferredDate: z.date().optional(), // Changed to Date object
@@ -521,7 +521,7 @@ export function CourseRegistrationForm({ eventType, eventDate, onSuccess, onCanc
                                                     name="phone"
                                                     render={({ field }) => (
                                                         <FormItem>
-                                                            <FormLabel>Phone (Optional)</FormLabel>
+                                                            <FormLabel>Phone</FormLabel>
                                                             <FormControl>
                                                                 <Input placeholder="+1 234..." {...field} className="bg-slate-900 border-slate-700 focus:border-cyan-500 transition-colors" />
                                                             </FormControl>

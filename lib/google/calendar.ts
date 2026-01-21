@@ -12,8 +12,13 @@ export async function getCalendarClient() {
     console.log('[Google Auth Debug] Refresh Token loaded:', refreshToken ? `${refreshToken.substring(0, 10)}...` : 'NULL');
 
     if (!clientId || !clientSecret || !refreshToken) {
-        console.error('Missing Google Credentials in app_config');
-        throw new Error('Missing Google Credentials');
+        const missing = [];
+        if (!clientId) missing.push('GOOGLE_CLIENT_ID');
+        if (!clientSecret) missing.push('GOOGLE_CLIENT_SECRET');
+        if (!refreshToken) missing.push('GOOGLE_REFRESH_TOKEN');
+
+        console.error(`[Google Auth Error] Missing credentials: ${missing.join(', ')}`);
+        throw new Error(`Missing Google Credentials: ${missing.join(', ')}`);
     }
 
     const oauth2Client = new google.auth.OAuth2(
