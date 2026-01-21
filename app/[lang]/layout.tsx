@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 import { Locale } from "@/lib/i18n/config";
 import { getTranslations } from "@/lib/i18n/server";
@@ -109,6 +110,7 @@ export default async function RootLayout({
           <ScrollToTop />
           <Footer lang={validLang} translations={commonTranslations} />
         </LocaleProvider>
+        <Analytics />
       </body>
     </html>
   );
