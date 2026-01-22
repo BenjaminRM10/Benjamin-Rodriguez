@@ -58,6 +58,33 @@ export async function POST(req: Request) {
             );
         }
 
+        // 2.5 Server-Side Capacity Check (Strict)
+        // Only for public/student events that have limits. Corporate/Online Individual might be exempt or have different logic.
+        // Assuming limit applies to the specific `eventDate`
+        if (data.eventType !== 'corporate' && data.eventType !== 'online_individual') {
+            const CAPACITY_LIMIT = 12;
+
+            const { count, error: countError } = await supabaseAdmin
+                .from('course_registrations')
+                .select('*', { count: 'exact', head: true })
+                .eq('event_date', data.eventDate)
+                .in('status', ['confirmed', 'pending_payment', 'pending_email_verification']);
+
+            if (countError) {
+                console.error('Capacity Check Error:', countError);
+                return NextResponse.json({ error: 'Failed to verify availability' }, { status: 500 });
+            }
+
+            const currentCount = count || 0;
+            // Check if adding this request's attendees would overflow
+            if ((currentCount + (data.attendees || 1)) > CAPACITY_LIMIT) {
+                return NextResponse.json(
+                    { error: `Event is full. Only ${Math.max(0, CAPACITY_LIMIT - currentCount)} spots remaining.` },
+                    { status: 400 }
+                );
+            }
+        }
+
         // 3. Create Registration Record
         const verificationToken = crypto.randomUUID();
 
@@ -113,22 +140,17 @@ export async function POST(req: Request) {
             // Fix: Add '/es' locale prefix because page is under [lang]
             const callbackUrl = `${siteUrl}/api/auth/callback?next=${encodeURIComponent(`/es/academy/verify-callback?registrationId=${record.id}`)}`;
 
-            // 5. Send Verification Email (Magic Link) via PKCE Flow
-            // We use signInWithOtp for ALL students (new or existing).
-            // This ensures consistent behavior and avoids "Invite" flow issues.
+            // 5. Send Verification Email via Admin Invite (Robust for Cross-Device)
+            // We use inviteUserByEmail because it generates a link with a `token_hash` that works 
+            // even if the user opens the email on a different device (unlike PKCE which requires the same browser cookie).
 
-            const supabase = await createServerSupabaseClient();
-            const { error: authError } = await supabase.auth.signInWithOtp({
-                email: emailToSendTo,
-                options: {
-                    emailRedirectTo: callbackUrl,
-                    shouldCreateUser: true,
-                    data: {
-                        full_name: data.fullName,
-                        registration_id: record.id,
-                        attendee_type: data.attendeeType
-                    }
-                }
+            const { error: authError } = await supabaseAdmin.auth.admin.inviteUserByEmail(emailToSendTo, {
+                data: {
+                    full_name: data.fullName,
+                    registration_id: record.id,
+                    attendee_type: data.attendeeType
+                },
+                redirectTo: callbackUrl
             });
 
             if (authError) {
