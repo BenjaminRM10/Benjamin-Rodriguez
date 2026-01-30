@@ -48,7 +48,6 @@ export default function Footer({ lang = "en", translations }: FooterProps) {
                         <nav className="flex flex-col space-y-2">
                             <Link href={`/${lang}/profile`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.profile}</Link>
                             <Link href={`/${lang}/solutions`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.solutions}</Link>
-                            <Link href={`/${lang}/academy`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.academy}</Link>
                             <Link href={`/${lang}/contact`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.contact}</Link>
                         </nav>
                     </div>

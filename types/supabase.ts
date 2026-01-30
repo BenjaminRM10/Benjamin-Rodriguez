@@ -130,126 +130,6 @@ export type Database = {
                     },
                 ]
             }
-            course_registrations: {
-                Row: {
-                    attendee_type: Database["public"]["Enums"]["course_attendee_type"]
-                    course_id: string
-                    created_at: string | null
-                    email: string
-                    email_verification_token: string | null
-                    email_verified_at: string | null
-                    event_id: string | null
-                    event_date: string | null
-                    full_name: string
-                    id: string
-                    payment_id: string | null
-                    phone: string | null
-                    status: Database["public"]["Enums"]["course_registration_status"] | null
-                }
-                Insert: {
-                    attendee_type: Database["public"]["Enums"]["course_attendee_type"]
-                    course_id: string
-                    created_at?: string | null
-                    email: string
-                    email_verification_token?: string | null
-                    email_verified_at?: string | null
-                    event_id?: string | null
-                    event_date?: string | null
-                    full_name: string
-                    id?: string
-                    payment_id?: string | null
-                    phone?: string | null
-                    status?: Database["public"]["Enums"]["course_registration_status"] | null
-                }
-                Update: {
-                    attendee_type?: Database["public"]["Enums"]["course_attendee_type"]
-                    course_id?: string
-                    created_at?: string | null
-                    email?: string
-                    email_verification_token?: string | null
-                    email_verified_at?: string | null
-                    event_id?: string | null
-                    event_date?: string | null
-                    full_name?: string
-                    id?: string
-                    payment_id?: string | null
-                    phone?: string | null
-                    status?: Database["public"]["Enums"]["course_registration_status"] | null
-                }
-                Relationships: []
-            }
-            email_verifications: {
-                Row: {
-                    created_at: string | null
-                    email: string
-                    expires_at: string | null
-                    id: string
-                    token: string
-                    verified: boolean | null
-                }
-                Insert: {
-                    created_at?: string | null
-                    email: string
-                    expires_at?: string | null
-                    id?: string
-                    token: string
-                    verified?: boolean | null
-                }
-                Update: {
-                    created_at?: string | null
-                    email?: string
-                    expires_at?: string | null
-                    id?: string
-                    token?: string
-                    verified?: boolean | null
-                }
-                Relationships: []
-            }
-            events: {
-                Row: {
-                    id: string
-                    slug: string
-                    title: string
-                    description: string | null
-                    type: Database["public"]["Enums"]["event_type"]
-                    start_date: string
-                    end_date: string
-                    location: string | null
-                    capacity: number | null
-                    price_config: Json | null
-                    created_at: string | null
-                    updated_at: string | null
-                }
-                Insert: {
-                    id?: string
-                    slug: string
-                    title: string
-                    description?: string | null
-                    type: Database["public"]["Enums"]["event_type"]
-                    start_date: string
-                    end_date: string
-                    location?: string | null
-                    capacity?: number | null
-                    price_config?: Json | null
-                    created_at?: string | null
-                    updated_at?: string | null
-                }
-                Update: {
-                    id?: string
-                    slug?: string
-                    title?: string
-                    description?: string | null
-                    type?: Database["public"]["Enums"]["event_type"]
-                    start_date?: string
-                    end_date?: string
-                    location?: string | null
-                    capacity?: number | null
-                    price_config?: Json | null
-                    created_at?: string | null
-                    updated_at?: string | null
-                }
-                Relationships: []
-            }
             roi_calculations: {
                 Row: {
                     created_at: string | null
@@ -327,13 +207,7 @@ export type Database = {
             [_ in never]: never
         }
         Enums: {
-            course_attendee_type: "student" | "professional" | "company"
-            course_registration_status:
-            | "pending_email_verification"
-            | "pending_payment"
-            | "confirmed"
-            | "rejected"
-            event_type: "workshop" | "online" | "corporate" | "tec_saltillo"
+            [_ in never]: never
         }
         CompositeTypes: {
             [_ in never]: never

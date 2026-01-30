@@ -19,7 +19,6 @@ export default function MobileMenu({ lang, translations }: MobileMenuProps) {
     const navLinks = [
         { href: `/profile`, label: translations.nav.profile },
         { href: `/solutions`, label: translations.nav.solutions },
-        { href: `/academy`, label: translations.nav.academy },
         { href: `/contact`, label: translations.nav.contact },
     ];
 

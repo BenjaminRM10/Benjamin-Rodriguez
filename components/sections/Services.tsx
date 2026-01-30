@@ -118,7 +118,7 @@ export function Services({ mode = 'all', lang, translations }: ServicesProps) {
             icon: BrainCircuit,
             gradient: "from-emerald-500 to-teal-500",
             secondaryCtaText: t?.pythonAI?.cta ?? "Enroll Now",
-            secondaryCtaLink: "/academy",
+            secondaryCtaLink: "https://academy.appcreatorbr.com",
             techStack: [
                 { icon: Code, name: "FastAPI" },
                 { icon: Cpu, name: "Llama 3" },

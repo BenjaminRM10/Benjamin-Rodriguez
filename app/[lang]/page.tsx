@@ -35,7 +35,7 @@ export default async function GatewayPage({
       delay: "delay-200",
     },
     {
-      href: `/${lang}/academy`,
+      href: `https://academy.appcreatorbr.com`,
       title: t.cards.academy.title,
       description: t.cards.academy.description,
       icon: GraduationCap,

@@ -64,6 +64,7 @@ async function main() {
         }
 
         const supabase = createAdminClient();
+        // @ts-expect-error - RPC function exists in database but not in generated types
         const { error } = await supabase.rpc('set_encrypted_config', {
             p_key: 'GOOGLE_REFRESH_TOKEN',
             p_value: tokens.refresh_token,

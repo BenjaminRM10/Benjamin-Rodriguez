@@ -6,7 +6,6 @@ export type TranslationNamespace =
   | 'home'
   | 'profile'
   | 'solutions'
-  | 'academy'
   | 'contact';
 
 // Generic translation object type
@@ -20,7 +19,6 @@ export interface CommonTranslations {
     home: string;
     profile: string;
     solutions: string;
-    academy: string;
     contact: string;
     about: string;
     services: string;
@@ -303,98 +301,6 @@ export interface ContactTranslations {
   };
   toast: {
     emailCopied: string;
-  };
-}
-
-// Academy translations type
-export interface AcademyTranslations {
-  hero: {
-    badge: string;
-    badgeSecondary: string;
-    title: string;
-    titleHighlight: string;
-    intro: string;
-    stats: {
-      intensive: string;
-      workflow: string;
-      impact: string;
-    };
-  };
-  paths: {
-    sectionTitle: string;
-    sectionSubtitle: string;
-    initializeSequence: string;
-    items: {
-      tecSaltillo: { title: string; subtitle: string; description: string; badge: string; date: string };
-      student: { title: string; subtitle: string; description: string; badge: string; date: string };
-      corporate: { title: string; subtitle: string; description: string; badge: string };
-      onlineGroup: { title: string; subtitle: string; description: string; badge: string };
-    };
-  };
-  protocol: {
-    sectionTitle: string;
-    sectionSubtitle: string;
-    steps: {
-      infrastructure: { time: string; title: string; header: string; description: string };
-      dataEngineering: { time: string; title: string; header: string; description: string };
-      frontend: { time: string; title: string; header: string; description: string };
-      automation: { time: string; title: string; header: string; description: string };
-      bridge: { time: string; title: string; header: string; description: string };
-      deployment: { time: string; title: string; header: string; description: string };
-    };
-  };
-  sidebar: {
-    upcomingSets: string;
-    schedule: string;
-    checkRemote: string;
-    events: {
-      tecSaltillo: { title: string; status: string };
-      alebrijeModule2: { title: string; status: string; note: string };
-      alebrijeModule1: { title: string; status: string };
-    };
-  };
-  requirements: {
-    title: string;
-    tooltip: string;
-    hardware: { label: string; value: string; detail: string };
-    knowledge: { label: string; value: string; detail: string };
-    language: { label: string; value: string; detail: string };
-  };
-  modal: {
-    onlineCourse: string;
-    tecSaltilloEvent: string;
-    courseRegistration: string;
-    registerDescription: string;
-    loadingForm: string;
-  };
-  form: {
-    title: string;
-    name: string;
-    namePlaceholder: string;
-    email: string;
-    emailPlaceholder: string;
-    phone: string;
-    phonePlaceholder: string;
-    experience: string;
-    experienceOptions: {
-      none: string;
-      beginner: string;
-      intermediate: string;
-      advanced: string;
-    };
-    goals: string;
-    goalsPlaceholder: string;
-    submit: string;
-    submitting: string;
-    success: string;
-    error: string;
-    validation: {
-      nameRequired: string;
-      emailRequired: string;
-      emailInvalid: string;
-      phoneRequired: string;
-      phoneInvalid: string;
-    };
   };
 }
 
