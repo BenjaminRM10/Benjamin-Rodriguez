@@ -18,7 +18,7 @@ const privacyCopy = {
       {
         title: "1. Responsable",
         body: [
-          "El responsable del tratamiento de los datos personales recabados a través de este sitio es Benjamin Rodríguez, operando comercialmente como AppCreatorBR.",
+          "El responsable del tratamiento de los datos personales recabados a través de este sitio es Alejandro Benjamin Rodriguez Mares, operando comercialmente como AppCreatorBR.",
         ],
       },
       {
@@ -76,7 +76,7 @@ const privacyCopy = {
       {
         title: "1. Data controller",
         body: [
-          "The controller of personal data collected through this website is Benjamin Rodríguez, operating commercially as AppCreatorBR.",
+          "The controller of personal data collected through this website is Alejandro Benjamin Rodriguez Mares, operating commercially as AppCreatorBR.",
         ],
       },
       {
