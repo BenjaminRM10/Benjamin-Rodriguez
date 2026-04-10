@@ -78,6 +78,9 @@ export const metadata: Metadata = {
     shortcut: "/logo.png",
     apple: "/logo.png",
   },
+  other: {
+    'facebook-domain-verification': 'z02q23x9lboijd25eod3r2c0yu9i5n',
+  },
   alternates: {
     canonical: '/',
   },
