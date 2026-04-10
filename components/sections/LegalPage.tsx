@@ -150,6 +150,14 @@ export default function LegalPage({ lang, type }: LegalPageProps) {
                   <dd className="mt-1 text-base text-white">{company.legalName}</dd>
                 </div>
                 <div>
+                  <dt className="text-slate-400">{company.taxStatusLabel}</dt>
+                  <dd className="mt-1 text-base text-white">{company.taxStatus}</dd>
+                </div>
+                <div>
+                  <dt className="text-slate-400">{company.taxIdLabel}</dt>
+                  <dd className="mt-1 text-base text-white">{company.taxId}</dd>
+                </div>
+                <div>
                   <dt className="text-slate-400">{company.brandLabel}</dt>
                   <dd className="mt-1 text-base text-white">{company.brand}</dd>
                 </div>
@@ -164,6 +172,10 @@ export default function LegalPage({ lang, type }: LegalPageProps) {
                 <div>
                   <dt className="text-slate-400">{company.regionLabel}</dt>
                   <dd className="mt-1 text-base text-white">{company.region}</dd>
+                </div>
+                <div>
+                  <dt className="text-slate-400">{company.addressLabel}</dt>
+                  <dd className="mt-1 text-base text-white">{company.address}</dd>
                 </div>
                 <div>
                   <dt className="text-slate-400">{company.businessTypeLabel}</dt>
@@ -188,6 +200,14 @@ export default function LegalPage({ lang, type }: LegalPageProps) {
                   <dd className="mt-1 text-base text-white">
                     <a className="text-cyan-300 hover:text-cyan-200" href={company.website} target="_blank" rel="noreferrer">
                       {company.website}
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-slate-400">{company.phoneLabel}</dt>
+                  <dd className="mt-1 text-base text-white">
+                    <a className="text-cyan-300 hover:text-cyan-200" href={`tel:${company.phone.replace(/\s+/g, "")}`}>
+                      {company.phone}
                     </a>
                   </dd>
                 </div>

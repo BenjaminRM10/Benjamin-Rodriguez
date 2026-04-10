@@ -3,6 +3,10 @@ export type LocalizedCompanyInfo = {
   subheading: string;
   legalNameLabel: string;
   legalName: string;
+  taxStatusLabel: string;
+  taxStatus: string;
+  taxIdLabel: string;
+  taxId: string;
   brandLabel: string;
   brand: string;
   ownerLabel: string;
@@ -11,6 +15,10 @@ export type LocalizedCompanyInfo = {
   country: string;
   regionLabel: string;
   region: string;
+  addressLabel: string;
+  address: string;
+  phoneLabel: string;
+  phone: string;
   businessTypeLabel: string;
   businessType: string;
   servicesLabel: string;
@@ -33,6 +41,10 @@ export const companyInfo = {
       "Información visible para validación de identidad comercial, contacto y operación del sitio.",
     legalNameLabel: "Responsable / titular",
     legalName: "Benjamin Rodríguez",
+    taxStatusLabel: "Régimen / estatus fiscal",
+    taxStatus: "Persona física en RESICO",
+    taxIdLabel: "RFC",
+    taxId: "ROMA010710P21",
     brandLabel: "Nombre comercial",
     brand: "AppCreatorBR",
     ownerLabel: "Representante",
@@ -41,6 +53,10 @@ export const companyInfo = {
     country: "México",
     regionLabel: "Ubicación operativa",
     region: "Saltillo, Coahuila, México",
+    addressLabel: "Domicilio",
+    address: "Avenida Insurgentes 265, Col. Sierra del Poniente, Saltillo, Coahuila, México",
+    phoneLabel: "Teléfono",
+    phone: "866 147 9075",
     businessTypeLabel: "Giro",
     businessType: "Desarrollo de software, automatización, integración de IA y soluciones web empresariales",
     servicesLabel: "Servicios principales",
@@ -67,6 +83,10 @@ export const companyInfo = {
       "Visible information for business identity, contact and website verification.",
     legalNameLabel: "Owner / controller",
     legalName: "Benjamin Rodríguez",
+    taxStatusLabel: "Tax status",
+    taxStatus: "Individual taxpayer under RESICO",
+    taxIdLabel: "Tax ID (RFC)",
+    taxId: "ROMA010710P21",
     brandLabel: "Trade name",
     brand: "AppCreatorBR",
     ownerLabel: "Representative",
@@ -75,6 +95,10 @@ export const companyInfo = {
     country: "Mexico",
     regionLabel: "Operating location",
     region: "Saltillo, Coahuila, Mexico",
+    addressLabel: "Address",
+    address: "Avenida Insurgentes 265, Sierra del Poniente, Saltillo, Coahuila, Mexico",
+    phoneLabel: "Phone",
+    phone: "+52 866 147 9075",
     businessTypeLabel: "Business activity",
     businessType: "Software development, automation, AI integration and business web solutions",
     servicesLabel: "Main services",
