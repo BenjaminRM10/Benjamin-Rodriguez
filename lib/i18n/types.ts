@@ -23,6 +23,8 @@ export interface CommonTranslations {
     about: string;
     services: string;
     portfolio: string;
+    privacy: string;
+    companyInfo: string;
   };
   footer: {
     tagline: string;

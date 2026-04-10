@@ -6,7 +6,9 @@
     "contact": "Contact",
     "about": "About",
     "services": "Services",
-    "portfolio": "Portfolio"
+    "portfolio": "Portfolio",
+    "privacy": "Privacy",
+    "companyInfo": "Company info"
   },
   "footer": {
     "tagline": "Transforming ideas into intelligent solutions",

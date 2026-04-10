@@ -31,6 +31,7 @@ export default function Navbar({ lang, translations }: NavbarProps) {
     const navLinks = [
         { href: `/profile`, label: translations.nav.profile, isContact: false },
         { href: `/solutions`, label: translations.nav.solutions, isContact: false },
+        { href: `/company-info`, label: translations.nav.companyInfo, isContact: false },
         { href: `/contact`, label: translations.nav.contact, isContact: true },
     ];
 

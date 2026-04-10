@@ -48,6 +48,8 @@ export default function Footer({ lang = "en", translations }: FooterProps) {
                         <nav className="flex flex-col space-y-2">
                             <Link href={`/${lang}/profile`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.profile}</Link>
                             <Link href={`/${lang}/solutions`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.solutions}</Link>
+                            <Link href={`/${lang}/company-info`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.companyInfo}</Link>
+                            <Link href={`/${lang}/privacy`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.privacy}</Link>
                             <Link href={`/${lang}/contact`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.contact}</Link>
                         </nav>
                     </div>
@@ -81,6 +83,10 @@ export default function Footer({ lang = "en", translations }: FooterProps) {
                             </a>
                         </div>
                         <p className="text-sm text-slate-500">Saltillo, Coahuila, Mexico</p>
+                        <div className="flex flex-col gap-1 text-sm">
+                            <Link href={`/${lang}/privacy`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.privacy}</Link>
+                            <Link href={`/${lang}/company-info`} className="text-slate-400 hover:text-blue-400 transition-colors w-fit">{t.nav.companyInfo}</Link>
+                        </div>
                     </div>
                 </div>
 
