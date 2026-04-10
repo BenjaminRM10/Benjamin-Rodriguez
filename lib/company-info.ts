@@ -38,7 +38,7 @@ export const companyInfo = {
   es: {
     heading: "Información de la empresa",
     subheading:
-      "Información visible para validación de identidad comercial, contacto y operación del sitio.",
+      "Información pública sobre identidad comercial, contacto y operación del sitio.",
     legalNameLabel: "Responsable / titular",
     legalName: "Alejandro Benjamin Rodriguez Mares",
     taxStatusLabel: "Régimen / estatus fiscal",
@@ -73,14 +73,14 @@ export const companyInfo = {
     website: "https://appcreatorbr.com",
     responseTimeLabel: "Tiempo de respuesta",
     responseTime: "Usualmente dentro de 1 a 2 días hábiles",
-    reviewTitle: "Nota para validación",
+    reviewTitle: "Información adicional",
     reviewText:
       "Esta sección se publica para mostrar de forma clara la identidad del responsable del sitio, medios de contacto y naturaleza de los servicios ofrecidos.",
   },
   en: {
     heading: "Company information",
     subheading:
-      "Visible information for business identity, contact and website verification.",
+      "Public information about business identity, contact details and website operations.",
     legalNameLabel: "Owner / controller",
     legalName: "Alejandro Benjamin Rodriguez Mares",
     taxStatusLabel: "Tax status",
@@ -115,7 +115,7 @@ export const companyInfo = {
     website: "https://appcreatorbr.com",
     responseTimeLabel: "Response time",
     responseTime: "Usually within 1 to 2 business days",
-    reviewTitle: "Verification note",
+    reviewTitle: "Additional information",
     reviewText:
       "This section is published to clearly display the website owner identity, contact channels and the nature of the services offered.",
   },

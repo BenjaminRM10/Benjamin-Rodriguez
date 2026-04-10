@@ -135,7 +135,7 @@ export default function LegalPage({ lang, type }: LegalPageProps) {
         <section className="mx-auto max-w-5xl px-4 py-24 sm:px-6 lg:px-8">
           <div className="mb-10 max-w-3xl">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">
-              Meta Business Verification
+              AppCreatorBR
             </p>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{company.heading}</h1>
             <p className="mt-4 text-lg leading-8 text-slate-300">{company.subheading}</p>
