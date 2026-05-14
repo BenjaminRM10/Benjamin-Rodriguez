@@ -21,11 +21,26 @@
       "paragraph1": "Soy un apasionado <strong>Ingeniero OPEX</strong> y <strong>Desarrollador de Software</strong> dedicado a transformar desafíos complejos en soluciones automatizadas y optimizadas.",
       "paragraph2": "Con una combinación única de experiencia en ingeniería industrial y habilidades de desarrollo full-stack, conecto los procesos físicos con la eficiencia digital. Mi misión es simple: eliminar desperdicios, optimizar el rendimiento y desbloquear el verdadero potencial de tu negocio."
     },
+    "quote": "El único límite es tu imaginación",
+    "whoIWorkWith": "Con Quién Trabajo",
+    "badges": ["PyMEs", "Startups", "Manufactura", "Estudiantes", "Ingenieros"],
     "stats": {
-      "experience": { "value": "1", "label": "Año Ingeniero OPEX" },
-      "countries": { "value": "2", "label": "Canadá y México" },
-      "certifications": { "value": "18+", "label": "Certificaciones" },
-      "education": { "value": "Recién", "label": "Egresado Ing. Mec." }
+      "recentGraduate": {
+        "headline": "Recién Graduado",
+        "description": "Ingeniería Mecánica"
+      },
+      "experience": {
+        "headline": "1 Año",
+        "description": "Experiencia como Ingeniero OPEX"
+      },
+      "international": {
+        "headline": "Experiencia Internacional",
+        "description": "Canadá y México"
+      },
+      "certifications": {
+        "headline": "Aprendizaje Continuo",
+        "description": "18+ Certificaciones"
+      }
     }
   },
   "skills": {
@@ -62,22 +77,44 @@
   "beyondCode": {
     "title": "Más Allá del Código",
     "subtitle": "Las experiencias que me formaron",
+    "quote": "El único límite es tu imaginación",
     "cards": {
       "toronto": {
-        "title": "Seis Meses en Toronto",
-        "body": "A los 20 años, viví y trabajé seis meses en Toronto, Canadá — completamente inmerso en inglés, compartiendo casa con personas de Corea, China, India y Canadá. El entorno multicultural aceleró mi fluidez en inglés y amplió mi visión del mundo. He regresado por estancias de dos meses cada verano desde entonces."
+        "title": "Seis Meses que lo Cambiaron Todo",
+        "badges": ["Inmersión Cultural", "Dominio del Inglés"],
+        "paragraphs": [
+          "A los 20 años, pasé seis meses viviendo en <strong>Toronto, Canadá</strong>, trabajando y sumergiéndome completamente en un ambiente de habla inglesa. Vivir de forma independiente, lejos de casa, fue desafiante e increíblemente gratificante.",
+          "Compartí alojamiento con personas de Corea, China, India y Canadá. Esta experiencia multicultural no solo aceleró mi dominio del inglés sino que amplió mi visión del mundo de maneras que nunca imaginé.",
+          "Las amistades que formé perduran hasta hoy, y he regresado a Toronto por estancias de dos meses en cada uno de los últimos dos veranos."
+        ]
       },
       "legendarios": {
-        "title": "Legendarios Track",
-        "body": "En 2024, completé el Legendarios Track en Tampa, Florida — cinco días en la naturaleza con comida mínima, largas caminatas y desafíos físicos intensos. Cada obstáculo fue una lección deliberada de resiliencia y autodescubrimiento. La experiencia demostró que el verdadero crecimiento vive fuera de la zona de confort."
+        "title": "Un Viaje Transformador en la Naturaleza",
+        "badges": ["Resiliencia", "Transformación"],
+        "paragraphs": [
+          "En 2024, me embarqué en la experiencia <strong>Legendarios Track</strong> en Tampa, Florida—una aventura inmersiva de cuatro días diseñada para desafiar a los hombres física y espiritualmente.",
+          "Cinco días en la naturaleza con comida mínima, caminatas de larga distancia, levantamiento de peso y desafíos físicos prolongados. Cada tarea fue una lección de resiliencia, autodescubrimiento y superación de límites percibidos.",
+          "Esta experiencia me enseñó que la transformación ocurre fuera de tu zona de confort, y que el crecimiento personal requiere tanto resistencia física como fortaleza mental."
+        ]
       },
       "books": {
-        "title": "Aprendizaje Continuo",
-        "body": "Mi mentalidad está moldeada por libros de liderazgo proactivo, comunicación empática, disciplina financiera y mejora continua. Trato la lectura como un hábito profesional fundamental. Las ideas que absorbo influyen directamente en cómo abordo los problemas de ingeniería y las relaciones con clientes."
+        "title": "Filosofía de Aprendizaje Continuo",
+        "badges": ["Mentalidad de Crecimiento", "Desarrollo Personal"],
+        "intro": "Estoy profundamente influenciado por principios de desarrollo personal, comunicación efectiva y sabiduría financiera. Pilares clave de mi mentalidad:",
+        "pillars": [
+          "Vida proactiva y liderazgo basado en principios",
+          "Construir relaciones genuinas a través de la empatía",
+          "Creación de riqueza a través de la disciplina",
+          "Mejora continua y efecto compuesto"
+        ]
       },
       "basketball": {
         "title": "Donde Recargo Energías",
-        "body": "Cuando no estoy programando u optimizando procesos, estoy en la cancha de baloncesto. El deporte enseña trabajo en equipo, toma de decisiones bajo presión y el valor de la práctica constante — principios que aplico en cada proyecto de ingeniería. Es como me mantengo activo y con la mente aguda."
+        "badges": ["Trabajo en Equipo", "Balance"],
+        "paragraphs": [
+          "Cuando no estoy programando u optimizando procesos, me encontrarás en la cancha de baloncesto. El baloncesto me enseñó trabajo en equipo, estrategia bajo presión y la importancia de la práctica constante.",
+          "Es mi forma de mantenerme físicamente activo, despejar mi mente y mantener el equilibrio. Ya sea jugando partidos casuales o viendo la NBA, el baloncesto me mantiene centrado y energizado."
+        ]
       }
     }
   }
