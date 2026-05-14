@@ -116,10 +116,7 @@ export function SkillsClient({ initialSkills, translations }: SkillsClientProps)
     return (
         <section className="py-24 relative overflow-hidden" id="skills">
             {/* Background Decor */}
-            <div className="absolute inset-0 bg-slate-950">
-                <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
-            </div>
+            <div className="absolute inset-0 bg-slate-950" />
 
             <div className="container relative mx-auto px-4 z-10">
                 <div className="text-center mb-16">
@@ -127,7 +124,7 @@ export function SkillsClient({ initialSkills, translations }: SkillsClientProps)
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 mb-4"
+                        className="text-3xl md:text-5xl font-bold text-white mb-4"
                     >
                         {translations.title}
                     </motion.h2>
@@ -148,7 +145,7 @@ export function SkillsClient({ initialSkills, translations }: SkillsClientProps)
                             <TabsTrigger
                                 key={category.id}
                                 value={category.id}
-                                className="px-4 py-3 text-sm md:text-base data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all flex items-center justify-center gap-2 rounded-xl hover:bg-white/10 hover:scale-[1.02] active:scale-[0.98]"
+                                className="px-4 py-3 text-sm md:text-base data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all flex items-center justify-center gap-2 rounded-xl hover:bg-white/10"
                             >
                                 <category.icon className="w-5 h-5" />
                                 <span className="truncate">{category.label}</span>

@@ -13,9 +13,6 @@ interface SolutionsHeroProps {
 export function SolutionsHero({ lang = "en", translations }: SolutionsHeroProps) {
     return (
         <section className="relative pt-8 pb-20 overflow-hidden bg-[#0a0e27]">
-            {/* Background Gradients */}
-            <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[100px] opacity-30" />
-            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[100px] opacity-30" />
 
             <div className="container px-4 mx-auto relative z-10">
                 <div className="max-w-4xl mx-auto text-center">
@@ -37,7 +34,7 @@ export function SolutionsHero({ lang = "en", translations }: SolutionsHeroProps)
                         className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
                     >
                         {translations.title} <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                        <span className="text-white">
                             {translations.titleHighlight}
                         </span>
                     </motion.h1>
