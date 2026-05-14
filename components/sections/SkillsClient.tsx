@@ -4,7 +4,6 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { SkillBadge } from "@/components/shared/SkillBadge";
 import { Laptop, Database, Cpu, Wrench, BarChart3, Globe, Users } from "lucide-react";
 import type { ProfileTranslations } from "@/lib/i18n/types";
 
@@ -140,15 +139,14 @@ export function SkillsClient({ initialSkills, translations }: SkillsClientProps)
                 </div>
 
                 <Tabs defaultValue="devops" className="max-w-6xl mx-auto">
-                    <TabsList className="bg-white/5 border border-white/10 p-2 h-auto grid grid-cols-2 md:grid-cols-3 gap-3 mb-12 w-full rounded-2xl">
-                        {skillCategories.map((category) => (
+                    <TabsList className="flex flex-wrap gap-x-6 gap-y-2 justify-start bg-transparent border-b border-slate-800 rounded-none p-0 h-auto mb-12">
+                        {skillCategories.map((cat) => (
                             <TabsTrigger
-                                key={category.id}
-                                value={category.id}
-                                className="px-4 py-3 text-sm md:text-base data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all flex items-center justify-center gap-2 rounded-xl hover:bg-white/10"
+                                key={cat.id}
+                                value={cat.id}
+                                className="bg-transparent text-slate-400 data-[state=active]:text-white data-[state=active]:border-b-2 data-[state=active]:border-blue-500 rounded-none px-0 pb-3 text-sm font-medium shadow-none"
                             >
-                                <category.icon className="w-5 h-5" />
-                                <span className="truncate">{category.label}</span>
+                                {cat.label}
                             </TabsTrigger>
                         ))}
                     </TabsList>
@@ -168,14 +166,14 @@ export function SkillsClient({ initialSkills, translations }: SkillsClientProps)
                                             <div className="h-px bg-white/10 flex-1 ml-2" />
                                         </h3>
                                     )}
-                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-2 mt-8">
                                         {group.skills.map((skill, idx) => (
-                                            <SkillBadge
-                                                key={idx}
-                                                name={skill.name}
-                                                icon={skill.icon || undefined}
-                                                description={skill.description}
-                                            />
+                                            <div key={idx} className="text-slate-300 text-sm py-1.5 border-b border-slate-900 last:border-0">
+                                                {skill.icon && (
+                                                    <span className="text-slate-500 size-4 mr-2 inline-block" />
+                                                )}
+                                                {skill.name}
+                                            </div>
                                         ))}
                                     </div>
                                 </motion.div>
@@ -215,4 +213,3 @@ export function SkillsClient({ initialSkills, translations }: SkillsClientProps)
         </section>
     );
 }
-
