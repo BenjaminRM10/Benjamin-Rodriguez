@@ -20,7 +20,8 @@
     "webDevelopment": "Web Development",
     "consulting": "Consulting",
     "copyright": "All rights reserved.",
-    "builtWith": "Built with Next.js & Tailwind CSS"
+    "builtWith": "Built with Next.js & Tailwind CSS",
+    "openToWork": "Open to new projects."
   },
   "buttons": {
     "learnMore": "Learn More",

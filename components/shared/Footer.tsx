@@ -40,6 +40,7 @@ export default function Footer({ lang = "en", translations }: FooterProps) {
                         <p className="text-slate-400 max-w-xs">
                             {t.footer.tagline}
                         </p>
+                        <p className="text-slate-400 text-sm mt-2">{t.footer.openToWork}</p>
                     </div>
 
                     {/* Column 3: Quick Links */}
@@ -92,7 +93,6 @@ export default function Footer({ lang = "en", translations }: FooterProps) {
 
                 <div className="border-t border-slate-800/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-600">
                     <p>© {year} Benjamin Rodríguez. {t.footer.copyright}</p>
-                    <p>{t.footer.builtWith}</p>
                 </div>
             </div>
         </footer>
