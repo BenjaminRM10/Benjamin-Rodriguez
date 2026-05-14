@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/carousel";
 import { CertificationCard, Certification } from "@/components/shared/CertificationCard";
 import { CertificationsModal } from "@/components/modals/CertificationsModal";
+import { Award } from "lucide-react";
 import type { ProfileTranslations } from "@/lib/i18n/types";
 
 interface CertificationsClientProps {
@@ -28,6 +29,15 @@ export function CertificationsClient({ certifications, translations }: Certifica
 
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                     <div className="max-w-2xl">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="flex items-center gap-2 text-blue-400 mb-4 font-medium"
+                        >
+                            <Award className="w-5 h-5" />
+                            <span>{translations.badge}</span>
+                        </motion.div>
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
