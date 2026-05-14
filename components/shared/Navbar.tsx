@@ -62,7 +62,7 @@ export default function Navbar({ lang, translations }: NavbarProps) {
                             <Link
                                 key={link.href}
                                 href={`/${lang}${link.href}`}
-                                className="px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium hover:from-blue-500 hover:to-cyan-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all"
+                                className="rounded-sm border border-slate-700 hover:border-slate-500 text-white px-4 py-1.5 text-sm transition-colors"
                             >
                                 {link.label}
                             </Link>
