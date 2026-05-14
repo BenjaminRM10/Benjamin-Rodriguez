@@ -37,7 +37,6 @@ export interface CommonTranslations {
     consulting: string;
     copyright: string;
     builtWith: string;
-    openToWork: string;
   };
   buttons: {
     learnMore: string;
