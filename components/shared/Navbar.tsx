@@ -50,7 +50,7 @@ export default function Navbar({ lang, translations }: NavbarProps) {
                 {/* Logo */}
                 <Link href={`/${lang}`} className="relative group flex items-center gap-2">
 
-                    <span className="font-bold text-xl tracking-tighter text-white transition-all duration-300">
+                    <span className="font-bold text-xl tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:from-blue-300 group-hover:to-cyan-300 transition-all duration-300">
                         AppCreatorBR
                     </span>
                 </Link>
@@ -62,7 +62,7 @@ export default function Navbar({ lang, translations }: NavbarProps) {
                             <Link
                                 key={link.href}
                                 href={`/${lang}${link.href}`}
-                                className="px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium hover:from-blue-500 hover:to-cyan-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all"
+                                className="px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium hover:from-blue-500 hover:to-cyan-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all transform hover:scale-105"
                             >
                                 {link.label}
                             </Link>

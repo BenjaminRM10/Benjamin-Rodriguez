@@ -71,6 +71,7 @@ export function ServiceCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: delay }}
+            whileHover={{ scale: 1.02 }}
             className={cn(
                 "group relative flex flex-col h-full bg-slate-950/50 backdrop-blur-md rounded-2xl overflow-hidden border transition-all duration-300 shadow-xl",
                 isCourse ? "border-yellow-500/50 hover:border-yellow-400" : "border-white/5 hover:border-white/10",
@@ -106,11 +107,13 @@ export function ServiceCard({
                     </div>
                 </div>
 
-                <h3 className={cn(
-                    "text-xl font-bold mb-2 transition-colors duration-300",
-                    isCourse ? "text-white group-hover:text-yellow-200" : "text-white"
-                )}>
-                    {title}
+                <h3 className="text-xl font-bold text-white mb-2 transition-colors duration-300">
+                    <span className={cn(
+                        "bg-clip-text text-transparent bg-gradient-to-r group-hover:bg-gradient-to-r",
+                        isCourse ? "from-white to-white group-hover:from-yellow-200 group-hover:to-amber-200" : `from-white to-white group-hover:from-white group-hover:to-white ${gradient}`
+                    )}>
+                        {title}
+                    </span>
                 </h3>
 
                 <p className="text-slate-400 mb-4 flex-grow leading-relaxed text-sm md:text-base">

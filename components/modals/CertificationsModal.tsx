@@ -29,7 +29,7 @@ export function CertificationsModal({ open, onOpenChange, certifications }: Cert
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-7xl w-11/12 h-[85vh] flex flex-col bg-slate-950/95 border-white/10 backdrop-blur-xl p-0 gap-0 overflow-hidden">
                 <DialogHeader className="p-6 md:p-8 border-b border-white/10 shrink-0">
-                    <DialogTitle className="text-2xl md:text-3xl font-bold text-white">
+                    <DialogTitle className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
                         Professional Certifications
                     </DialogTitle>
                     <DialogDescription className="text-slate-400 text-base mt-2">

@@ -15,7 +15,7 @@ interface SkillBadgeProps {
 export function SkillBadge({ name, icon, description, className }: SkillBadgeProps) {
     return (
         <motion.div
-            whileHover={{ y: -2 }}
+            whileHover={{ scale: 1.05, y: -2 }}
             className={cn(
                 "group relative flex flex-col justify-center px-4 py-3 rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/20 select-none cursor-default overflow-hidden min-h-[60px]",
                 className

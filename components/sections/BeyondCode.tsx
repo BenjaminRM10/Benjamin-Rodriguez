@@ -20,6 +20,7 @@ function BeyondCard({ title, description, badge, icon: Icon, className, gradient
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
             className={cn(
                 "group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all hover:bg-white/10 flex flex-col justify-between",
                 className
@@ -65,7 +66,7 @@ export function BeyondCode({ translations }: BeyondCodeProps) {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-3xl md:text-5xl font-bold text-white mb-4"
+                        className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400 mb-4"
                     >
                         {translations.title}
                     </motion.h2>
