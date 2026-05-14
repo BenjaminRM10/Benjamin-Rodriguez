@@ -127,14 +127,11 @@ export interface ProfileTranslations {
       paragraph1: string;
       paragraph2: string;
     };
-    quote: string;
-    whoIWorkWith: string;
-    badges: string[];
     stats: {
-      recentGraduate: { headline: string; description: string };
-      experience: { headline: string; description: string };
-      international: { headline: string; description: string };
-      certifications: { headline: string; description: string };
+      experience: { value: string; label: string };
+      countries: { value: string; label: string };
+      certifications: { value: string; label: string };
+      education: { value: string; label: string };
     };
   };
   skills: {
@@ -162,29 +159,11 @@ export interface ProfileTranslations {
   beyondCode: {
     title: string;
     subtitle: string;
-    quote: string;
     cards: {
-      toronto: {
-        title: string;
-        badges: string[];
-        paragraphs: string[];
-      };
-      legendarios: {
-        title: string;
-        badges: string[];
-        paragraphs: string[];
-      };
-      books: {
-        title: string;
-        badges: string[];
-        intro: string;
-        pillars: string[];
-      };
-      basketball: {
-        title: string;
-        badges: string[];
-        paragraphs: string[];
-      };
+      toronto: { title: string; body: string };
+      legendarios: { title: string; body: string };
+      books: { title: string; body: string };
+      basketball: { title: string; body: string };
     };
   };
 }
