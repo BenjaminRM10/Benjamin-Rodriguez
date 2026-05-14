@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Briefcase, FolderKanban, UserCircle, ArrowRight } from "lucide-react";
+import { User, Briefcase, FolderGit2, ArrowRight } from "lucide-react";
 import { getImageUrl } from "@/lib/storage/supabase-images";
 import { RoleTyper } from "@/components/shared/RoleTyper";
 import { getTranslations } from "@/lib/i18n/server";
@@ -14,33 +14,6 @@ export default async function GatewayPage({
 }) {
   const { lang } = await params;
   const t = await getTranslations<HomeTranslations>(lang as Locale, 'home');
-
-  const cards = [
-    {
-      href: `/${lang}/profile`,
-      title: t.cards.profile.title,
-      description: t.cards.profile.description,
-      icon: UserCircle,
-      gradient: "from-blue-500 to-indigo-600",
-      delay: "delay-100",
-    },
-    {
-      href: `/${lang}/solutions`,
-      title: t.cards.solutions.title,
-      description: t.cards.solutions.description,
-      icon: Briefcase,
-      gradient: "from-purple-500 to-pink-600",
-      delay: "delay-200",
-    },
-    {
-      href: `/${lang}/portfolio`,
-      title: t.cards.portfolio.title,
-      description: t.cards.portfolio.description,
-      icon: FolderKanban,
-      gradient: "from-emerald-500 to-cyan-600",
-      delay: "delay-300",
-    },
-  ];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0a0e27]">
@@ -92,22 +65,48 @@ export default async function GatewayPage({
 
 
         {/* Choice Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-          {cards.map((card, index) => (
-            <Link key={index} href={card.href} className={`group relative transform transition-all duration-300 hover:-translate-y-2`}>
-              <div className="relative h-full bg-slate-900/40 backdrop-blur-md border border-white/10 p-8 rounded-2xl flex flex-col items-center text-center hover:bg-slate-800/60 transition-colors">
-                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${card.gradient} flex items-center justify-center mb-6 shadow-lg transition-transform`}>
-                  <card.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">{card.title}</h3>
-                <p className="text-slate-400 mb-8 flex-grow">{card.description}</p>
-                <div className="flex items-center text-sm font-medium text-white/70 group-hover:text-white transition-colors">
-                  {t.cards.enter}
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </Link>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+          <Link
+            href={`/${lang}/profile`}
+            className="group flex flex-col justify-between rounded border border-slate-800 hover:border-slate-700 transition-colors p-8 min-h-[200px]"
+          >
+            <div className="flex items-start justify-between">
+              <User className="size-5 text-slate-400" />
+              <ArrowRight className="size-4 text-slate-500 group-hover:text-white transition-colors" />
+            </div>
+            <div>
+              <h3 className="text-white text-xl font-semibold mb-1">{t.cards.profile.title}</h3>
+              <p className="text-slate-400 text-sm">{t.cards.profile.description}</p>
+            </div>
+          </Link>
+
+          <Link
+            href={`/${lang}/solutions`}
+            className="group flex flex-col justify-between rounded border border-slate-800 hover:border-slate-700 transition-colors p-8 min-h-[200px]"
+          >
+            <div className="flex items-start justify-between">
+              <Briefcase className="size-5 text-slate-400" />
+              <ArrowRight className="size-4 text-slate-500 group-hover:text-white transition-colors" />
+            </div>
+            <div>
+              <h3 className="text-white text-xl font-semibold mb-1">{t.cards.solutions.title}</h3>
+              <p className="text-slate-400 text-sm">{t.cards.solutions.description}</p>
+            </div>
+          </Link>
+
+          <Link
+            href={`/${lang}/portfolio`}
+            className="group flex flex-col justify-between rounded border border-slate-800 hover:border-slate-700 transition-colors p-8 min-h-[200px]"
+          >
+            <div className="flex items-start justify-between">
+              <FolderGit2 className="size-5 text-slate-400" />
+              <ArrowRight className="size-4 text-slate-500 group-hover:text-white transition-colors" />
+            </div>
+            <div>
+              <h3 className="text-white text-xl font-semibold mb-1">{t.cards.portfolio.title}</h3>
+              <p className="text-slate-400 text-sm">{t.cards.portfolio.description}</p>
+            </div>
+          </Link>
         </div>
 
       </div>
