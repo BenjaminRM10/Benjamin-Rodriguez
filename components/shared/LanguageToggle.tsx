@@ -26,7 +26,7 @@ export default function LanguageToggle() {
             <span className="relative z-10 transition-colors duration-300 group-hover:text-cyan-400">
                 {currentLang === "en" ? "ES" : "EN"}
             </span>
-            <span className="absolute inset-0 bg-blue-500/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out" />
+            <span className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </Button>
     );
 }

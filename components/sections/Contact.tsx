@@ -106,7 +106,7 @@ export function Contact({ lang = 'en', translations }: ContactProps) {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 mb-4 pb-2"
+                        className="text-3xl md:text-5xl font-bold text-white mb-4 pb-2"
                     >
                         {t.hero.title} {t.hero.titleHighlight}
                     </motion.h2>
@@ -192,7 +192,7 @@ export function Contact({ lang = 'en', translations }: ContactProps) {
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`p-3 rounded-lg border border-white/10 transition-all hover:scale-110 ${social.bg} hover:border-white/20`}
+                                        className={`p-3 rounded-lg border border-white/10 transition-all ${social.bg} hover:border-white/20`}
                                     >
                                         <social.icon className={`w-5 h-5 ${social.color}`} />
                                     </a>

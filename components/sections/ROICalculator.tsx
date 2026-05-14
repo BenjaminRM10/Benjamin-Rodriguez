@@ -32,7 +32,7 @@ export function ROICalculator({ lang, translations }: ROICalculatorProps) {
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 mb-4">
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
                             {translations.title} <span>{translations.titleHighlight}</span>
                         </h2>
                         <p className="text-xl text-slate-400">

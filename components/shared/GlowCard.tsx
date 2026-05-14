@@ -22,7 +22,6 @@ export default function GlowCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay }}
-            whileHover={{ scale: 1.05 }}
             className="relative group p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 overflow-hidden hover:border-white/20 transition-colors"
         >
             {/* Gradient Glow Effect on Hover */}

@@ -74,7 +74,7 @@ export function PortfolioClient({ initialProjects, translations }: PortfolioClie
                         viewport={{ once: true }}
                         className="text-3xl md:text-5xl font-bold text-white mb-6"
                     >
-                        Projects in <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Action</span>
+                        Projects in <span className="text-white">Action</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
