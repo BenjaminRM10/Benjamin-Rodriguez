@@ -131,6 +131,8 @@ export function Services({ mode = 'all', translations }: ServicesProps) {
 
             {/* Background elements */}
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-3xl" />
 
             <div className="container px-4 md:px-6 relative z-10">
                 <div className="text-center mb-16 max-w-3xl mx-auto">
@@ -141,7 +143,7 @@ export function Services({ mode = 'all', translations }: ServicesProps) {
                         transition={{ duration: 0.5 }}
                     >
                         <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                            {translations?.title ?? "Solutions for the"} <span className="text-white">{translations?.titleHighlight ?? "Future"}</span>
+                            {translations?.title ?? "Solutions for the"} <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">{translations?.titleHighlight ?? "Future"}</span>
                         </h2>
                         <p className="text-slate-400 text-lg md:text-xl leading-relaxed">
                             {translations?.subtitle ?? "Whether you need to automate your workflows, analyze your data, or build the next big thing, I have the stack to make it happen."}

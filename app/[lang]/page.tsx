@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+const ParticleBackground = dynamic(() => import("@/components/shared/ParticleBackground"));
 import { Briefcase, FolderKanban, UserCircle, ArrowRight } from "lucide-react";
 import { getImageUrl } from "@/lib/storage/supabase-images";
 import { RoleTyper } from "@/components/shared/RoleTyper";
@@ -44,6 +46,7 @@ export default async function GatewayPage({
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0a0e27]">
+      <ParticleBackground />
 
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-6xl px-4 flex flex-col items-center text-center">
@@ -95,8 +98,9 @@ export default async function GatewayPage({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
           {cards.map((card, index) => (
             <Link key={index} href={card.href} className={`group relative transform transition-all duration-300 hover:-translate-y-2`}>
+              <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 rounded-2xl`}></div>
               <div className="relative h-full bg-slate-900/40 backdrop-blur-md border border-white/10 p-8 rounded-2xl flex flex-col items-center text-center hover:bg-slate-800/60 transition-colors">
-                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${card.gradient} flex items-center justify-center mb-6 shadow-lg transition-transform`}>
+                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${card.gradient} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
                   <card.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">{card.title}</h3>
