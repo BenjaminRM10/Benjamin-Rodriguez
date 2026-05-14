@@ -39,7 +39,6 @@ export async function POST(request: Request) {
         const adminEmailResult = await resend.emails.send({
             from: 'Portfolio Contact <onboarding@resend.dev>', // Update this once domain is verified
             to: OWNER_EMAIL,
-            cc: ADMIN_EMAIL,
             replyTo: validatedData.email,
             subject: `New Lead: ${validatedData.name} - ${validatedData.service}`,
             html: `
@@ -81,10 +80,6 @@ export async function POST(request: Request) {
 
         if (userEmailResult.error) {
             console.error('Resend user confirmation error:', userEmailResult.error);
-            return NextResponse.json(
-                { error: 'Failed to send confirmation email' },
-                { status: 502 }
-            );
         }
 
         return NextResponse.json({ success: true });
