@@ -32,12 +32,14 @@ export async function POST(request: Request) {
 
         const resend = new Resend(resendKey);
         const ADMIN_EMAIL = 'contacto@appcreatorbr.com';
+        const OWNER_EMAIL = 'benjaminrm14032018@gmail.com';
 
         // 3. Send Notification to Admin (Alejandro)
         // We reply to the User's email to easily answer them
-        await resend.emails.send({
+        const adminEmailResult = await resend.emails.send({
             from: 'Portfolio Contact <onboarding@resend.dev>', // Update this once domain is verified
-            to: ADMIN_EMAIL,
+            to: OWNER_EMAIL,
+            cc: ADMIN_EMAIL,
             replyTo: validatedData.email,
             subject: `New Lead: ${validatedData.name} - ${validatedData.service}`,
             html: `
@@ -51,9 +53,17 @@ export async function POST(request: Request) {
       `
         });
 
+        if (adminEmailResult.error) {
+            console.error('Resend admin notification error:', adminEmailResult.error);
+            return NextResponse.json(
+                { error: 'Failed to send admin notification' },
+                { status: 502 }
+            );
+        }
+
         // 4. Send Confirmation to User
         // We reply to 'contacto@appcreatorbr.com' as requested
-        await resend.emails.send({
+        const userEmailResult = await resend.emails.send({
             from: 'Benjamin Rodriguez <onboarding@resend.dev>', // Update this once domain is verified
             to: validatedData.email,
             replyTo: ADMIN_EMAIL,
@@ -68,6 +78,14 @@ export async function POST(request: Request) {
         <p>OPEX Engineer & Developer</p>
       `
         });
+
+        if (userEmailResult.error) {
+            console.error('Resend user confirmation error:', userEmailResult.error);
+            return NextResponse.json(
+                { error: 'Failed to send confirmation email' },
+                { status: 502 }
+            );
+        }
 
         return NextResponse.json({ success: true });
 
