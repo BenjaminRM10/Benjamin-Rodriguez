@@ -47,7 +47,7 @@
 }
 
 :root {
-  --radius: 0.25rem;
+  --radius: 0.625rem;
   /* Dark theme by default as per visual identity */
   --background: #0a0e27;
   --foreground: #f8fafc;
@@ -139,3 +139,16 @@
   }
 }
 
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
