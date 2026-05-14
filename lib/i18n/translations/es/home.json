@@ -18,6 +18,10 @@
       "title": "Soluciones Empresariales",
       "description": "Automatiza tu flujo de trabajo. Ver ROI y Servicios."
     },
+    "portfolio": {
+      "title": "Portafolio",
+      "description": "Explora sitios, sistemas privados y productos reales."
+    },
     "academy": {
       "title": "Academia / Cursos",
       "description": "Aprende IA y Desarrollo Full-Stack."

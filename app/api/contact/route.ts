@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
-import { createClient } from '@/lib/supabase/server';
 import { getCachedEnvVar } from '@/lib/config/env';
 
 // Schema validation
@@ -20,12 +19,11 @@ export async function POST(request: Request) {
         // 1. Validate input
         const validatedData = contactSchema.parse(body);
 
-        // 2. Initializing clients
-        const supabase = await createClient();
+        // 2. Initializing email client
         const resendKey = await getCachedEnvVar('RESEND_API_KEY');
 
         if (!resendKey) {
-            console.error('RESEND_API_KEY is missing in app_config');
+            console.error('RESEND_API_KEY is missing');
             return NextResponse.json(
                 { error: 'Email service configuration missing' },
                 { status: 503 }
@@ -35,27 +33,7 @@ export async function POST(request: Request) {
         const resend = new Resend(resendKey);
         const ADMIN_EMAIL = 'contacto@appcreatorbr.com';
 
-        // 3. Save to Supabase
-        const { error: dbError } = await supabase
-            .from('contact_messages')
-            .insert({
-                name: validatedData.name,
-                email: validatedData.email,
-                company: validatedData.company,
-                service: validatedData.service,
-                message: validatedData.message,
-                source: 'contact_form'
-            });
-
-        if (dbError) {
-            console.error('Supabase error:', dbError);
-            return NextResponse.json(
-                { error: 'Failed to save message' },
-                { status: 500 }
-            );
-        }
-
-        // 4. Send Notification to Admin (Alejandro)
+        // 3. Send Notification to Admin (Alejandro)
         // We reply to the User's email to easily answer them
         await resend.emails.send({
             from: 'Portfolio Contact <onboarding@resend.dev>', // Update this once domain is verified
@@ -73,7 +51,7 @@ export async function POST(request: Request) {
       `
         });
 
-        // 5. Send Confirmation to User
+        // 4. Send Confirmation to User
         // We reply to 'contacto@appcreatorbr.com' as requested
         await resend.emails.send({
             from: 'Benjamin Rodriguez <onboarding@resend.dev>', // Update this once domain is verified

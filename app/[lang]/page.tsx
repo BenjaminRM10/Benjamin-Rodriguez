@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 const ParticleBackground = dynamic(() => import("@/components/shared/ParticleBackground"));
-import { Briefcase, GraduationCap, UserCircle, ArrowRight } from "lucide-react";
+import { Briefcase, FolderKanban, UserCircle, ArrowRight } from "lucide-react";
 import { getImageUrl } from "@/lib/storage/supabase-images";
 import { RoleTyper } from "@/components/shared/RoleTyper";
 import { getTranslations } from "@/lib/i18n/server";
@@ -35,11 +35,11 @@ export default async function GatewayPage({
       delay: "delay-200",
     },
     {
-      href: `https://academy.appcreatorbr.com`,
-      title: t.cards.academy.title,
-      description: t.cards.academy.description,
-      icon: GraduationCap,
-      gradient: "from-yellow-500 to-orange-600",
+      href: `/${lang}/portfolio`,
+      title: t.cards.portfolio.title,
+      description: t.cards.portfolio.description,
+      icon: FolderKanban,
+      gradient: "from-emerald-500 to-cyan-600",
       delay: "delay-300",
     },
   ];

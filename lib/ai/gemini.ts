@@ -27,7 +27,7 @@ export async function analyzeTask(
     const apiKey = await getCachedEnvVar("GEMINI_API_KEY");
 
     if (!apiKey) {
-        console.error("GEMINI_API_KEY is missing in Supabase app_config.");
+        console.error("GEMINI_API_KEY is missing.");
         throw new Error("Missing AI configuration (GEMINI_API_KEY)");
     }
 

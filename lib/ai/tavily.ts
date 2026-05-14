@@ -14,7 +14,7 @@ export async function findSimilarCases(
     const apiKey = await getCachedEnvVar("TAVILY_API_KEY");
 
     if (!apiKey) {
-        console.error("TAVILY_API_KEY is missing in Supabase app_config.");
+        console.error("TAVILY_API_KEY is missing.");
         return []; // Fail gracefully for Tavily as it's secondary
     }
 
@@ -29,12 +29,6 @@ export async function findSimilarCases(
             include_images: false,
         });
 
-        return response.results.map((result) => ({
-            title: result.title,
-            url: result.url,
-            content: result.content,
-            score: result.score,
-        }));
         return response.results.map((result) => ({
             title: result.title,
             url: result.url,

@@ -1,9 +1,3 @@
-import { createBrowserClient } from '@supabase/ssr'
-import { Database } from '@/types/supabase'
-
 export function createClient() {
-    return createBrowserClient<Database>(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
+    throw new Error('Supabase has been removed from this app. Use local content and Vercel environment variables instead.');
 }

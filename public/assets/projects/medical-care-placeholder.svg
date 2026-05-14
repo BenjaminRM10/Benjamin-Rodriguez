@@ -1,0 +1,70 @@
+<svg width="1440" height="1000" viewBox="0 0 1440 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="1000" fill="#faf7ef"/>
+  <rect x="0" y="0" width="188" height="1000" fill="#fbf8f0" stroke="#e6dcc8"/>
+  <text x="52" y="46" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#d71920">URGENCIAS</text>
+  <text x="72" y="66" font-family="Arial, sans-serif" font-size="10" fill="#0f8b83">Medical Care</text>
+  <g font-family="Arial, sans-serif" font-size="15" fill="#665d52">
+    <text x="50" y="130">Recepción</text>
+    <text x="50" y="178">Consulta</text>
+    <text x="50" y="226">Observación</text>
+    <text x="50" y="274">Hospitalización</text>
+    <text x="50" y="322">Inventario</text>
+  </g>
+  <rect x="12" y="358" width="164" height="38" rx="8" fill="#e6f0e3"/>
+  <rect x="12" y="370" width="3" height="20" rx="2" fill="#15946f"/>
+  <text x="50" y="383" font-family="Arial, sans-serif" font-size="15" fill="#15946f">Reportes</text>
+  <g font-family="Arial, sans-serif" font-size="15" fill="#665d52">
+    <text x="50" y="438">Administracion</text>
+    <text x="50" y="486">Feedback</text>
+    <text x="50" y="534">Usuarios</text>
+    <text x="50" y="582">Configuración</text>
+  </g>
+  <rect x="188" y="0" width="1252" height="64" fill="#fffdf8" stroke="#e6dcc8"/>
+  <text x="208" y="38" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#221f1b">Reportes</text>
+  <text x="1220" y="36" font-family="Arial, sans-serif" font-size="17" fill="#221f1b">Administrador del Sistema</text>
+  <rect x="236" y="122" width="1148" height="90" rx="8" fill="#fffdf8" stroke="#d7cbb8"/>
+  <g font-family="Arial, sans-serif" font-size="14" fill="#6e6257">
+    <text x="252" y="150">Fecha inicio</text><text x="394" y="150">Fecha fin</text><text x="536" y="150">Médico</text><text x="828" y="150">Tipo de paciente</text>
+  </g>
+  <g fill="#fffdf8" stroke="#d7cbb8">
+    <rect x="252" y="160" width="128" height="38" rx="8"/>
+    <rect x="394" y="160" width="128" height="38" rx="8"/>
+    <rect x="536" y="160" width="276" height="38" rx="8"/>
+    <rect x="828" y="160" width="136" height="38" rx="8"/>
+  </g>
+  <text x="266" y="185" font-family="Arial, sans-serif" font-size="16" fill="#151515">05/01/2026</text>
+  <text x="408" y="185" font-family="Arial, sans-serif" font-size="16" fill="#151515">05/14/2026</text>
+  <text x="552" y="185" font-family="Arial, sans-serif" font-size="16" fill="#151515">Todos los médicos</text>
+  <text x="844" y="185" font-family="Arial, sans-serif" font-size="16" fill="#151515">Todos los tipos</text>
+  <rect x="236" y="232" width="274" height="210" rx="8" fill="#07866f"/>
+  <text x="278" y="268" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#d8fff5">TOTAL CONSULTAS</text>
+  <text x="256" y="360" font-family="Arial, sans-serif" font-size="70" font-weight="700" fill="#fff">35</text>
+  <text x="256" y="414" font-family="Arial, sans-serif" font-size="14" fill="#b9fff2">2026-05-01 → 2026-05-14</text>
+  <rect x="526" y="232" width="858" height="210" rx="8" fill="#fffdf8" stroke="#d7cbb8"/>
+  <text x="566" y="270" font-family="Arial, sans-serif" font-size="15" fill="#6e6257">Consultas por día</text>
+  <g stroke="#eadcc4" stroke-dasharray="4 4">
+    <line x1="584" y1="338" x2="1354" y2="338"/>
+    <line x1="584" y1="292" x2="1354" y2="292"/>
+    <line x1="670" y1="292" x2="670" y2="400"/>
+    <line x1="840" y1="292" x2="840" y2="400"/>
+    <line x1="1010" y1="292" x2="1010" y2="400"/>
+    <line x1="1180" y1="292" x2="1180" y2="400"/>
+  </g>
+  <path d="M584 384 C650 384 682 384 728 358 S832 330 884 334 948 374 1000 360 1044 304 1100 314 1136 374 1190 368 1264 340 1348 382" stroke="#0e7f74" stroke-width="3" fill="none"/>
+  <g fill="#0e7f74">
+    <circle cx="584" cy="384" r="5"/><circle cx="752" cy="354" r="5"/><circle cx="838" cy="330" r="5"/><circle cx="922" cy="374" r="5"/><circle cx="1010" cy="314" r="5"/><circle cx="1094" cy="368" r="5"/><circle cx="1178" cy="360" r="5"/><circle cx="1348" cy="382" r="5"/>
+  </g>
+  <rect x="236" y="464" width="562" height="256" rx="8" fill="#fffdf8" stroke="#d7cbb8"/>
+  <rect x="814" y="464" width="570" height="256" rx="8" fill="#fffdf8" stroke="#d7cbb8"/>
+  <text x="276" y="500" font-family="Arial, sans-serif" font-size="15" fill="#6e6257">Por género</text>
+  <text x="854" y="500" font-family="Arial, sans-serif" font-size="15" fill="#6e6257">Por tipo de paciente</text>
+  <circle cx="518" cy="594" r="74" fill="#0e7f74"/>
+  <path d="M518 594 L518 520 A74 74 0 0 1 592 594 Z" fill="#c21864"/>
+  <circle cx="518" cy="594" r="36" fill="#fffdf8"/>
+  <rect x="890" y="612" width="126" height="92" rx="4" fill="#167f73"/>
+  <rect x="1048" y="652" width="126" height="52" rx="4" fill="#bc5609"/>
+  <rect x="1206" y="622" width="126" height="82" rx="4" fill="#5aa208"/>
+  <rect x="236" y="744" width="1148" height="174" rx="8" fill="#fffdf8" stroke="#d7cbb8"/>
+  <text x="276" y="782" font-family="Arial, sans-serif" font-size="15" fill="#6e6257">Top 10 diagnósticos</text>
+  <rect x="318" y="844" width="1000" height="24" rx="4" fill="#167f73"/>
+</svg>

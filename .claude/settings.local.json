@@ -16,7 +16,16 @@
       "Bash(pdftk:*)",
       "Bash(python3:*)",
       "Bash(qpdf --show-npages:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(xargs cat:*)",
+      "Bash(npm run build:*)",
+      "Bash(git checkout:*)",
+      "Bash(npx next build:*)",
+      "Bash(git add:*)",
+      "Bash(git rm:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(/home/benjaminrm10/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh *)"
     ]
   }
 }

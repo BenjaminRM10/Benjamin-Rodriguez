@@ -12,7 +12,6 @@ const ProjectModal = dynamic(() => import("@/components/shared/ProjectModal").th
     loading: () => null // Modal is initially hidden anyway, simplistic loading if it pops up
 });
 import { FilterButtons } from "@/components/shared/FilterButtons";
-import { getImageUrl } from "@/lib/storage/supabase-images";
 
 // Project Data
 // Project data received via props

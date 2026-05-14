@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ExternalLink, Eye, Download } from "lucide-react";
+import { ExternalLink, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { SkeletonImage } from "@/components/ui/Skeletons";
@@ -21,6 +21,9 @@ export interface Project {
     gallery?: string[]; // For modal
     features?: string[]; // For modal
     downloadUrl?: string; // For modal/download
+    client?: string;
+    year?: string;
+    visibility?: "public" | "private";
 }
 
 interface ProjectCardProps {

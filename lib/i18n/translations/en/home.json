@@ -18,6 +18,10 @@
       "title": "Business Solutions",
       "description": "Automate your workflow. See ROI & Services."
     },
+    "portfolio": {
+      "title": "Portfolio",
+      "description": "Explore real websites, private systems, and products."
+    },
     "academy": {
       "title": "Academy / Courses",
       "description": "Learn AI & Full-Stack Development."

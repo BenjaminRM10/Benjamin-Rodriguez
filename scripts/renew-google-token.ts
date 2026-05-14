@@ -2,7 +2,6 @@
 import { google } from 'googleapis';
 import readline from 'readline';
 import { getCachedEnvVar } from '../lib/config/env';
-import { createAdminClient } from '../lib/supabase/admin';
 
 const SCOPES = ['https://www.googleapis.com/auth/calendar'];
 
@@ -10,13 +9,13 @@ async function main() {
     console.log('\n🔵 Google Calendar Token Renewer 🔵\n');
 
     // 1. Fetch Credentials
-    console.log('Fetching Client Credentials from Supabase...');
+    console.log('Fetching Client Credentials from environment variables...');
     const clientId = await getCachedEnvVar('GOOGLE_CLIENT_ID');
     const clientSecret = await getCachedEnvVar('GOOGLE_CLIENT_SECRET');
     const redirectUri = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
     if (!clientId || !clientSecret) {
-        console.error('❌ Missing GOOGLE_CLIENT_ID or GOOGLE_CLIENT_SECRET in database.');
+        console.error('Missing GOOGLE_CLIENT_ID or GOOGLE_CLIENT_SECRET.');
         process.exit(1);
     }
 
@@ -56,28 +55,8 @@ async function main() {
         console.log('✅ Refresh Token obtained!');
         console.log(`Token: ${tokens.refresh_token.substring(0, 15)}...`);
 
-        // 5. Save to Supabase
-        console.log('Saving to Supabase...');
-        const encryptionKey = process.env.SUPABASE_ENCRYPTION_KEY;
-        if (!encryptionKey) {
-            throw new Error('Missing SUPABASE_ENCRYPTION_KEY');
-        }
-
-        const supabase = createAdminClient();
-        // @ts-expect-error - RPC function exists in database but not in generated types
-        const { error } = await supabase.rpc('set_encrypted_config', {
-            p_key: 'GOOGLE_REFRESH_TOKEN',
-            p_value: tokens.refresh_token,
-            p_enc_key: encryptionKey
-        });
-
-        if (error) {
-            console.error('❌ Error saving to Supabase:', error);
-            console.log('MANUAL BACKUP: Save this token manually:');
-            console.log(tokens.refresh_token);
-        } else {
-            console.log('✅ Token successfully encrypted and saved to database!');
-        }
+        console.log('Save this value as GOOGLE_REFRESH_TOKEN in .env.local and Vercel:');
+        console.log(tokens.refresh_token);
 
     } catch (error: any) {
         console.error('❌ Error:', error.message);

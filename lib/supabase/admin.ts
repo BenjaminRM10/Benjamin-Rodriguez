@@ -1,18 +1,3 @@
-import { createClient } from '@supabase/supabase-js'
-import { Database } from '@/types/supabase'
-
 export function createAdminClient() {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
-
-    if (!supabaseServiceKey) {
-        throw new Error('SUPABASE_SERVICE_ROLE_KEY is required for admin client')
-    }
-
-    return createClient<Database>(supabaseUrl, supabaseServiceKey, {
-        auth: {
-            autoRefreshToken: false,
-            persistSession: false
-        }
-    })
+    throw new Error('Supabase has been removed from this app. Use local content and Vercel environment variables instead.');
 }

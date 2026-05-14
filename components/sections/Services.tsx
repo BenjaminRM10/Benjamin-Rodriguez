@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
     Bot,
@@ -47,7 +46,7 @@ interface ServicesProps {
     };
 }
 
-export function Services({ mode = 'all', lang, translations }: ServicesProps) {
+export function Services({ mode = 'all', translations }: ServicesProps) {
     // SelectedCourse state removed
 
     // Courses array removed as legacy modules are no longer displayed
@@ -117,8 +116,6 @@ export function Services({ mode = 'all', lang, translations }: ServicesProps) {
             description: t?.pythonAI?.description ?? "Learn to build FastAPI applications, deploy local LLMs (Llama), integrate AI into Excel, and create your own AI-powered tools.",
             icon: BrainCircuit,
             gradient: "from-emerald-500 to-teal-500",
-            secondaryCtaText: t?.pythonAI?.cta ?? "Enroll Now",
-            secondaryCtaLink: "https://academy.appcreatorbr.com",
             techStack: [
                 { icon: Code, name: "FastAPI" },
                 { icon: Cpu, name: "Llama 3" },

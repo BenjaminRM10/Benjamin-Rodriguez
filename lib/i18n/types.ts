@@ -88,6 +88,10 @@ export interface HomeTranslations {
       title: string;
       description: string;
     };
+    portfolio: {
+      title: string;
+      description: string;
+    };
     academy: {
       title: string;
       description: string;

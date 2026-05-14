@@ -7,7 +7,6 @@ import type { Locale } from "@/lib/i18n/config";
 
 const Services = dynamic(() => import("@/components/sections/Services").then(mod => mod.Services));
 const ROICalculator = dynamic(() => import("@/components/sections/ROICalculator").then(mod => mod.ROICalculator));
-const Portfolio = dynamic(() => import("@/components/sections/Portfolio"));
 
 export default async function SolutionsPage({
     params,
@@ -23,7 +22,6 @@ export default async function SolutionsPage({
             <Brand translations={t.brand} />
             <ROICalculator lang={lang} translations={t.roi} />
             <Services mode="business" lang={lang} translations={t.services} />
-            <Portfolio lang={lang} translations={t.portfolio} />
         </div>
     );
 }
