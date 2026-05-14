@@ -1,20 +1,53 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Mountain, BookOpen, Trophy, LucideIcon } from "lucide-react";
+import { MapPin, Mountain, BookOpen, Trophy } from "lucide-react";
+import { cn } from "@/lib/utils";
 import type { ProfileTranslations } from "@/lib/i18n/types";
 
-function BeyondCard({ title, body, icon: Icon }: { title: string; body: string; icon: LucideIcon }) {
+interface BeyondCardProps {
+    title: string;
+    description: string | React.ReactNode;
+    badge: string[];
+    icon: any;
+    className?: string;
+    gradient: string;
+}
+
+function BeyondCard({ title, description, badge, icon: Icon, className, gradient }: BeyondCardProps) {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded border border-slate-800 hover:border-slate-700 transition-colors p-8"
+            className={cn(
+                "group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all hover:bg-white/10 flex flex-col justify-between",
+                className
+            )}
         >
-            <Icon className="size-5 text-slate-400 mb-4" />
-            <h3 className="text-white text-lg font-semibold mb-2">{title}</h3>
-            <p className="text-slate-400 text-sm leading-relaxed">{body}</p>
+            {/* Background Gradient/Image Placeholder */}
+            <div className={cn("absolute inset-0 opacity-20 transition-opacity group-hover:opacity-30", gradient)} />
+
+            {/* Content */}
+            <div className="relative z-10">
+                <div className="mb-6 flex items-start justify-between">
+                    <div className="rounded-full bg-white/10 p-3 backdrop-blur-md">
+                        <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="flex gap-2">
+                        {badge.map((b, i) => (
+                            <span key={i} className="rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-slate-300 backdrop-blur-md border border-white/5">
+                                {b}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+                <h3 className="mb-4 text-2xl font-bold text-white">{title}</h3>
+                <div className="text-slate-300 leading-relaxed text-sm md:text-base space-y-4">
+                    {description}
+                </div>
+            </div>
         </motion.div>
     );
 }
@@ -48,26 +81,78 @@ export function BeyondCode({ translations }: BeyondCodeProps) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                    {/* Card 1: Toronto */}
                     <BeyondCard
                         title={translations.cards.toronto.title}
-                        body={translations.cards.toronto.body}
                         icon={MapPin}
+                        gradient="bg-gradient-to-br from-red-500 to-orange-500"
+                        badge={translations.cards.toronto.badges}
+                        className="min-h-[400px]"
+                        description={
+                            <>
+                                {translations.cards.toronto.paragraphs.map((p, i) => (
+                                    <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+                                ))}
+                            </>
+                        }
                     />
+
+                    {/* Card 2: Legendarios */}
                     <BeyondCard
                         title={translations.cards.legendarios.title}
-                        body={translations.cards.legendarios.body}
                         icon={Mountain}
+                        gradient="bg-gradient-to-br from-emerald-600 to-teal-600"
+                        badge={translations.cards.legendarios.badges}
+                        className="min-h-[400px]"
+                        description={
+                            <>
+                                {translations.cards.legendarios.paragraphs.map((p, i) => (
+                                    <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+                                ))}
+                            </>
+                        }
                     />
+
+                    {/* Card 3: Books */}
                     <BeyondCard
                         title={translations.cards.books.title}
-                        body={translations.cards.books.body}
                         icon={BookOpen}
+                        gradient="bg-gradient-to-br from-blue-500 to-indigo-500"
+                        badge={translations.cards.books.badges}
+                        description={
+                            <>
+                                <p className="mb-4">
+                                    {translations.cards.books.intro}
+                                </p>
+                                <ul className="list-disc list-inside space-y-1 text-slate-400">
+                                    {translations.cards.books.pillars.map((pillar, i) => (
+                                        <li key={i}>{pillar}</li>
+                                    ))}
+                                </ul>
+                            </>
+                        }
                     />
+
+                    {/* Card 4: Basketball */}
                     <BeyondCard
                         title={translations.cards.basketball.title}
-                        body={translations.cards.basketball.body}
                         icon={Trophy}
+                        gradient="bg-gradient-to-br from-orange-500 to-amber-500"
+                        badge={translations.cards.basketball.badges}
+                        description={
+                            <>
+                                {translations.cards.basketball.paragraphs.map((p, i) => (
+                                    <p key={i} className={i > 0 ? "mt-4" : ""}>{p}</p>
+                                ))}
+                            </>
+                        }
                     />
+                </div>
+
+                <div className="mt-16 text-center">
+                    <p className="text-xl md:text-2xl font-light text-slate-300 italic">
+                        "{translations.quote}"
+                    </p>
                 </div>
             </div>
         </section>
